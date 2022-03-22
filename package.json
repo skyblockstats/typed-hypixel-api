@@ -1,0 +1,12 @@
+{
+  "name": "typed-hypixel-api",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
+  "author": "mat <github@matdoes.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.6.2",
+    "undici": "^4.16.0"
+  }
+}
