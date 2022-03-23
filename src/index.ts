@@ -7,7 +7,6 @@ import { PlayerDataResponse } from './responses/player'
 const BASE_URL = 'https://api.hypixel.net/'
 
 
-
 type Response<
     R,
     H extends Record<string, string | number> = {
@@ -58,4 +57,4 @@ async function request(path: string, options?: Record<string, string>): Promise<
 
 export { request }
 
-request('player', { key: '1', uuid: 'a' }).then(r => r.data.success ? r.data.player.stats.SkyBlock : {})
+request('player', { key: '1', uuid: 'a' }).then(r => r.data.success ? r.data.player.levelingReward_9999 : {})
