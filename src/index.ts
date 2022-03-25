@@ -18,9 +18,9 @@ const BASE_URL = 'https://api.hypixel.net/'
 type Response<
     R,
     H extends Record<string, string | number> = {
-        'X-RateLimit-Limit': number,
-        'X-RateLimit-Remaining': number,
-        'X-Ratelimit-Reset': number
+        'RateLimit-Limit': number,
+        'RateLimit-Remaining': number,
+        'Ratelimit-Reset': number
     }
     >
     = { data: R, headers: H }
