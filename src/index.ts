@@ -6,6 +6,9 @@ import { SkyBlockProfilesResponse } from './responses/skyblock/profiles'
 import { ApiKeyInformationResponse } from './responses/api'
 import { PlayerDataResponse } from './responses/player'
 import { fetch } from 'undici'
+import { FriendsResponse } from './responses/friends'
+import { RecentGamesResponse } from './responses/recentgames'
+import { OnlineStatusResponse } from './responses/status'
 
 /** The base url of the Hypixel API with a trailing slash */
 const BASE_URL = 'https://api.hypixel.net/'
@@ -33,6 +36,19 @@ async function request(path: 'skyblock/profiles', options: {
     uuid: string
     key: string
 }): Promise<Response<SkyBlockProfilesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
+async function request(path: 'friends', options: {
+    uuid: string
+    key: string
+}): Promise<Response<FriendsResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
+async function request(path: 'recentgames', options: {
+    uuid: string
+    key: string
+}): Promise<Response<RecentGamesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
+async function request(path: 'status', options: {
+    uuid: string
+    key: string
+}): Promise<Response<OnlineStatusResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
+
 
 async function request(path: string, options?: Record<string, string>): Promise<Response<any, {}>> {
     const requestHeaders = new Headers()
