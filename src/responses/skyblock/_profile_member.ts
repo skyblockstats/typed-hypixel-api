@@ -90,13 +90,10 @@ export interface ProfileMember {
      */
     achievement_spawned_island_types?: string[]
     slayer_bosses?: Record<'wolf' | 'zombie' | 'spider' | 'enderman', {
-        claimed_levels: {
-            [`level_${number}`]?: true
-        }
-        [`boss_kills_tier_${number}`]?: number
+        claimed_levels: Record<`level_${number}`, true>
         boss_kills_tier_1?: number
         xp?: number
-    }>
+    } & Record<`boss_kills_tier_${number}`, number>>
     pets?: []
     dungeons?: {
         dungeon_types: {
@@ -132,10 +129,9 @@ export interface ProfileMember {
     harp_quest?: {
         selected_song: string
         selected_song_epoch: number
-        [`song_${string}_best_completion`]?: number,
-        [`song_${string}_completions`]?: number,
-        [`song_${string}_perfect_completions`]?: number,
-    }
+    } & Record<`song_${string}_best_completion`, number>
+    & Record<`song_${string}_completions`, number>
+    & Record<`song_${string}_perfect_completions`, number>,
     active_effects: []
     paused_effects?: []
     visited_modes?: string[]
@@ -153,7 +149,6 @@ export interface ProfileMember {
     forge?: {
         forge_processes: {}
     }
-    [`experience_skill_${string}`]?: number
     unlocked_coll_tiers?: string[]
     backpack_contents?: Record<number, Inventory>
     quiver?: Inventory
@@ -173,4 +168,16 @@ export interface ProfileMember {
     essence_wither?: Inventory
     essence_spider?: Inventory
     candy_inventory_contents?: Inventory
+
+    experience_skill_alchemy?: number
+    experience_skill_carpentry?: number
+    experience_skill_combat?: number
+    experience_skill_enchanting?: number
+    experience_skill_farming?: number
+    experience_skill_fishing?: number
+    experience_skill_foraging?: number
+    experience_skill_mining?: number
+    experience_skill_runecrafting?: number
+    experience_skill_social?: number
+    experience_skill_taming?: number
 }

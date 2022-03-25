@@ -19,7 +19,7 @@ export interface SkyBlockItemsResponse {
 		npc_sell_price?: number
 		essence: {
 			essence_type: string
-			costs: nummber[]
+			costs: number[]
 		}
 		catacombs_requirements?: {
 			dungeon: {
@@ -43,11 +43,11 @@ export interface SkyBlockItemsResponse {
 	} & ({
 		generator: string
 		generator_tier: number
-	}?) & ({
+	} | {}) & ({
 		material: 'SKULL_ITEM'
 		skin: string
-	}?) & ({
+	} | {}) & ({
 		material: 'LEATHER_CHESTPLATE'
 		color: `${number},${number},${number}`
-	}?))[]
+	} | {}))[]
 }

@@ -1,7 +1,7 @@
 {
   "name": "typed-hypixel-api",
   "version": "0.1.0",
-  "main": "src/index.ts",
+  "main": "build/index.js",
   "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
   "author": "mat <github@matdoes.dev>",
   "license": "MIT",
