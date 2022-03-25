@@ -1,13 +1,13 @@
-import { fetch } from 'undici'
-import { ApiKeyInformationResponse } from './responses/api'
 import { InvalidApiKeyResponse, MalformedUuidResponse, MissingFieldResponse, ThrottleResponse } from './responses/error'
-import { PlayerDataResponse } from './responses/player'
 import { SkyBlockCollectionsResponse } from './responses/resources/skyblock/collections'
-import { SkyBlockItemsResponse } from './responses/resources/skyblock/items'
 import { SkyBlockSkillsResponse } from './responses/resources/skyblock/skills'
+import { SkyBlockItemsResponse } from './responses/resources/skyblock/items'
 import { SkyBlockProfilesResponse } from './responses/skyblock/profiles'
+import { ApiKeyInformationResponse } from './responses/api'
+import { PlayerDataResponse } from './responses/player'
+import { fetch } from 'undici'
 
-/** The base Url of the Hypixel API with a trailing slash */
+/** The base url of the Hypixel API with a trailing slash */
 const BASE_URL = 'https://api.hypixel.net/'
 
 
