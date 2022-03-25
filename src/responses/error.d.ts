@@ -4,17 +4,16 @@ export interface InvalidApiKeyResponse {
 }
 export interface ThrottleResponse {
     success: false,
-    cause: 'Key throttle'
-}
-export interface ThrottleResponse {
-    success: false,
-    cause: string,
-    throttle: boolean,
+    cause: 'Key throttle',
+    throttle: true,
     global: boolean
 }
 export interface MissingFieldResponse {
     success: false,
     cause: string
 }
-
+export interface MalformedUuidResponse {
+    success: false
+    cause: 'Malformed UUID'
+}
 

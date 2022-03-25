@@ -48,7 +48,7 @@ interface Inventory {
     data: string
 }
 
-export interface ApiKeyInformationResponse {
+export interface SkyBlockProfilesResponse {
     success: true
     profiles: {
         profile_id: string
