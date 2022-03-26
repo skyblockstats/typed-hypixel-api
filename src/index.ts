@@ -25,58 +25,71 @@ type Response<
     >
     = { data: R, headers: H }
 
-export interface RequestInterface {
-    (path: 'api'): Promise<Response<ApiKeyInformationResponse | InvalidApiKeyResponse | ThrottleResponse>>
-}
-export interface RequestInterface {
-    (path: 'player', options: {
-        uuid: string,
-        key: string
-    }): Promise<Response<PlayerDataResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>>
-}
-export interface RequestInterface {
-    (path: 'resources/skyblock/collections'): Promise<Response<SkyBlockCollectionsResponse>>
-}
-export interface RequestInterface {
-    (path: 'resources/skyblock/skills'): Promise<Response<SkyBlockSkillsResponse>>
-}
-export interface RequestInterface {
-    (path: 'resources/skyblock/items'): Promise<Response<SkyBlockItemsResponse>>
-}
-export interface RequestInterface {
-    (path: 'resources/skyblock/election'): Promise<Response<SkyBlockElectionResponse>>
-}
-export interface RequestInterface {
-    (path: 'skyblock/profiles', options: {
-        uuid: string
-        key: string
-    }): Promise<Response<SkyBlockProfilesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
-}
-export interface RequestInterface {
-    (path: 'friends', options: {
-        uuid: string
-        key: string
-    }): Promise<Response<FriendsResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
-}
-export interface RequestInterface {
-    (path: 'recentgames', options: {
-        uuid: string
-        key: string
-    }): Promise<Response<RecentGamesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
-}
-export interface RequestInterface {
-    (path: 'status', options: {
-        uuid: string
-        key: string
-    }): Promise<Response<OnlineStatusResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>>
+export interface Requests {
+    'api': {
+        options: {}
+        response: Response<ApiKeyInformationResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'player': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<PlayerDataResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'resources/skyblock/collections': {
+        options: {}
+        response: Response<SkyBlockCollectionsResponse>
+    }
+    'resources/skyblock/skills': {
+        options: {}
+        response: Response<SkyBlockSkillsResponse>
+    }
+    'resources/skyblock/items': {
+        options: {}
+        response: Response<SkyBlockItemsResponse>
+    }
+    'resources/skyblock/election': {
+        options: {}
+        response: Response<SkyBlockElectionResponse>
+    }
+    'skyblock/profiles': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<SkyBlockProfilesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'friends': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<FriendsResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'recentgames': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<RecentGamesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'status': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<OnlineStatusResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
 }
 
-export const request: RequestInterface = async (path, options?) => {
+
+export const request = async<P extends keyof Requests>(path: P, options: Requests[P]['options']): Promise<Requests[P]['response']> => {
     const requestHeaders = new Headers()
     const requestParameters: Record<string, string> = {}
 
     if (options)
-        for (const [optionName, optionValue] of Object.entries(options as Record<string, string>)) {
+        for (const [optionName, optionValue] of Object.entries(options)) {
             if (optionName === 'key') {
                 requestHeaders.set('X-Api-Key', optionValue)
             } else {
@@ -98,7 +111,7 @@ export const request: RequestInterface = async (path, options?) => {
     }
 
     return {
-        data,
-        headers
-    } as any
+        data: data as any,
+        headers: headers as any
+    }
 }
