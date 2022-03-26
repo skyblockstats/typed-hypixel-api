@@ -107,7 +107,7 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
     if (options)
         for (const [optionName, optionValue] of Object.entries(options)) {
             if (optionName === 'key') {
-                requestHeaders.set('X-Api-Key', optionValue)
+                requestHeaders.set('Api-Key', optionValue)
             } else {
                 requestParameters[optionName] = optionValue
             }
