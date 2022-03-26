@@ -9,12 +9,6 @@
   "files": [
     "build"
   ],
-  "exports": {
-    "./responses": {
-      "require": "./v6.js",
-      "import": "./v6.mjs"
-    }
-  },
   "dependencies": {
     "typescript": "^4.6.2",
     "undici": "^4.16.0"
