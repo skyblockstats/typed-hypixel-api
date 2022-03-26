@@ -44,7 +44,13 @@ export interface PlayerDataResponse {
         lastLogout: number
         friendRequestsUuid: any[]
         channel?: 'ALL'
-        newPackageRank?: 'MVP_PLUS'
+
+        packageRank?: string
+        newPackageRank?: string
+        monthlyPackageRank?: 'NONE' | string
+        rank?: string
+        prefix?: string
+
         [key: `levelup_${string}`]: number
         currentPet?: string
         network_update_book: number
