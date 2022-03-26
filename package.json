@@ -7,8 +7,8 @@
   "author": "mat <github@matdoes.dev>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "test": "build && node --experimental-specifier-resolution=node test"
+    "build": "npx tsc",
+    "test": "yarn build && node --experimental-specifier-resolution=node test"
   },
   "files": [
     "build"
