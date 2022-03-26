@@ -141,7 +141,7 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
     const data = await res.json()
 
     const headers: Record<string, string | number> = {}
-    for (const [name, value] of res.headers) {
+    for (const [name, value] of res.headers.entries()) {
         try {
             headers[name] = parseInt(value)
         } catch {
