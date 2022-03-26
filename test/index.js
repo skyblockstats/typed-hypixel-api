@@ -22,7 +22,7 @@ const typedData: ${typeName} = ${JSON.stringify(data, null, '\t')}`
 async function testData(typeName, data) {
 	await writeTestData(typeName, data.data)
 	try {
-		await exec('npx tsc test/_test_data.ts --noEmit --esModuleInterop --downlevelIteration --skipLibCheck')
+		await exec('npx tsc test/_test_data.ts --noEmit --esModuleInterop --downlevelIteration --skipLibCheck --lib DOM.Iterable,ESNext,DOM"')
 	} catch (err) {
 		console.error(err.stdout)
 		throw new Error(err)
