@@ -4,6 +4,7 @@ export * from './resources/skyblock/skills'
 export * from './resources/skyblock/items'
 
 export * from './skyblock/_profile_member'
+export * from './skyblock/_profile'
 export * from './skyblock/profiles'
 export * from './skyblock/profile'
 

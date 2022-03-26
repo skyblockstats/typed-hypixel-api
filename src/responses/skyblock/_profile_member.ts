@@ -48,7 +48,7 @@ interface Inventory {
     data: string
 }
 
-export interface ProfileMember {
+export interface SkyBlockProfileMember {
     last_save: number
     inv_armor: Inventory
     coop_invitation?: {

@@ -1,10 +1,6 @@
-import { ProfileMember } from './_profile_member'
+import { SkyBlockProfile } from './_profile'
 
 export interface SkyBlockProfilesResponse {
     success: true
-    profiles: {
-        profile_id: string
-        members: Record<string, ProfileMember>
-        cute_name: string
-    }[]
+    profiles: (SkyBlockProfile & { cute_name: string })[]
 }
