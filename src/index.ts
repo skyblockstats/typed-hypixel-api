@@ -10,6 +10,7 @@ import { FriendsResponse } from './responses/friends'
 import { RecentGamesResponse } from './responses/recentgames'
 import { OnlineStatusResponse } from './responses/status'
 import { SkyBlockElectionResponse } from './responses/resources/skyblock/election'
+import { SkyBlockProfileResponse } from './responses/skyblock/profile'
 
 /** The base url of the Hypixel API with a trailing slash */
 const BASE_URL = 'https://api.hypixel.net/'
@@ -59,6 +60,13 @@ export interface Requests {
             key: string
         }
         response: Response<SkyBlockProfilesResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'skyblock/profile': {
+        options: {
+            profile: string
+            key: string
+        }
+        response: Response<SkyBlockProfileResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
     }
     'friends': {
         options: {

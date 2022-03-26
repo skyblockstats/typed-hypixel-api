@@ -1,6 +1,6 @@
 {
   "name": "typed-hypixel-api",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "build/index.js",
   "types": "build/index.d.js",
   "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
