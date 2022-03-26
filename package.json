@@ -1,14 +1,11 @@
 {
   "name": "typed-hypixel-api",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "build/index.js",
   "types": "build/index.d.js",
   "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
   "author": "mat <github@matdoes.dev>",
   "license": "MIT",
-  "files": [
-    "build"
-  ],
   "dependencies": {
     "typescript": "^4.6.2",
     "undici": "^4.16.0"
