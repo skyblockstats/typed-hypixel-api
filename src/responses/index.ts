@@ -2,8 +2,11 @@ export * from './resources/skyblock/collections'
 export * from './resources/skyblock/election'
 export * from './resources/skyblock/skills'
 export * from './resources/skyblock/items'
+
+export * from './skyblock/_profile_member'
 export * from './skyblock/profiles'
 export * from './skyblock/profile'
+
 export * from './recentgames'
 export * from './friends'
 export * from './status'
