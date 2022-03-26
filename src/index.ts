@@ -1,4 +1,4 @@
-import { fetch } from 'undici'
+import { fetch, Headers } from 'undici'
 export * from './responses'
 import {
     ApiKeyInformationResponse,
