@@ -8,7 +8,6 @@ jobs:
   release:
     name: Test
     runs-on: ubuntu-latest
-    environment: Test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,3 +27,5 @@ jobs:
 
       - name: Run tests
         run: yarn test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}

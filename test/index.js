@@ -8,9 +8,8 @@ if (!process.env.API_KEY)
 	// if there's no hypixel keys in env, run dotenv
 	(await import('dotenv')).config()
 
-if (!process.env.API_KEY) {
+if (!process.env.API_KEY)
 	throw new Error('No API key found in env')
-}
 
 async function writeTestData(typeName, data) {
 	const writingData = `import { ${typeName} } from '../src'
