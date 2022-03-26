@@ -1,6 +1,6 @@
 {
   "name": "typed-hypixel-api",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "build/index.js",
   "types": "build/index.d.js",
   "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
@@ -9,6 +9,12 @@
   "files": [
     "build"
   ],
+  "exports": {
+    "./responses": {
+      "require": "./v6.js",
+      "import": "./v6.mjs"
+    }
+  },
   "dependencies": {
     "typescript": "^4.6.2",
     "undici": "^4.16.0"

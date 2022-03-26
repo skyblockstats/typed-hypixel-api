@@ -1,4 +1,4 @@
-interface Candidate {
+export interface Candidate {
     key: string
     name: string
     perks: {
