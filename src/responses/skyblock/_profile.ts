@@ -1,9 +1,16 @@
 import { SkyBlockProfileMember } from './_profile_member'
 
+export type SkyBlockCommunityUpgradeName = 'minion_slots' | 'island_size' | 'guests_count' | 'coins_allowance' | 'coop_slots'
+
 export interface SkyBlockCommunityUpgrades {
-	currently_upgrading: null
+	currently_upgrading?: null | {
+		upgrade: SkyBlockCommunityUpgradeName,
+		new_tier: number,
+		start_ms: number,
+		who_started: string
+	}
 	upgrade_states: {
-		upgrade: 'minion_slots' | 'island_size' | 'guests_count' | 'coins_allowance' | 'coop_slots'
+		upgrade: SkyBlockCommunityUpgradeName
 		tier: number
 		started_ms: number
 		started_by: string
@@ -29,4 +36,5 @@ export interface SkyBlockProfile {
 	community_upgrades?: SkyBlockCommunityUpgrades
 	last_save?: string
 	banking?: SkyBlockBanking
+	game_mode?: 'bingo'
 }

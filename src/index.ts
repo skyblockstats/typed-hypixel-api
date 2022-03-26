@@ -1,4 +1,4 @@
-import { fetch, Headers } from 'undici'
+import { fetch, Headers, RequestInit } from 'undici'
 export * from './responses'
 import {
     ApiKeyInformationResponse,
@@ -99,8 +99,30 @@ export interface Requests {
     }
 }
 
+async function fetchJsonWithRetry(url: string, options: RequestInit) {
+    let retries = 0
+    while (true) {
+        try {
+            const res = await fetch(url, options)
+            const resJson = await res.json()
+            // quacks like a Response
+            return {
+                json: async () => resJson,
+                headers: res.headers
+            }
+        } catch (e: any) {
+            if (e.name === 'AbortError') {
+                throw e
+            }
+            if (retries++ > 3) {
+                throw e
+            }
+            await new Promise(resolve => setTimeout(resolve, 1000))
+        }
+    }
+}
 
-export const request = async<P extends keyof Requests>(path: P, options: Requests[P]['options']): Promise<Requests[P]['response']> => {
+export const request = async<P extends keyof Requests>(path: P, options: Requests[P]['options'], retry?: boolean): Promise<Requests[P]['response']> => {
     const requestHeaders = new Headers()
     const requestParameters: Record<string, string> = {}
 
@@ -113,10 +135,11 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
             }
         }
 
-    const res = await fetch(`${BASE_URL}${path}?` + new URLSearchParams(requestParameters), {
+    const res = await (retry ? fetchJsonWithRetry : fetch)(`${BASE_URL}${path}?` + new URLSearchParams(requestParameters), {
         headers: requestHeaders
     })
     const data = await res.json()
+
     const headers: Record<string, string | number> = {}
     for (const [name, value] of res.headers) {
         try {

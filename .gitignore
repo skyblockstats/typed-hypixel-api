@@ -1,2 +1,4 @@
 node_modules
 /build
+.env
+/test/_test_data.ts
