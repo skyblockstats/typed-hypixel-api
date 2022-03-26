@@ -1,10 +1,10 @@
-import { ProfileMember } from './_profile_member'
+import { SkyBlockProfileMember } from './_profile_member'
 
 export interface SkyBlockProfileResponse {
     success: true
     profile: {
         profile_id: string
-        members: Record<string, ProfileMember>
+        members: Record<string, SkyBlockProfileMember>
         community_upgrades: {
             currently_upgrading: null
             upgrade_states: {
