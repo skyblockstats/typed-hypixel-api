@@ -49,7 +49,7 @@ export interface Pet {
     type: string
     exp: number
     active: boolean
-    tier: string
+    tier: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC' | 'LEGENDARY' | 'MYTHIC'
     heldItem: string | null
     candyUsed: number
     skin?: string | null
