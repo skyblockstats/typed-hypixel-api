@@ -61,7 +61,7 @@ export interface SkyBlockObjective {
     completed_at: number
 }
 
-export interface SkyBlockActiveEffect {
+export interface SkyBlockPotionEffect {
     effect: string
     level: number
     modifiers: {
@@ -113,8 +113,8 @@ export interface SkyBlockCrystalStatus {
 }
 
 export interface SkyBlockProfileMember {
-    last_save: number
-    inv_armor: Inventory
+    last_save?: number
+    inv_armor?: Inventory
     coop_invitation?: {
         timestamp: number
         /**
@@ -122,9 +122,9 @@ export interface SkyBlockProfileMember {
          */
         invited_by: string
         confirmed: boolean
-        confirmed_timestamp: number
+        confirmed_timestamp?: number
     }
-    first_join: number
+    first_join?: number
     first_join_hub?: number
     stats: Record<string, number>
     objectives: Record<string, SkyBlockObjective> & ({
@@ -133,7 +133,7 @@ export interface SkyBlockProfileMember {
             GOLD_INGOT: boolean
         }
     })
-    tutorial: string[]
+    tutorial?: string[]
     quests: Record<string, {
         status: 'ACTIVE' | 'COMPLETE'
         activated_at: number
@@ -141,11 +141,11 @@ export interface SkyBlockProfileMember {
         completed_at: number
         completed_at_sb: number
     }>
-    coin_purse: number
+    coin_purse?: number
     last_death: number
     crafted_generators?: string[]
     visited_zones?: string[]
-    fairy_souls_collected: number
+    fairy_souls_collected?: number
     fairy_souls?: number
     fairy_exchanges?: number
     fishing_treasure_caught?: number
@@ -159,14 +159,14 @@ export interface SkyBlockProfileMember {
         tier: number
         start_timestamp: number
         completion_state: number
-        combat_xp: number
-        recent_mob_kills: {
+        combat_xp?: number
+        recent_mob_kills?: {
             xp: number
             timestamp: number
         }[]
-        last_killed_mob_island: string
-        xp_on_last_follower_spawn: number
-        spawn_timestamp: number
+        last_killed_mob_island?: string
+        xp_on_last_follower_spawn?: number
+        spawn_timestamp?: number
         kill_timestamp?: number
     }
     slayer_bosses?: Partial<Record<SkyBlockSlayerBosses, {
@@ -222,7 +222,7 @@ export interface SkyBlockProfileMember {
         }
     }
     griffin?: {
-        burrows: {
+        burrows?: {
             ts: number
             x: number
             y: number
@@ -258,15 +258,15 @@ export interface SkyBlockProfileMember {
     }
     perks?: {}
     harp_quest?: {
-        selected_song: string
-        selected_song_epoch: number
+        selected_song?: string
+        selected_song_epoch?: number
         claimed_talisman?: true
     } & Record<`song_${string}_best_completion`, number>
     & Record<`song_${string}_completions`, number>
     & Record<`song_${string}_perfect_completions`, number>
     fastest_target_practice?: number
-    active_effects: SkyBlockActiveEffect[]
-    paused_effects?: []
+    active_effects?: SkyBlockPotionEffect[]
+    paused_effects?: SkyBlockPotionEffect[]
     disabled_potion_effects?: string[]
     visited_modes?: string[]
     temp_stat_buffs?: {
@@ -283,6 +283,11 @@ export interface SkyBlockProfileMember {
         powder_mithril_total?: number
         experience?: number
         retroactive_tier2_token?: boolean
+
+        current_daily_effect?: string
+        /** This isn't a timestamp, but I don't know what it is */
+        current_daily_effect_last_changed?: number
+
         tokens_spent?: number
         powder_spent_mithril?: number
         crystals?: Record<`${string}_crystal`, SkyBlockCrystalStatus | {}>
@@ -300,13 +305,20 @@ export interface SkyBlockProfileMember {
         }
         selected_pickaxe_ability?: string | null
         last_reset?: number
+
         daily_ores_mined_day_mithril_ore?: number
         daily_ores_mined_mithril_ore?: number
-        powder_gemstone?: number
-        powder_gemstone_total?: number
+
         daily_ores_mined_day_gemstone?: number
         daily_ores_mined_gemstone?: number
+
+        powder_gemstone?: number
+        powder_gemstone_total?: number
+
         powder_spent_gemstone?: number
+
+        daily_ores_mined_day?: number
+        daily_ores_mined?: number
     }
     forge?: {
         forge_processes: {

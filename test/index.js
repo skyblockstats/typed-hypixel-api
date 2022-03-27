@@ -35,6 +35,24 @@ await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
 	uuid: '26398ec782e5440cbcbb94c58b8b60a2',
 	key: process.env.API_KEY
 }, true))
+await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+	uuid: '16751f79c0b14e53a0b590d31fc1d80d',
+	key: process.env.API_KEY
+}, true))
+await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+	uuid: '974b2a9e0d6d41819dd18a05fb228965',
+	key: process.env.API_KEY
+}, true))
+
+await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
+	profile: '64722047f9b34e69b67b76a62351eb05',
+	key: process.env.API_KEY
+}, true))
+
+await testData('PlayerDataResponse', await request('player', {
+	uuid: '16751f79c0b14e53a0b590d31fc1d80d',
+	key: process.env.API_KEY
+}, true))
 
 console.log('Passed :)')
 
