@@ -1,5 +1,5 @@
 import { fetch, Headers, RequestInit } from 'undici'
-export * from './responses'
+export * from './responses/index'
 import {
     ApiKeyInformationResponse,
     FriendsResponse,
