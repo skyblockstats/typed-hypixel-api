@@ -16,7 +16,7 @@ import {
     SkyBlockProfilesResponse,
     SkyBlockSkillsResponse,
     ThrottleResponse
-} from './responses'
+} from './responses/index'
 
 
 
