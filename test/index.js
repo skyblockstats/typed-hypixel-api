@@ -1,12 +1,12 @@
-import util from 'util'
-import { promises as fs } from 'fs'
-import { request } from '../build/index.js'
+const util = require('util')
+const { promises: fs } = require('fs')
+const { request } = require('../build/index.js')
 
-const exec = util.promisify((await import('child_process')).exec)
+const exec = util.promisify(require('child_process').exec)
 
 if (!process.env.API_KEY)
 	// if there's no hypixel keys in env, run dotenv
-	(await import('dotenv')).config()
+	require('dotenv').config()
 
 if (!process.env.API_KEY)
 	throw new Error('No API key found in env')
@@ -29,30 +29,32 @@ async function testData(typeName, data) {
 	}
 }
 
-console.log('ok doing tsc')
+console.log('ok doing tsc');
 
-await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
-	uuid: '26398ec782e5440cbcbb94c58b8b60a2',
-	key: process.env.API_KEY
-}, true))
-await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
-	uuid: '16751f79c0b14e53a0b590d31fc1d80d',
-	key: process.env.API_KEY
-}, true))
-await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
-	uuid: '974b2a9e0d6d41819dd18a05fb228965',
-	key: process.env.API_KEY
-}, true))
+(async () => {
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '26398ec782e5440cbcbb94c58b8b60a2',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '974b2a9e0d6d41819dd18a05fb228965',
+		key: process.env.API_KEY
+	}, true))
 
-await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
-	profile: '64722047f9b34e69b67b76a62351eb05',
-	key: process.env.API_KEY
-}, true))
+	await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
+		profile: '64722047f9b34e69b67b76a62351eb05',
+		key: process.env.API_KEY
+	}, true))
 
-await testData('PlayerDataResponse', await request('player', {
-	uuid: '16751f79c0b14e53a0b590d31fc1d80d',
-	key: process.env.API_KEY
-}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
+		key: process.env.API_KEY
+	}, true))
 
-console.log('Passed :)')
+	console.log('Passed :)')
 
+})()
