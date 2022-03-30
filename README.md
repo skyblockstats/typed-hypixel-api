@@ -4,4 +4,4 @@ A library to make requests to the Hypixel API, but with TypeScript to help you a
 
 I made this primarily for [skyblock-api](https://github.com/skyblockstats/skyblock-api), so information for other games may be limited. Feel free to contribute if you want these, though!
 
-If you find missing or incorrect typings, please also contribute a fix.
+If you find missing/incorrect typings/JSDocs, please also contribute a fix.

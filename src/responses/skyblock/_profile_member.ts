@@ -234,19 +234,39 @@ export interface SkyBlockProfileMember {
 
     }
     jacob2?: {
-        medals_inv: {}
-        perks: {}
+        medals_inv: {
+            /** The number of bronze medals the player has won. */
+            bronze?: number,
+            /** The number of silver medals the player has won. */
+            silver?: number,
+            /** The number of gold medals the player has won. */
+            gold?: number
+        }
+        /** This seems to always be empty. */
+        perks: Record<never, never>
         /**
-         * Key example: 193:1_20:WHEAT
-         * I don't know what the 1_20 means
+         * The key is the contest year, date, and item separated by colon.
+         * Example: `193:1_20:WHEAT`.
          */
         contests?: Record<string, {
+            /** The amount of the item that this player collected */
             collected: number
+            /** Whether the player has claimed their rewards for their position yet. */
             claimed_rewards?: boolean
+            /** The position that the player placed in the contest. */
             claimed_position?: number
+            /**
+             * The number of people who participated in this contest
+            */
             claimed_participants?: number
         }>
+        /** Whether the player has talked to the Jacob NPC */
         talked?: true
+        /**
+         * The set of items that the user has gotten a gold medal for before.
+         * This is a bit redundant since it can be calculated from the
+         * medals_inv.
+         */
         unique_golds2?: string[]
     }
     experimentation?: {
