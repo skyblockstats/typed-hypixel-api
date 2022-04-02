@@ -20,6 +20,7 @@ import {
     SkyBlockProfilesResponse,
     SkyBlockSkillsResponse,
     RankedSkywarsResponse,
+    GamesInformationResponse,
 } from './responses/index'
 
 
@@ -65,6 +66,10 @@ export interface Requests {
     'resources/skyblock/election': {
         options: {}
         response: Response<SkyBlockElectionResponse>
+    }
+    'resources/games': {
+        options: {}
+        response: Response<GamesInformationResponse>
     }
     'skyblock/profiles': {
         options: {

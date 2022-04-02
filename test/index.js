@@ -68,5 +68,7 @@ console.log('ok doing tsc');
 		uuid: 'a91bd7ca5d4b4846990bf4393727f279'
 	}, true))
 
+	await testData('GamesInformationResponse', await request('resources/games', {}, true))
+
 	console.log('Everything passed :)')
 })()
