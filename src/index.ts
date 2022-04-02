@@ -1,21 +1,24 @@
 import { fetch, Headers, RequestInit } from 'undici'
 export * from './responses/index'
 import {
-    ApiKeyInformationResponse,
-    FriendsResponse,
     InvalidApiKeyResponse,
     MalformedUuidResponse,
     MissingFieldResponse,
+    ThrottleResponse,
+
+    ApiKeyInformationResponse,
+    FriendsResponse,
     OnlineStatusResponse,
     PlayerDataResponse,
     RecentGamesResponse,
+    GuildResponse,
+
     SkyBlockCollectionsResponse,
     SkyBlockElectionResponse,
     SkyBlockItemsResponse,
     SkyBlockProfileResponse,
     SkyBlockProfilesResponse,
     SkyBlockSkillsResponse,
-    ThrottleResponse
 } from './responses/index'
 
 
@@ -96,6 +99,25 @@ export interface Requests {
             key: string
         }
         response: Response<OnlineStatusResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'guild': {
+        options: {
+            key: string
+        } & (
+            {
+                /** The guild id, determined from the `_id` */
+                id: string
+            } |
+            {
+                /** The display name of the guild */
+                name: string
+            } |
+            {
+                /** The UUID of a player in the guild */
+                player: string
+            }
+        )
+        response: Response<GuildResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
     }
 }
 

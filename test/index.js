@@ -27,6 +27,7 @@ async function testData(typeName, data) {
 		console.error(err.stdout)
 		throw new Error(err)
 	}
+	console.log('Passed', typeName)
 }
 
 console.log('ok doing tsc');
@@ -55,6 +56,10 @@ console.log('ok doing tsc');
 		key: process.env.API_KEY
 	}, true))
 
-	console.log('Passed :)')
+	await testData('GuildResponse', await request('guild', {
+		key: process.env.API_KEY,
+		name: 'SkyComm'
+	}, true))
 
+	console.log('Everything passed :)')
 })()

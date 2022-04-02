@@ -199,6 +199,7 @@ export interface SkyBlockProfileMember {
         }
         xp?: number
     } & Record<`boss_kills_tier_${number}`, number>>>
+    /** The pets that the member has */
     pets?: Pet[]
     dungeons?: {
         dungeon_types: {

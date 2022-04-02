@@ -18,6 +18,10 @@ export interface Tourneys {
 export interface PlayerDataResponse {
     success: true
     player: {
+        /**
+         * The database ObjectId of the player. This isn't used for anything,
+         * you probably want to use the `uuid` field instead.
+         */
         _id: string
         achievementsOneTime: string[]
         clock?: boolean
@@ -72,7 +76,7 @@ export interface PlayerDataResponse {
         lastClaimedReward?: number
         lastLogout?: number
         friendRequestsUuid: any[]
-        channel?: 'ALL'
+        channel?: 'ALL' | 'PM'
 
         collectibles_menu_sort?: string
         onetime_achievement_menu_sort_completion_sort?: string
