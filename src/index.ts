@@ -19,6 +19,7 @@ import {
     SkyBlockProfileResponse,
     SkyBlockProfilesResponse,
     SkyBlockSkillsResponse,
+    RankedSkywarsResponse,
 } from './responses/index'
 
 
@@ -118,6 +119,13 @@ export interface Requests {
             }
         )
         response: Response<GuildResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'player/ranked/skywars': {
+        options: {
+            uuid: string
+            key: string
+        }
+        response: Response<RankedSkywarsResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
     }
 }
 

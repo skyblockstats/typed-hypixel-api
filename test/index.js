@@ -63,5 +63,10 @@ console.log('ok doing tsc');
 		name: 'SkyComm'
 	}, true))
 
+	await testData('RankedSkywarsResponse', await request('player/ranked/skywars', {
+		key: process.env.API_KEY,
+		uuid: 'a91bd7ca5d4b4846990bf4393727f279'
+	}, true))
+
 	console.log('Everything passed :)')
 })()

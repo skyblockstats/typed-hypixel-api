@@ -9,6 +9,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["_test_data.ts"],
-  "extends": "../tsconfig.json",
+  "include": ["_test_data.ts"]
 }

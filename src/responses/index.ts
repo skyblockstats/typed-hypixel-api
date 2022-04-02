@@ -8,10 +8,13 @@ export * from './skyblock/_profile'
 export * from './skyblock/profiles'
 export * from './skyblock/profile'
 
+export * from './player/ranked/skywars'
+export * from './player'
+
 export * from './recentgames'
 export * from './friends'
 export * from './status'
-export * from './player'
 export * from './error'
 export * from './guild'
 export * from './api'
+
