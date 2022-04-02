@@ -22,7 +22,7 @@ const typedData: ${typeName} = ${JSON.stringify(data, null, '\t')}`
 async function testData(typeName, data) {
 	await writeTestData(typeName, data.data)
 	try {
-		await exec('npx tsc test/_test_data.ts --noEmit --esModuleInterop --downlevelIteration --skipLibCheck --lib DOM.Iterable,ESNext,DOM')
+		await exec('npx tsc')
 	} catch (err) {
 		console.error(err.stdout)
 		throw new Error(err)
@@ -33,6 +33,8 @@ async function testData(typeName, data) {
 console.log('ok doing tsc');
 
 (async () => {
+	await exec('cd test')
+
 	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
 		uuid: '26398ec782e5440cbcbb94c58b8b60a2',
 		key: process.env.API_KEY
