@@ -1,3 +1,5 @@
+import { Inventory, ITEM_RARITY } from './_shared'
+
 export interface DungeonStats {
     times_played?: Record<number, number>
     experience?: number
@@ -39,17 +41,12 @@ export interface DungeonStats {
     milestone_completions?: Record<number, number>
 }
 
-export interface Inventory {
-    type: 0
-    data: string
-}
-
 export interface Pet {
     uuid?: string | null
     type: string
     exp: number
     active: boolean
-    tier: 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC' | 'LEGENDARY' | 'MYTHIC'
+    tier: ITEM_RARITY
     heldItem: string | null
     candyUsed: number
     skin?: string | null

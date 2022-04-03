@@ -30,7 +30,7 @@ async function testData(typeName, data) {
 	console.log('\x1b[32m%s\x1b[0m', '✓', 'Passed', typeName)
 }
 
-console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few moments, be patient!')
+console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be patient!')
 const startTime = Date.now();
 
 (async () => {
@@ -51,6 +51,11 @@ const startTime = Date.now();
 
 	await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
 		profile: '64722047f9b34e69b67b76a62351eb05',
+		key: process.env.API_KEY
+	}, true))
+
+	await testData('SkyBlockAuctionsResponse', await request('skyblock/auction', {
+		profile: 'ba8c4d8746274656b9c5c9578ccef419',
 		key: process.env.API_KEY
 	}, true))
 

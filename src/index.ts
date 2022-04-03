@@ -31,6 +31,7 @@ import {
     FriendsResponse,
     GuildResponse,
     SkyBlockNewsResponse,
+    SkyBlockAuctionsResponse,
 } from './responses/index'
 
 
@@ -124,6 +125,23 @@ export interface Requests {
             key: string
         }
         response: Response<SkyBlockNewsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'skyblock/auction': {
+        options: {
+            key: string
+        } & (
+            {
+                /** Find auctions created by a specific user. */
+                player: string
+            } | {
+                /** Find an auction by its UUID. */
+                uuid: string
+            } | {
+                /** Find auctions created by members of a Co-op by UUID. */
+                profile: string
+            }
+        )
+        response: Response<SkyBlockAuctionsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
     }
     'friends': {
         options: {

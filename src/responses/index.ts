@@ -15,6 +15,7 @@ export * from './skyblock/_profile_member'
 export * from './skyblock/_profile'
 export * from './skyblock/profiles'
 export * from './skyblock/profile'
+export * from './skyblock/auction'
 export * from './skyblock/news'
 
 export * from './player/ranked/skywars'
