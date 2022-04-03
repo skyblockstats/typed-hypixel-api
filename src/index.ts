@@ -34,6 +34,9 @@ import {
     PlayerDataResponse,
     FriendsResponse,
     GuildResponse,
+    SkyBlockBazaarResponse,
+    SkyBlockPlayerBingoResponse,
+    NoBingoDataResponse,
 } from './responses/index'
 
 
@@ -154,6 +157,17 @@ export interface Requests {
     'skyblock/auctions_ended': {
         options: {}
         response: Response<SkyBlockRecentlyEndedAuctionsResponse>
+    }
+    'skyblock/bazaar': {
+        options: {}
+        response: Response<SkyBlockBazaarResponse>
+    }
+    'skyblock/bingo': {
+        options: {
+            key: string
+            uuid: string
+        }
+        response: Response<SkyBlockPlayerBingoResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse | NoBingoDataResponse | MalformedUuidResponse>
     }
     'friends': {
         options: {

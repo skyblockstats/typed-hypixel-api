@@ -39,3 +39,17 @@ export let sendApiRequest = async<P extends keyof hypixel.Requests>(path: P, opt
 	return response.data
 }
 ```
+
+## Contributing
+
+### Adding an endpoint
+
+Each endpoint is in a separate file in the `src/responses/` directory. You can look at other endpoints as a reference on how yours should look. If you add one, first export it from `src/responses/index.ts` and then in `src/index.ts` add it to the `Requests` interface. Also, this isn't necessary but it's recommended that you add JSDoc comments to explain what each field is for. Finally, add a test in `test/index.js` and do `yarn test`.
+
+### Updating an endpoint
+
+If you change an endpoint, simply find the relevant file in the `src/responses/` directory and add a new type. Then, run `yarn test` to make sure it's correct.
+
+### JSDocs
+
+If you update or add a JSDoc (i.e. the /** */ comments), please use proper grammar and add a period at the end of your sentences. The comments should also be easy to understand for someone who does not have deep knowledge of the API.

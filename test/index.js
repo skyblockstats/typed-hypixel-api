@@ -64,6 +64,11 @@ const startTime = Date.now();
 	await testData('SkyBlockRecentlyEndedAuctionsResponse', await request('skyblock/auctions_ended', {}, true))
 
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
+	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
+	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
+		key: process.env.API_KEY,
+		uuid: '26398ec782e5440cbcbb94c58b8b60a2'
+	}, true))
 
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: '16751f79c0b14e53a0b590d31fc1d80d',

@@ -16,4 +16,8 @@ export interface MalformedUuidResponse {
     success: false
     cause: 'Malformed UUID'
 }
+export interface NoBingoDataResponse {
+    success: false
+    cause: 'No bingo data could be found'
+}
 
