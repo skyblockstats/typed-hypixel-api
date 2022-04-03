@@ -1,26 +1,31 @@
 import { fetch, Headers, RequestInit } from 'undici'
 export * from './responses/index'
 import {
+    // errors
     InvalidApiKeyResponse,
     MalformedUuidResponse,
     MissingFieldResponse,
     ThrottleResponse,
 
-    ApiKeyInformationResponse,
-    FriendsResponse,
-    OnlineStatusResponse,
-    PlayerDataResponse,
-    RecentGamesResponse,
-    GuildResponse,
-
+    // resources
     SkyBlockCollectionsResponse,
     SkyBlockElectionResponse,
-    SkyBlockItemsResponse,
-    SkyBlockProfileResponse,
-    SkyBlockProfilesResponse,
     SkyBlockSkillsResponse,
-    RankedSkywarsResponse,
+    SkyBlockItemsResponse,
+    AchievementsResponse,
+    ChallengesResponse,
+
+    // everything else
+    ApiKeyInformationResponse,
     GamesInformationResponse,
+    SkyBlockProfilesResponse,
+    SkyBlockProfileResponse,
+    RankedSkywarsResponse,
+    OnlineStatusResponse,
+    RecentGamesResponse,
+    PlayerDataResponse,
+    FriendsResponse,
+    GuildResponse,
 } from './responses/index'
 
 
@@ -70,6 +75,14 @@ export interface Requests {
     'resources/games': {
         options: {}
         response: Response<GamesInformationResponse>
+    }
+    'resources/achievements': {
+        options: {}
+        response: Response<AchievementsResponse>
+    }
+    'resources/challenges': {
+        options: {}
+        response: Response<ChallengesResponse>
     }
     'skyblock/profiles': {
         options: {
@@ -189,3 +202,4 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
         headers: headers as any
     }
 }
+

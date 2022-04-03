@@ -2,6 +2,8 @@ export * from './resources/skyblock/collections'
 export * from './resources/skyblock/election'
 export * from './resources/skyblock/skills'
 export * from './resources/skyblock/items'
+export * from './resources/achievements'
+export * from './resources/challenges'
 export * from './resources/games'
 
 export * from './skyblock/_profile_member'

@@ -27,10 +27,10 @@ async function testData(typeName, data) {
 		console.error(err.stdout)
 		throw new Error(err)
 	}
-	console.log('Passed', typeName)
+	console.log('\x1b[32m%s\x1b[0m', '✓', 'Passed', typeName)
 }
 
-console.log('ok doing tsc');
+console.log('Running tests. This will take a few moments, be patient!');
 
 (async () => {
 	await exec('cd test')
@@ -69,6 +69,8 @@ console.log('ok doing tsc');
 	}, true))
 
 	await testData('GamesInformationResponse', await request('resources/games', {}, true))
+	await testData('ChallengesResponse', await request('resources/challenges', {}, true))
+	await testData('AchievementsResponse', await request('resources/achievements', {}, true))
 
-	console.log('Everything passed :)')
+	console.log('\x1b[32m%s\x1b[0m', '✓ Everything passed.', 'Good job! :)')
 })()
