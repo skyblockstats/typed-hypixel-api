@@ -2,7 +2,11 @@ export * from './resources/skyblock/collections'
 export * from './resources/skyblock/election'
 export * from './resources/skyblock/skills'
 export * from './resources/skyblock/items'
+
+export * from './resources/guilds/achievements'
+export * from './resources/vanity/companions'
 export * from './resources/achievements'
+export * from './resources/vanity/pets'
 export * from './resources/challenges'
 export * from './resources/games'
 

@@ -9,11 +9,14 @@ import {
 
     // resources
     SkyBlockCollectionsResponse,
+    GuildAchievementsResponse,
     SkyBlockElectionResponse,
+    VanityCompanionsResponse,
     SkyBlockSkillsResponse,
     SkyBlockItemsResponse,
     AchievementsResponse,
     ChallengesResponse,
+    VanityPetsResponse,
 
     // everything else
     ApiKeyInformationResponse,
@@ -83,6 +86,18 @@ export interface Requests {
     'resources/challenges': {
         options: {}
         response: Response<ChallengesResponse>
+    }
+    'resources/guilds/achievements': {
+        options: {}
+        response: Response<GuildAchievementsResponse>
+    }
+    'resources/vanity/pets': {
+        options: {}
+        response: Response<VanityPetsResponse>
+    }
+    'resources/vanity/companions': {
+        options: {}
+        response: Response<VanityCompanionsResponse>
     }
     'skyblock/profiles': {
         options: {

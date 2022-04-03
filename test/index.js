@@ -30,7 +30,8 @@ async function testData(typeName, data) {
 	console.log('\x1b[32m%s\x1b[0m', '✓', 'Passed', typeName)
 }
 
-console.log('Running tests. This will take a few moments, be patient!');
+console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few moments, be patient!')
+const startTime = Date.now();
 
 (async () => {
 	await exec('cd test')
@@ -71,6 +72,11 @@ console.log('Running tests. This will take a few moments, be patient!');
 	await testData('GamesInformationResponse', await request('resources/games', {}, true))
 	await testData('ChallengesResponse', await request('resources/challenges', {}, true))
 	await testData('AchievementsResponse', await request('resources/achievements', {}, true))
+	await testData('GuildAchievementsResponse', await request('resources/guild/achievements', {}, true))
+	await testData('VanityPetsResponse', await request('resources/vanity/pets', {}, true))
+	await testData('VanityCompanionsResponse', await request('resources/vanity/companions', {}, true))
 
 	console.log('\x1b[32m%s\x1b[0m', '✓ Everything passed.', 'Good job! :)')
+
+	console.log('Took', Math.round((Date.now() - startTime) / 1000), 'seconds')
 })()
