@@ -1,4 +1,4 @@
-import { Inventory, ITEM_RARITY } from './_shared'
+import { Inventory, ITEM_RARITY } from './_item'
 
 export interface DungeonStats {
     times_played?: Record<number, number>

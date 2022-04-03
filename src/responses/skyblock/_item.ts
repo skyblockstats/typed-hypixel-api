@@ -4,7 +4,7 @@ export interface Inventory {
 	/** This seems to always be 0. */
 	type: 0
 	/**
-	 * Gzipped and NBT-Encoded inventory data.
+	 * Base64-encoded gzipped NBT-Encoded inventory data.
 	 */
 	data: string
 }

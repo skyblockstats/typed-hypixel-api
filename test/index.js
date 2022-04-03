@@ -54,10 +54,14 @@ const startTime = Date.now();
 		key: process.env.API_KEY
 	}, true))
 
-	await testData('SkyBlockAuctionsResponse', await request('skyblock/auction', {
+	await testData('SkyBlockRequestAuctionResponse', await request('skyblock/auction', {
 		profile: 'ba8c4d8746274656b9c5c9578ccef419',
 		key: process.env.API_KEY
 	}, true))
+	await testData('SkyBlockAuctionsResponse', await request('skyblock/auctions', {
+		page: 0
+	}, true))
+	await testData('SkyBlockRecentlyEndedAuctionsResponse', await request('skyblock/auctions_ended', {}, true))
 
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 

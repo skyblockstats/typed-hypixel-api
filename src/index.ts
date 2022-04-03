@@ -20,18 +20,20 @@ import {
     VanityPetsResponse,
 
     // everything else
+    SkyBlockRecentlyEndedAuctionsResponse,
+    SkyBlockRequestAuctionResponse,
+    SkyBlockActiveAuctionsResponse,
     ApiKeyInformationResponse,
     GamesInformationResponse,
     SkyBlockProfilesResponse,
     SkyBlockProfileResponse,
     RankedSkywarsResponse,
+    SkyBlockNewsResponse,
     OnlineStatusResponse,
     RecentGamesResponse,
     PlayerDataResponse,
     FriendsResponse,
     GuildResponse,
-    SkyBlockNewsResponse,
-    SkyBlockAuctionsResponse,
 } from './responses/index'
 
 
@@ -141,7 +143,17 @@ export interface Requests {
                 profile: string
             }
         )
-        response: Response<SkyBlockAuctionsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+        response: Response<SkyBlockRequestAuctionResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'skyblock/auctions': {
+        options: {
+            page?: number
+        }
+        response: Response<SkyBlockActiveAuctionsResponse | MissingFieldResponse>
+    }
+    'skyblock/auctions_ended': {
+        options: {}
+        response: Response<SkyBlockRecentlyEndedAuctionsResponse>
     }
     'friends': {
         options: {
