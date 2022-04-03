@@ -14,6 +14,7 @@ import {
     VanityCompanionsResponse,
     SkyBlockSkillsResponse,
     SkyBlockItemsResponse,
+    SkyBlockBingoResponse,
     AchievementsResponse,
     ChallengesResponse,
     VanityPetsResponse,
@@ -29,6 +30,7 @@ import {
     PlayerDataResponse,
     FriendsResponse,
     GuildResponse,
+    SkyBlockNewsResponse,
 } from './responses/index'
 
 
@@ -75,6 +77,10 @@ export interface Requests {
         options: {}
         response: Response<SkyBlockElectionResponse>
     }
+    'resources/skyblock/bingo': {
+        options: {}
+        response: Response<SkyBlockBingoResponse>
+    }
     'resources/games': {
         options: {}
         response: Response<GamesInformationResponse>
@@ -112,6 +118,12 @@ export interface Requests {
             key: string
         }
         response: Response<SkyBlockProfileResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
+    }
+    'skyblock/news': {
+        options: {
+            key: string
+        }
+        response: Response<SkyBlockNewsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
     }
     'friends': {
         options: {

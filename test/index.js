@@ -54,6 +54,8 @@ const startTime = Date.now();
 		key: process.env.API_KEY
 	}, true))
 
+	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
+
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
 		key: process.env.API_KEY
@@ -75,6 +77,8 @@ const startTime = Date.now();
 	await testData('GuildAchievementsResponse', await request('resources/guild/achievements', {}, true))
 	await testData('VanityPetsResponse', await request('resources/vanity/pets', {}, true))
 	await testData('VanityCompanionsResponse', await request('resources/vanity/companions', {}, true))
+	await testData('SkyBlockBingoResponse', await request('resources/skyblock/bingo', {}, true))
+
 
 	console.log('\x1b[32m%s\x1b[0m', '✓ Everything passed.', 'Good job! :)')
 
