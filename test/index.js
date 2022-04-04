@@ -34,6 +34,10 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
+	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
+		key: process.env.API_KEY,
+		uuid: 'e471665f71014891bef337c8d22cf04b'
+	}, true))
 	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
 		uuid: '26398ec782e5440cbcbb94c58b8b60a2',
 		key: process.env.API_KEY
@@ -56,17 +60,13 @@ const startTime = Date.now();
 		profile: 'ba8c4d8746274656b9c5c9578ccef419',
 		key: process.env.API_KEY
 	}, true))
-	await testData('SkyBlockAuctionsResponse', await request('skyblock/auctions', {
+	await testData('SkyBlockActiveAuctionsResponse', await request('skyblock/auctions', {
 		page: 0
 	}, true))
 	await testData('SkyBlockRecentlyEndedAuctionsResponse', await request('skyblock/auctions_ended', {}, true))
 
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
-	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
-		key: process.env.API_KEY,
-		uuid: '26398ec782e5440cbcbb94c58b8b60a2'
-	}, true))
 
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
@@ -86,10 +86,13 @@ const startTime = Date.now();
 	await testData('GamesInformationResponse', await request('resources/games', {}, true))
 	await testData('ChallengesResponse', await request('resources/challenges', {}, true))
 	await testData('AchievementsResponse', await request('resources/achievements', {}, true))
-	await testData('GuildAchievementsResponse', await request('resources/guild/achievements', {}, true))
+	await testData('GuildAchievementsResponse', await request('resources/guilds/achievements', {}, true))
 	await testData('VanityPetsResponse', await request('resources/vanity/pets', {}, true))
 	await testData('VanityCompanionsResponse', await request('resources/vanity/companions', {}, true))
 	await testData('SkyBlockBingoResponse', await request('resources/skyblock/bingo', {}, true))
+	await testData('BoostersResponse', await request('boosters', { key: process.env.API_KEY }, true))
+	await testData('CurrentPlayerCountsResponse', await request('counts', { key: process.env.API_KEY }, true))
+	await testData('LeaderboardsResponse', await request('leaderboards', { key: process.env.API_KEY }, true))
 
 
 	console.log('\x1b[32m%s\x1b[0m', '✓ Everything passed.', 'Good job! :)')

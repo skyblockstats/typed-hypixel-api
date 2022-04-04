@@ -5,7 +5,7 @@ export interface Auction {
 	 * The ObjectID of the auction. You probably want the `uuid` instead of
 	 * this.
 	 */
-	_id: string
+	_id?: string
 	/** The unique identifier for the auction. */
 	uuid: string
 	/** The UUID of the person who started the auction. */
@@ -42,8 +42,11 @@ export interface Auction {
 	 * used as the price for BIN auctions.
 	 */
 	starting_bid: number
-	/** The Gzipped and NBT-encoded data of the item */
-	item_bytes: Inventory
+	/**
+	 * The Gzipped and NBT-encoded data of the item. This might be a string or
+	 * an object that has the { data }.
+	 */
+	item_bytes: string | Inventory
 	claimed: boolean
 	claimed_bidders: string[]
 	/**
@@ -54,6 +57,11 @@ export interface Auction {
 	bin?: boolean
 	/** The final bid on the item. */
 	highest_bid_amount: number
+	/**
+	 * The UNIX timestamp of when the auction was last bid on, or the creation
+	 * date if there's no bids. This is absent on old auctions.
+	 */
+	last_updated?: number
 	bids: {
 		/** The UUID of the auction that was bid on. */
 		auction_id: string
@@ -66,4 +74,6 @@ export interface Auction {
 		/** The UNIX timestamp of when the bid was made. */
 		timestamp: number
 	}[]
+	/** The UUID of the item that's being sold. This is only present on unstackable items. */
+	item_uuid?: string
 }

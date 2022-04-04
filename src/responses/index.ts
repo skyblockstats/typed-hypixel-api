@@ -30,9 +30,12 @@ export * from './player/ranked/skywars'
 export * from './player'
 
 // other endpoints
+export * from './leaderboards'
 export * from './recentgames'
+export * from './boosters'
 export * from './friends'
 export * from './status'
+export * from './counts'
 export * from './error'
 export * from './guild'
 export * from './api'

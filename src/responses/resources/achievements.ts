@@ -1,4 +1,4 @@
-export interface ChallengesResponse {
+export interface AchievementsResponse {
 	success: true
 	lastUpdated: number
 	/**
@@ -15,11 +15,15 @@ export interface ChallengesResponse {
 					name: string
 					/** The description of the achievement. */
 					description: string
+					legacy?: true
+					secret?: true
+				} & ({
 					/** The percentage of people who've played the game who have unlocked the achievement. This is a decimal between 0 and 100. */
 					gamePercentUnlocked: number
 					/** The percentage of people who've unlocked the achievement. This is a decimal between 0 and 100. */
 					globalPercentUnlocked: number
-				}
+
+				} | {})
 			}
 			/** Achievements that have different tiers to them. */
 			tiered: {
@@ -28,6 +32,7 @@ export interface ChallengesResponse {
 					name: string
 					/** The description of the achievement. */
 					description: string
+					legacy?: true
 					tiers: {
 						tier: number
 						points: number

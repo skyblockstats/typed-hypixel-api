@@ -12,7 +12,6 @@ export interface GuildAchievementsResponse {
 			description: string
 			tiers: {
 				tier: number
-				points: number
 				amount: number
 			}[]
 		}

@@ -52,4 +52,4 @@ If you change an endpoint, simply find the relevant file in the `src/responses/`
 
 ### JSDocs
 
-If you update or add a JSDoc (i.e. the /** */ comments), please use proper grammar and add a period at the end of your sentences. The comments should also be easy to understand for someone who does not have deep knowledge of the API.
+If you update or add a JSDoc (i.e. the /** */ comments), please use proper grammar and add a period at the end of your sentences. The comments should also be easy to understand for someone who does not have deep knowledge of the API. If you don't understand a field or you don't feel like it, you don't have to write anything for it.

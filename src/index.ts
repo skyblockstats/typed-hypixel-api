@@ -37,6 +37,9 @@ import {
     SkyBlockBazaarResponse,
     SkyBlockPlayerBingoResponse,
     NoBingoDataResponse,
+    BoostersResponse,
+    CurrentPlayerCountsResponse,
+    LeaderboardsResponse,
 } from './responses/index'
 
 
@@ -57,7 +60,9 @@ type Response<
 
 export interface Requests {
     'api': {
-        options: {}
+        options: {
+            key: string
+        }
         response: Response<ApiKeyInformationResponse | InvalidApiKeyResponse | ThrottleResponse>
     }
     'player': {
@@ -216,6 +221,24 @@ export interface Requests {
         }
         response: Response<RankedSkywarsResponse | MissingFieldResponse | InvalidApiKeyResponse | MalformedUuidResponse | ThrottleResponse>
     }
+    'boosters': {
+        options: {
+            key: string
+        }
+        response: Response<BoostersResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'counts': {
+        options: {
+            key: string
+        }
+        response: Response<CurrentPlayerCountsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'leaderboards': {
+        options: {
+            key: string
+        }
+        response: Response<LeaderboardsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
 }
 
 async function fetchJsonWithRetry(url: string, options: RequestInit) {
@@ -254,7 +277,8 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
             }
         }
 
-    const res = await (retry ? fetchJsonWithRetry : fetch)(`${BASE_URL}${path}?` + new URLSearchParams(requestParameters), {
+    const fetchUrl = `${BASE_URL}${path}?` + new URLSearchParams(requestParameters)
+    const res = await (retry ? fetchJsonWithRetry : fetch)(fetchUrl, {
         headers: requestHeaders
     })
     const data = await res.json()

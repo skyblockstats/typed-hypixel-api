@@ -54,5 +54,5 @@ export interface SkyBlockBazaarResponse {
 				buyOrders: number
 			}
 		}
-	}[]
+	}
 }

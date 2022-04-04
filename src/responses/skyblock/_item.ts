@@ -1,4 +1,4 @@
-export type ITEM_RARITY = 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC' | 'LEGENDARY' | 'MYTHIC' | 'SPECIAL'
+export type ITEM_RARITY = 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC' | 'LEGENDARY' | 'MYTHIC' | 'SPECIAL' | 'VERY_SPECIAL'
 
 export interface Inventory {
 	/** This seems to always be 0. */

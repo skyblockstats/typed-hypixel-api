@@ -1,4 +1,4 @@
-export interface AchievementsResponse {
+export interface ChallengesResponse {
 	success: true
 	lastUpdated: number
 	challenges: {
@@ -9,6 +9,6 @@ export interface AchievementsResponse {
 				type: 'MultipliedExperienceReward'
 				amount: number
 			}[]
-		}
+		}[]
 	}
 }
