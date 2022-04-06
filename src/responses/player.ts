@@ -25,8 +25,10 @@ export interface PlayerDataResponse {
         _id: string
         achievementsOneTime: string[]
         clock?: boolean
+        /** The username of the player that Hypixel has cached. */
         displayname: string
         eulaCoins?: boolean
+        /** The UNIX timestamp at which the player first joined Hypixel. */
         firstLogin: number
         friendRequests?: string[]
         knownAliases: string[]
@@ -180,7 +182,16 @@ export interface PlayerDataResponse {
         }>>
         [key: `completed_christmas_quests_${number}`]: number
         currentGadget?: string
+        /**
+         * The UNIX timestamp at which the player claimed their year 100
+         * century cake. Century cakes after 100 are claimed_century_cake{year}.
+         */
         claimed_century_cake?: number
+        /**
+         * The key is formatted as claimed_century_cake{year}. The century
+         * cake for the year 100, though, is in the `claimed_century_cake`
+         * field.
+         */
         [key: `claimed_century_cake${number}00`]: number
         [key: `adventRewards${number}` | `adventRewards_v2_${number}`]: Record<`day${number}`, number>
         claimed_year143_cake?: number
