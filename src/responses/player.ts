@@ -181,6 +181,7 @@ export interface PlayerDataResponse {
         [key: `completed_christmas_quests_${number}`]: number
         currentGadget?: string
         claimed_century_cake?: number
+        [key: `claimed_century_cake${number}00`]: number
         [key: `adventRewards${number}` | `adventRewards_v2_${number}`]: Record<`day${number}`, number>
         claimed_year143_cake?: number
         mostRecentGameType?: string
