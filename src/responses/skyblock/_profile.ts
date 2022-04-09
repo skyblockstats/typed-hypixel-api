@@ -36,5 +36,5 @@ export interface SkyBlockProfile {
 	community_upgrades?: SkyBlockCommunityUpgrades
 	last_save?: string
 	banking?: SkyBlockBanking
-	game_mode?: 'bingo' | 'island'
+	game_mode?: 'bingo' | 'island' | 'ironman'
 }
