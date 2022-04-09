@@ -35,6 +35,6 @@ export interface SkyBlockProfile {
 	members: Record<string, SkyBlockProfileMember>
 	community_upgrades?: SkyBlockCommunityUpgrades
 	last_save?: string
-	banking?: SkyBlockBanking
+	banking?: SkyBlockBanking | {}
 	game_mode?: 'bingo' | 'island' | 'ironman'
 }

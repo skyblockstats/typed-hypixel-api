@@ -50,6 +50,10 @@ const startTime = Date.now();
 		uuid: '974b2a9e0d6d41819dd18a05fb228965',
 		key: process.env.API_KEY
 	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: 'ac01147ed01a47d1b5777b31ccf5e616',
+		key: process.env.API_KEY
+	}, true))
 
 	await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
 		profile: '64722047f9b34e69b67b76a62351eb05',
