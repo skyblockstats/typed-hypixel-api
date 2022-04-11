@@ -13,7 +13,7 @@ export interface DungeonStats {
         score_bonus: number
         dungeon_class: string
         /**
-         * Undashed UUIDs of the other people in this
+         * Dashed UUIDs of the other people in this
          * run, not including the member
          */
         teammates: string[]
@@ -109,21 +109,82 @@ export interface SkyBlockCrystalStatus {
     total_found: number
 }
 
+export interface SkyBlockJournalEntries {
+    karylles_diary?: number[]
+    the_study?: number[]
+    uncanny_remains?: number[]
+    grim_adversity?: number[]
+    the_walls?: number[]
+    the_eye?: number[]
+    aftermath?: number[]
+    necrons_magic_scroll?: number[]
+    murderer?: number[]
+
+    the_follower?: number[]
+    the_follower_2?: number[]
+
+    expedition_volume_1?: number[]
+    expedition_volume_2?: number[]
+    expedition_volume_3?: number[]
+    expedition_volume_4?: number[]
+
+    the_apprentice?: number[]
+    the_apprentice_2?: number[]
+    the_apprentice_3?: number[]
+}
+
+export interface ForgeProcess {
+    type: string
+    id: string
+    /** A UNIX timestamp. */
+    startTime: number
+    slot: number
+    notified: boolean
+}
+
 export interface SkyBlockProfileMember {
     last_save?: number
     inv_armor?: Inventory
+    /**
+     * Information about how the member was invited to the co-op. This only
+     * shows up on co-op profiles, but it still shows up for the creator of the
+     * profile. If the member created the profile, the timestamps are for when
+     * the user started and ended creation. [citation needed]
+     */
     coop_invitation?: {
+        /**
+         * The UNIX timestamp at which the invitation was first sent. If the
+         * member is the owner of the profile, this is when they started
+         * creating the profile. [citation needed]
+         */
         timestamp: number
         /**
          * The undashed UUID of the coop member who invited this member
          */
         invited_by: string
+        /** Whether the user accepted the co-op invitation. */
         confirmed: boolean
+        /** The UNIX timestamp for when the user accepted the co-op invitation. If the
+         * member is the owner of hte profile, this is when they finished
+         * creating the profile. [citation needed]
+         */
         confirmed_timestamp?: number
     }
     first_join?: number
     first_join_hub?: number
+    /**
+     * A record of the stat id to a number for each stat that the user has. For
+     * example, { deaths_void: 500 } would mean that the user died to the void
+     * 500 times. There's also stats like `deaths` that are the total combined
+     * amount for their category.
+     */
     stats: Record<string, number>
+    /**
+     * The objectives that the user has. Each objective can be either ACTIVE or
+     * COMPLETE, and has a `progress` value in between 0 and 1. Some objectives
+     * like `collect_ingots` have extra data attached that are relevant to the
+     * objective.
+     */
     objectives: Record<string, SkyBlockObjective> & ({
         collect_ingots?: SkyBlockObjective & {
             IRON_INGOT: boolean
@@ -207,7 +268,9 @@ export interface SkyBlockProfileMember {
             SkyBlockDungeonClasses,
             { experience?: number }
         > | {}
-        dungeon_journal: {}
+        dungeon_journal: {
+            journal_entries?: SkyBlockJournalEntries
+        }
         /**
          * This lists the dungeon people who the player has talked to
          * in the format <npcname>_first_talk
@@ -240,8 +303,10 @@ export interface SkyBlockProfileMember {
             /** The number of gold medals the player has won. */
             gold?: number
         }
-        /** This seems to always be empty. */
-        perks: Record<never, never>
+        perks: {
+            double_drops?: number
+            farming_level_cap?: number
+        }
         /**
          * The key is the contest year, date, and item separated by colon.
          * Example: `193:1_20:WHEAT`.
@@ -274,7 +339,24 @@ export interface SkyBlockProfileMember {
         claims_resets?: number
         claims_resets_timestamp?: number
     }
-    perks?: {}
+    perks?: {
+        permanent_strength?: number
+        permanent_intelligence?: number
+        permanent_speed?: number
+        permanent_defense?: number
+        permanent_health?: number
+
+        catacombs_strength?: number
+        catacombs_boss_luck?: number
+        catacombs_looting?: number
+        catacombs_crit_damage?: number
+        catacombs_health?: number
+        catacombs_defense?: number
+        catacombs_intelligence?: number
+
+        forbidden_blessing?: number
+        revive_stone?: number
+    }
     harp_quest?: {
         selected_song?: string
         selected_song_epoch?: number
@@ -294,7 +376,35 @@ export interface SkyBlockProfileMember {
         expire_at: number
     }[]
     mining_core?: {
-        nodes?: {}
+        nodes?: {
+            special_0?: number
+            daily_effect?: number
+            mining_fortune?: number
+            titanium_insanium?: number
+            mining_speed_boost?: number
+            random_event?: number
+            mining_madness?: number
+            goblin_killer?: number
+            lonesome_miner?: number
+            mining_speed_2?: number
+            professional?: number
+            fortunate?: number
+            mining_fortune_2?: number
+            powder_buff?: number
+            daily_powder?: number
+            mining_experience?: number
+            forge_time?: number
+
+            great_explorer?: number
+            mole?: number
+            mining_speed?: number
+            efficient_miner?: number
+
+            toggle_great_explorer?: boolean
+            toggle_mole?: boolean
+            toggle_mining_speed?: boolean
+            toggle_efficient_miner?: boolean
+        }
         received_free_tier?: true
         tokens?: number
         powder_mithril?: number
@@ -311,7 +421,9 @@ export interface SkyBlockProfileMember {
         crystals?: Record<`${string}_crystal`, SkyBlockCrystalStatus | {}>
         greater_mines_last_access?: number
         biomes?: {
-            dwarven: {}
+            dwarven: {
+                statues_placed?: undefined[]
+            }
             precursor: {
                 parts_delivered: []
                 talked_to_professor?: true
@@ -340,7 +452,7 @@ export interface SkyBlockProfileMember {
     }
     forge?: {
         forge_processes: {
-            forge_1?: {}
+            forge_1?: Record<number, ForgeProcess>
         }
     }
     unlocked_coll_tiers?: string[]

@@ -34,7 +34,11 @@ export interface SkyBlockProfile {
 	profile_id: string
 	members: Record<string, SkyBlockProfileMember>
 	community_upgrades?: SkyBlockCommunityUpgrades
-	last_save?: string
+	/**
+	 * This can be either a string, or a UNIX timestamp. If it's a string, it
+	 * looks like Mar 21, 2022 9:58:42 PM.
+	 * */
+	last_save?: string | number
 	banking?: SkyBlockBanking | {}
 	game_mode?: 'bingo' | 'island' | 'ironman'
 }

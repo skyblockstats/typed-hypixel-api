@@ -2,7 +2,7 @@ export interface GuildAchievementsResponse {
 	success: true
 	lastUpdated: number
 	/** An empty array. There are no one-time guild achievements. */
-	one_time: Record<never, never>
+	one_time: Record<any, never>
 	/** Achievements that have different tiers to them. */
 	tiered: {
 		[key: string]: {

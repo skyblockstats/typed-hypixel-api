@@ -51,9 +51,9 @@ const BASE_URL = 'https://api.hypixel.net/'
 type Response<
     R,
     H extends Record<string, string | number> = {
-        'RateLimit-Limit': number,
-        'RateLimit-Remaining': number,
-        'Ratelimit-Reset': number
+        'ratelimit-limit': number,
+        'ratelimit-remaining': number,
+        'ratelimit-reset': number
     }
     >
     = { data: R, headers: H }
@@ -286,9 +286,9 @@ export const request = async<P extends keyof Requests>(path: P, options: Request
     const headers: Record<string, string | number> = {}
     for (const [name, value] of res.headers.entries()) {
         try {
-            headers[name] = parseInt(value)
+            headers[name.toLowerCase()] = parseInt(value)
         } catch {
-            headers[name] = value
+            headers[name.toLowerCase()] = value
         }
     }
 
