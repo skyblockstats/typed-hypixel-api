@@ -1,4 +1,5 @@
-import { Inventory, ITEM_RARITY } from './_item'
+import { DatabaseInventory, Inventory, ITEM_RARITY } from './_item'
+import { SkyBlockBanking } from './_profile'
 
 export interface DungeonStats {
     times_played?: Record<number, number>
@@ -144,7 +145,6 @@ export interface ForgeProcess {
 
 export interface SkyBlockProfileMember {
     last_save?: number
-    inv_armor?: Inventory
     /**
      * Information about how the member was invited to the co-op. This only
      * shows up on co-op profiles, but it still shows up for the creator of the
@@ -456,11 +456,7 @@ export interface SkyBlockProfileMember {
         }
     }
     unlocked_coll_tiers?: string[]
-    backpack_contents?: Record<number, Inventory>
-    quiver?: Inventory
     sacks_counts?: Record<string, number>
-    talisman_bag?: Inventory
-    backpack_icons?: Record<number, Inventory>
 
     essence_diamond?: number
     essence_gold?: number
@@ -470,9 +466,16 @@ export interface SkyBlockProfileMember {
     essence_undead?: number
     essence_ice?: number
 
-    fishing_bag?: Inventory
     wardrobe_equipped_slot?: number
     collection?: Record<string, number>
+
+    backpack_contents?: Record<number, Inventory>
+    backpack_icons?: Record<number, Inventory>
+
+    inv_armor?: Inventory
+    talisman_bag?: Inventory
+    quiver?: Inventory
+    fishing_bag?: Inventory
     ender_chest_contents?: Inventory
     wardrobe_contents?: Inventory
     potion_bag?: Inventory
@@ -492,3 +495,103 @@ export interface SkyBlockProfileMember {
     experience_skill_social?: number
     experience_skill_taming?: number
 }
+
+// https://stackoverflow.com/a/55032655
+type Modify<T, R> = Omit<T, keyof R> & R
+
+export interface DatabaseLastSavedVersion {
+    /**
+     * The internal SkyBlock version of when the player
+     * last logged onto SkyBlock, like `0.7.47`.
+     */
+    pluginVersion: string
+    bootTime: number
+    gmVersion: string
+    /**
+     * The internal Hypixel version of when the player last
+     * logged onto SkyBlock, like `1.0.123`.
+     */
+    hyVersion: string
+    /** A server id, like `mini149D`. */
+    server: string
+}
+
+/** How profile members are represented in Hypixel's database. */
+export type DatabaseSkyBlockProfileMember = Modify<SkyBlockProfileMember, {
+    profile_id: string
+    cute_name: string
+    /**
+     * The UUID of the player whose stats we're viewing. This isn't always
+     * present, for whatever reason.
+     */
+    player_id?: string
+    profile_version: number
+
+    /** An array of UUIDs, including this person. */
+    coop?: string[]
+    coop_initiator?: boolean
+    coop_confirmed?: boolean
+
+    level_experience: number
+    first_join_skyblock_time: number
+    held_item_slot: number
+    ingame_time: number
+    auction_placed_bid_before?: true
+    auction_starting_bid: number
+    auction_duration_ms: number
+    dark_auction_items?: undefined[]
+    claimable_rewards?: ('psychic')[]
+    achievement_sync_version: number
+    /** A set of coordinates and two more numbers. Looks like `9.0,100.0,14.0,0.0,0.0`. */
+    private_island_spawn_location?: string
+    lastAhMessage?: number
+
+    bank_account?: number
+    bank_history?: SkyBlockBanking['transactions']
+
+    last_checked_interest: number
+    last_interest: number
+    last_interest_time?: number
+
+    [key: `${string}_stamped`]: true
+
+    playtime_minutes: number
+    [key: `playtime_minutes_modes_${string}`]: number
+
+    exploit_start_timestamp: number
+    exploit_block_counter: number
+    exploit_fish_counter: number
+    exploit_monster_counter: number
+
+    shop_throttle?: {
+        /** A date, like `07-29-2019`. */
+        lastUpdate: string
+    }
+
+    damage_MAGMA_CUBE_BOSS_100?: number
+    damage_WISE_DRAGON_100?: number
+    damage_UNSTABLE_DRAGON_100?: number
+    damage_STRONG_DRAGON_100?: number
+
+    quiver_size?: number
+    talisman_bag_size?: number
+
+    inv_armor?: DatabaseInventory
+    talisman_bag?: DatabaseInventory
+    quiver?: DatabaseInventory
+    fishing_bag?: DatabaseInventory
+    ender_chest_contents?: DatabaseInventory
+    wardrobe_contents?: DatabaseInventory
+    potion_bag?: DatabaseInventory
+    personal_vault_contents?: DatabaseInventory
+    inv_contents?: DatabaseInventory
+    candy_inventory_contents?: DatabaseInventory
+
+    slayer_quest?: SkyBlockProfileMember['slayer_quest'] & {
+        last_killed_mob_id: string
+        last_killed_timestamp: number
+    }
+
+    lastSaveVersion: DatabaseLastSavedVersion
+    lastSaveTimestamp: number
+}>
