@@ -28,14 +28,40 @@ export interface PlayerDataResponse {
         /** The username of the player that Hypixel has cached. */
         displayname: string
         eulaCoins?: boolean
+        fireworkStorage?: {
+            flight_duration: number,
+            shape: string,
+            trail: true,
+            twinkle: true,
+            colors: string,
+            fade_colors: string,
+            selected: boolean
+        }[]
         /** The UNIX timestamp at which the player first joined Hypixel. */
         firstLogin: number
         friendRequests?: string[]
         knownAliases: string[]
         knownAliasesLower: string[]
+        /**
+         * A number that is supposed to represent the Minecraft version the
+         * player last logged on with. This seems to be deprecated as it only
+         * appears on some old profiles, use `mcVersionRp` instead.
+         */
+        mostRecentMinecraftVersion?: number
+
+        /** A username. */
+        mostRecentlyThanked?: string
+        mostRecentlyThankedUuid?: string
+
+        /** A username. */
+        mostRecentlyTipped?: string
+        mostRecentlyTippedUuid?: string
+
         lastLogin?: number
         networkExp: number
+        notifications?: boolean
         playername: string
+        seeRequests?: boolean
         stats: Record<string, any> & {
             SkyBlock?: {
                 profiles: Record<string, {
@@ -44,20 +70,35 @@ export interface PlayerDataResponse {
                 }>
             }
         }
+
         timePlaying: number
+        tournamentTokens?: number
+
+        /** The undashed Minecraft UUID of the player. */
         uuid: string
+        wardrobe?: string
+        /** The delivery man. */
         eugene: {
             dailyTwoKExp: number
         }
         quests: Record<string, any>
         testPass?: boolean
-        mostRecentlyTippedUuid?: string
+
+        thanksReceived?: number
+        thanksSent?: number
+
         vanityFavorites?: string
         currentEmote?: string
         achievements: Record<string, number>
         transformation?: string
         housingMeta: Record<string, any>
         voting: Record<string, number>
+        /**
+         * The version string of the Minecraft version the player last logged
+         * onto Hypixel with, for example 1.16.3. Note that this is not
+         * entirely accurate, and sometimes it returns the wrong Minecraft
+         * version for some players.
+         */
         mcVersionRp: string
         rewardConsumed?: boolean
         vanityConvertedBoxToday?: number
@@ -78,13 +119,16 @@ export interface PlayerDataResponse {
         lastClaimedReward?: number
         lastLogout?: number
         friendRequestsUuid: any[]
-        channel?: 'ALL' | 'PM'
-
+        gadget?: string
+        auto_spawn_pet?: boolean
+        channel?: 'ALL' | 'PM' | 'PARTY'
+        chat?: boolean
+        disguise?: string
         collectibles_menu_sort?: string
         onetime_achievement_menu_sort_completion_sort?: string
-        easter2021Cooldowns2?: Record<string, boolean>
-        anniversaryNPCVisited2021?: number[]
-        anniversaryNPCProgress2021?: number
+        [key: `easter${number}Cooldowns2`]: Record<string, boolean>
+        [key: `anniversaryNPCVisited${number}`]: number[]
+        [key: `anniversaryNPCProgress${number}`]: number
 
         packageRank?: string
         newPackageRank?: string
@@ -113,18 +157,28 @@ export interface PlayerDataResponse {
         flashingSaleOpens?: number
         flashingSaleClicks?: number
         giftingMeta?: {
-            realBundlesReceived: 197,
-            bundlesReceived: 197,
-            giftsGiven: 629,
-            bundlesGiven: 127,
-            realBundlesGiven: 127,
-            milestones: string[]
+            realBundlesReceivedInc?: number
+            realBundlesReceived: number
+            bundlesReceived: number
+            giftsGiven: number
+            bundlesGiven: number
+            realBundlesGiven: number
+            milestones?: string[]
         }
         fortuneBuff?: number
         SANTA_QUEST_STARTED?: boolean
         SANTA_FINISHED?: boolean
+        compassStats?: {
+            compass: {
+                battleground: number
+                arcade: number
+                prototype: number
+                skywars: number
+                tntgames: number
+            }
+        },
         socialMedia?: {
-            prompt: boolean
+            prompt?: boolean
             links: {
                 DISCORD?: string
                 HYPIXEL?: string
@@ -139,30 +193,46 @@ export interface PlayerDataResponse {
             /**
              * This was replaced with links.YOUTUBE, but this field is sometimes still used
             */
-            YOUTUBE: string
+            YOUTUBE?: string
             /**
              * This was replaced with links.TWITTER, but this field is sometimes still used
             */
-            TWITTER: string
+            TWITTER?: string
             /**
              * This was replaced with links.DISCORD, but this field is sometimes still used
             */
-            DISCORD: string
+            DISCORD?: string
 
         }
+        disableTipMessages?: boolean
         guildNotifications?: boolean
         challenges: Record<string, Record<string, number>>
         spec_always_flying?: boolean
-        userLanguage: string
+        userLanguage?: string
         monthlyRankColor?: 'AQUA'
         achievementSync: Record<string, number>
         tiered_achievement_menu_sort?: string
         parkourCheckpointBests: Record<string, Record<number, number>>
         achievementPoints: number
         battlePassGlowStatus?: boolean
+
+        'dmcrates-10-2019'?: {
+            REGULAR: boolean
+            VIP: boolean
+            VIP_PLUS: boolean
+            MVP: boolean
+            MVP_PLUS: boolean
+        }
         monthlycrates: Record<`${number}-${number}`, Record<string, boolean>>
+
         tourney?: Tourneys
         gifts_grinch?: number
+
+        xmas2019_ARCADE_1?: boolean
+        xmas2019_ARCADE_2?: boolean
+        xmas2019_ARCADE_3?: boolean
+        xmas2019_PTL_3?: boolean
+
         snowball_fight_intro_2019?: boolean
         achievementTotem?: any
         main2017Tutorial?: boolean
@@ -171,15 +241,37 @@ export interface PlayerDataResponse {
         questSettings?: {
             autoActivate: boolean
         }
+
+        /**
+         * The UNIX timestamp of when the player claimed their personal bank
+         * for each profile. The key is formatted as
+         * `claimed_solo_bank_b876ec32-e396-476b-a115-8438d83c67d4`.
+         */
+        [key: `claimed_solo_bank_${string}`]: number
         claimed_potato_talisman?: number
+        claim_potato_war_crown?: number
         skyblock_free_cookie?: number
+        claimed_potato_basket?: number
         [key: `scorpius_bribe_${number}`]: number
+
         disabledProjectileTrails?: boolean
         currentClickEffect?: string
-        seasonal?: Record<string, Record<number, {
-            adventRewards?: Record<`day${number}`, number>
-            presents?: Record<string, true>
-        }>>
+        outfit?: Record<any, never>
+        seasonal?: {
+            christmas?: Record<number, {
+                adventRewards?: Record<`day${number}`, number>
+                presents?: Record<string, true>
+            }>
+            easter?: Record<number, {
+                duelsWinsAchievement: number
+                mainlobby_egghunt_reward: boolean
+                [key: `mainlobby_egghunt_${number}_${number}_${number}`]: boolean
+            }>
+            anniversary?: Record<number, {
+                anniversaryNPCVisited: number[]
+                anniversaryNPCProgress: number
+            }>
+        }
         [key: `completed_christmas_quests_${number}`]: number
         currentGadget?: string
         /**

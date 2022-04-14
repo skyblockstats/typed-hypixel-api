@@ -76,6 +76,10 @@ const startTime = Date.now();
 		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
 		key: process.env.API_KEY
 	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'b876ec32e396476ba1158438d83c67d4',
+		key: process.env.API_KEY
+	}, true))
 
 	await testData('GuildResponse', await request('guild', {
 		key: process.env.API_KEY,
