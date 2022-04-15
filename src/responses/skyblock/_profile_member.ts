@@ -335,7 +335,7 @@ export interface SkyBlockProfileMember {
     experimentation?: {
         pairings: ExperimentationGame
         simon: ExperimentationGame
-        numbers: ExperimentationGame
+        numbers?: ExperimentationGame
         claims_resets?: number
         claims_resets_timestamp?: number
     }
@@ -394,6 +394,8 @@ export interface SkyBlockProfileMember {
             daily_powder?: number
             mining_experience?: number
             forge_time?: number
+            pickaxe_toss?: number
+            experience_orbs?: number
 
             great_explorer?: number
             mole?: number
@@ -424,11 +426,11 @@ export interface SkyBlockProfileMember {
             dwarven: {
                 statues_placed?: undefined[]
             }
-            precursor: {
+            precursor?: {
                 parts_delivered: []
                 talked_to_professor?: true
             }
-            goblin: {
+            goblin?: {
                 king_quest_active: boolean
                 king_quests_completed: number
             }

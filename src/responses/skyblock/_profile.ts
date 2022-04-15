@@ -9,7 +9,7 @@ export interface SkyBlockCommunityUpgrades {
 		start_ms: number,
 		who_started: string
 	}
-	upgrade_states: {
+	upgrade_states?: {
 		upgrade: SkyBlockCommunityUpgradeName
 		tier: number
 		started_ms: number

@@ -34,6 +34,7 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
+
 	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
 		key: process.env.API_KEY,
 		uuid: 'e471665f71014891bef337c8d22cf04b'
@@ -52,6 +53,26 @@ const startTime = Date.now();
 	}, true))
 	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
 		uuid: 'ac01147ed01a47d1b5777b31ccf5e616',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: 'e07f44d84fb8424cbb0b15dc542266f6',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '94c2516fe3224cec87084902314728e6',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '1b524fe49c5c4fe599840bdd7c790bf0',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: 'fb178c95d152459eb8dcefd127894e38',
+		key: process.env.API_KEY
+	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '20934ef9488c465180a78f861586b4cf',
 		key: process.env.API_KEY
 	}, true))
 
