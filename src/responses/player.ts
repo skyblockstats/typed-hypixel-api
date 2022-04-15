@@ -430,12 +430,12 @@ export interface PlayerDataResponse {
          * An array of dashed admin player UUIDs. A superset of
          * `aprilFoolsStaffClicked_-1`.
          */
-        'aprilFoolsPlayerClicked_-1': string[]
+        'aprilFoolsPlayerClicked_-1'?: string[]
         /**
          * An array of dashed admin player UUIDs. A subset of 
          * `aprilFoolsPlayerClicked_-1`, even though all the players there are staff.
          */
-        'aprilFoolsStaffClicked_-1': string[]
+        'aprilFoolsStaffClicked_-1'?: string[]
     }
 
 }
