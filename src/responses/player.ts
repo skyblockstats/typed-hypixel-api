@@ -33,9 +33,13 @@ export interface PlayerDataResponse {
          * you probably want to use the `uuid` field instead.
          */
         _id: string
+        /** An array of ids of one-time achievements that the player has unlocked. */
         achievementsOneTime: string[]
         clock?: boolean
-        /** The username of the player that Hypixel has cached. */
+        /**
+         * The username of the player that Hypixel has cached. Identical to
+         * `playername`.
+         */
         displayname: string
         eulaCoins?: boolean
         fireworkStorage?: {
@@ -50,7 +54,15 @@ export interface PlayerDataResponse {
         /** The UNIX timestamp at which the player first joined Hypixel. */
         firstLogin: number
         friendRequests?: string[]
+        /**
+         * The previous usernames of the player including their current one,
+         * without duplicates, sorted by oldest first.
+         */
         knownAliases: string[]
+        /**
+         * The lowercased previous usernames of the player including their
+         * current one, without duplicates, sorted by oldest first.
+         */
         knownAliasesLower: string[]
         /**
          * A number that is supposed to represent the Minecraft version the
@@ -67,11 +79,19 @@ export interface PlayerDataResponse {
         mostRecentlyTipped?: string
         mostRecentlyTippedUuid?: string
 
+        /** The UNIX timestamp of when the player last logged in. */
         lastLogin?: number
         networkExp: number
         notifications?: boolean
+
+        /**
+         * The username of the player that Hypixel has cached. Identical to
+         * `displayname`.
+         */
         playername: string
+        pp?: 'villager'
         seeRequests?: boolean
+        spec_first_person?: boolean
         spectators_invisible?: boolean
         stats: Record<string, any> & {
             SkyBlock?: {
@@ -239,11 +259,16 @@ export interface PlayerDataResponse {
         flashingSaleOpens?: number
         flashingSaleClicks?: number
 
-        flashingNewsPopup?: `${number}`[]
+        flashingNewsPopup?: (`${number}` | `${number}/`)[]
         flashingNewsPoppedUp?: number
         flashingNewsOpens?: number
 
+        vote?: {
+            chests: number
+        }
         multiTunnel?: undefined[]
+        INVALID?: true
+        MAIN_LOBBY_6?: boolean
 
         /**
          * Whether the player is on the Hypixel Build Team. Note that some
@@ -283,25 +308,13 @@ export interface PlayerDataResponse {
                 HYPIXEL?: string
                 TWITCH?: string
                 TWITTER?: string
-                /**
-                 * Make sure to also check socialMedia.YOUTUBE
-                 */
                 YOUTUBE?: string
                 INSTAGRAM?: string
             }
-            /**
-             * This was replaced with links.YOUTUBE, but this field is sometimes still used
-            */
-            YOUTUBE?: string
-            /**
-             * This was replaced with links.TWITTER, but this field is sometimes still used
-            */
-            TWITTER?: string
-            /**
-             * This was replaced with links.DISCORD, but this field is sometimes still used
-            */
             DISCORD?: string
-
+            TWITCH?: string
+            YOUTUBE?: string
+            TWITTER?: string
         }
         disableTipMessages?: boolean
         guildNotifications?: boolean
@@ -326,6 +339,13 @@ export interface PlayerDataResponse {
         monthlycrates?: Record<`${number}-${number}`, Record<string, boolean>>
 
         tourney?: Tourneys
+
+        /** What stat will be shown above the player's username. */
+        headStat?: 'ping'
+        /** This doesn't seem to be used for anything anymore. */
+        currentCloak?: 'PING'
+        particlePack?: 'SPHERE'
+
         gifts_grinch?: number
 
         /**
@@ -395,6 +415,27 @@ export interface PlayerDataResponse {
         claimed_year143_cake?: number
         mostRecentGameType?: string
         hasTheHotPotato?: boolean
+
+        /** An admin-only field. */
+        motionTrackerEnabled?: boolean
+        /** An admin-only field. */
+        motionTrackerDebug?: boolean
+
+        /** Seems like an admin-only field. */
+        [key: `players_flagged_new_${string}`]: number
+        /** Seems like an admin-only field. */
+        disableSendAll?: boolean
+
+        /**
+         * An array of dashed admin player UUIDs. A superset of
+         * `aprilFoolsStaffClicked_-1`.
+         */
+        'aprilFoolsPlayerClicked_-1': string[]
+        /**
+         * An array of dashed admin player UUIDs. A subset of 
+         * `aprilFoolsPlayerClicked_-1`, even though all the players there are staff.
+         */
+        'aprilFoolsStaffClicked_-1': string[]
     }
 
 }

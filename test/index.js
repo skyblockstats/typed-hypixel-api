@@ -34,7 +34,6 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
-
 	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
 		key: process.env.API_KEY,
 		uuid: 'e471665f71014891bef337c8d22cf04b'
@@ -93,6 +92,10 @@ const startTime = Date.now();
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
 
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'ed32a0660fc948378dcf8ed717d1188c',
+		key: process.env.API_KEY
+	}, true))
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: 'f7c77d999f154a66a87dc4a51ef30d19',
 		key: process.env.API_KEY
