@@ -73,6 +73,10 @@ const startTime = Date.now();
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
 
 	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'f7c77d999f154a66a87dc4a51ef30d19',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
 		uuid: 'c3b9402747b1433d8b20cd54c7da3f5d',
 		key: process.env.API_KEY
 	}, true))

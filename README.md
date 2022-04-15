@@ -2,7 +2,7 @@
 
 A library to make requests to the Hypixel API, but with TypeScript to help you avoid mistakes. This library does not modify or process any data returned, that's up to you.
 
-The library covers the *entire* Hypixel API, and we have [automatic daily tests](https://github.com/skyblockstats/typed-hypixel-api/actions) to make sure nothing has been added or changed.
+This library covers the *entire* Hypixel API, and we have [automatic daily tests](https://github.com/skyblockstats/typed-hypixel-api/actions) to make sure nothing has been added or changed.
 
 ## Usage
 

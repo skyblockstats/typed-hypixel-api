@@ -41,8 +41,8 @@ export interface PlayerDataResponse {
         fireworkStorage?: {
             flight_duration: number,
             shape: string,
-            trail: true,
-            twinkle: true,
+            trail: boolean,
+            twinkle: boolean,
             colors: string,
             fade_colors: string,
             selected: boolean
@@ -72,6 +72,7 @@ export interface PlayerDataResponse {
         notifications?: boolean
         playername: string
         seeRequests?: boolean
+        spectators_invisible?: boolean
         stats: Record<string, any> & {
             SkyBlock?: {
                 profiles: SimpleSkyBlockProfilesRecord
@@ -148,10 +149,14 @@ export interface PlayerDataResponse {
 
         /** The undashed Minecraft UUID of the player. */
         uuid: string
+        votesMissed?: number
         wardrobe?: string
         /** The delivery man. */
         eugene?: {
+            /** A UNIX timestamp. */
             dailyTwoKExp: number
+            /** A UNIX timestamp. */
+            weekly_booster?: number
         }
         quests?: Record<string, any>
         testPass?: boolean
@@ -192,9 +197,13 @@ export interface PlayerDataResponse {
         lastLogout?: number
         friendRequestsUuid: any[]
         gadget?: string
+        /** An old field, doesn't seem to be used anymore. */
+        hypixel_tutorial_tutorial?: true
         auto_spawn_pet?: boolean
         channel?: 'ALL' | 'PM' | 'PARTY'
         chat?: boolean
+        /** This field doesn't seem to be used anymore. */
+        chatAlerts?: boolean
         disguise?: string
         collectibles_menu_sort?: string
         onetime_achievement_menu_sort_completion_sort?: string
@@ -224,10 +233,24 @@ export interface PlayerDataResponse {
         achievementTracking: any[]
         adsense_tokens?: number
         language?: string
+
         flashingSalePopup?: number
         flashingSalePoppedUp?: number
         flashingSaleOpens?: number
         flashingSaleClicks?: number
+
+        flashingNewsPopup?: `${number}`[]
+        flashingNewsPoppedUp?: number
+        flashingNewsOpens?: number
+
+        multiTunnel?: undefined[]
+
+        /**
+         * Whether the player is on the Hypixel Build Team. Note that some
+         * admins have this as `true`.
+         */
+        buildTeam?: boolean
+
         giftingMeta?: {
             realBundlesReceivedInc?: number
             realBundlesReceived: number
@@ -246,11 +269,11 @@ export interface PlayerDataResponse {
         SANTA_FINISHED?: boolean
         compassStats?: {
             compass: {
-                battleground: number
-                arcade: number
-                prototype: number
-                skywars: number
-                tntgames: number
+                battleground?: number
+                arcade?: number
+                prototype?: number
+                skywars?: number
+                tntgames?: number
             }
         },
         socialMedia?: {
@@ -288,27 +311,27 @@ export interface PlayerDataResponse {
         monthlyRankColor?: 'AQUA'
         achievementSync: Record<string, number>
         tiered_achievement_menu_sort?: string
-        parkourCheckpointBests: Record<string, Record<number, number>>
+        parkourCheckpointBests?: Record<string, Record<number, number>>
         achievementPoints: number
         battlePassGlowStatus?: boolean
         lastMapVote?: number
 
-        'dmcrates-10-2019'?: {
+        [key: `dmcrates-${number}-${number}`]: {
             REGULAR: boolean
-            VIP: boolean
-            VIP_PLUS: boolean
-            MVP: boolean
-            MVP_PLUS: boolean
+            VIP?: boolean
+            VIP_PLUS?: boolean
+            MVP?: boolean
+            MVP_PLUS?: boolean
         }
         monthlycrates?: Record<`${number}-${number}`, Record<string, boolean>>
 
         tourney?: Tourneys
         gifts_grinch?: number
 
-        xmas2019_ARCADE_1?: boolean
-        xmas2019_ARCADE_2?: boolean
-        xmas2019_ARCADE_3?: boolean
-        xmas2019_PTL_3?: boolean
+        /**
+         * The key is formatted as `xmas2019_<lobby>`, with `lobby` being something like `PTL_3` or `MAIN_LOBBY_37`.
+         */
+        [key: `xmas2019_${string}`]: boolean
 
         snowball_fight_intro_2019?: boolean
         achievementTotem?: any
@@ -371,6 +394,7 @@ export interface PlayerDataResponse {
         [key: `adventRewards${number}` | `adventRewards_v2_${number}`]: Record<`day${number}`, number>
         claimed_year143_cake?: number
         mostRecentGameType?: string
+        hasTheHotPotato?: boolean
     }
 
 }
