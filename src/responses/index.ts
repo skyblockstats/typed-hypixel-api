@@ -11,6 +11,7 @@ export * from './resources/vanity/companions'
 export * from './resources/achievements'
 export * from './resources/vanity/pets'
 export * from './resources/challenges'
+export * from './resources/quests'
 export * from './resources/games'
 
 // skyblock endpoints
@@ -30,6 +31,7 @@ export * from './player/ranked/skywars'
 export * from './player'
 
 // other endpoints
+export * from './punishmentstats'
 export * from './leaderboards'
 export * from './recentgames'
 export * from './boosters'

@@ -23,23 +23,25 @@ import {
     SkyBlockRecentlyEndedAuctionsResponse,
     SkyBlockRequestAuctionResponse,
     SkyBlockActiveAuctionsResponse,
+    SkyBlockPlayerBingoResponse,
+    CurrentPlayerCountsResponse,
     ApiKeyInformationResponse,
     GamesInformationResponse,
     SkyBlockProfilesResponse,
     SkyBlockProfileResponse,
+    PunishmentStatsResponse,
+    SkyBlockBazaarResponse,
     RankedSkywarsResponse,
     SkyBlockNewsResponse,
     OnlineStatusResponse,
+    LeaderboardsResponse,
     RecentGamesResponse,
+    NoBingoDataResponse,
     PlayerDataResponse,
+    BoostersResponse,
     FriendsResponse,
     GuildResponse,
-    SkyBlockBazaarResponse,
-    SkyBlockPlayerBingoResponse,
-    NoBingoDataResponse,
-    BoostersResponse,
-    CurrentPlayerCountsResponse,
-    LeaderboardsResponse,
+    QuestsResponse,
 } from './responses/index'
 
 
@@ -99,6 +101,10 @@ export interface Requests {
     'resources/achievements': {
         options: {}
         response: Response<AchievementsResponse>
+    }
+    'resources/quests': {
+        options: {}
+        response: Response<QuestsResponse>
     }
     'resources/challenges': {
         options: {}
@@ -238,6 +244,12 @@ export interface Requests {
             key: string
         }
         response: Response<LeaderboardsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
+    }
+    'punishmentstats': {
+        options: {
+            key: string
+        }
+        response: Response<PunishmentStatsResponse | MissingFieldResponse | InvalidApiKeyResponse | ThrottleResponse>
     }
 }
 
