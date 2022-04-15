@@ -1,12 +1,17 @@
 import { SkyBlockProfileMember } from './_profile_member'
 
-export type SkyBlockCommunityUpgradeName = 'minion_slots' | 'island_size' | 'guests_count' | 'coins_allowance' | 'coop_slots'
+export type SkyBlockCommunityUpgradeName =
+	| 'minion_slots'
+	| 'island_size'
+	| 'guests_count'
+	| 'coins_allowance'
+	| 'coop_slots'
 
 export interface SkyBlockCommunityUpgrades {
 	currently_upgrading?: null | {
-		upgrade: SkyBlockCommunityUpgradeName,
-		new_tier: number,
-		start_ms: number,
+		upgrade: SkyBlockCommunityUpgradeName
+		new_tier: number
+		start_ms: number
 		who_started: string
 	}
 	upgrade_states?: {

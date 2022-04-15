@@ -11,17 +11,35 @@ export interface QuestsResponse {
 			id: string
 			name: string
 			rewards: {
-				type: 'MultipliedExperienceReward' | 'MultipliedCoinReward' | 'MegawallsMythicFavorReward' | 'ArenaMagicKeyReward' | 'CoinReward' | 'WarlordsBrokenWeaponReward' | 'WarlordsMagicDustReward' | 'WarlordsVoidShardReward' | 'SkyWarsSoulReward' | 'SkyWarsTokenReward' | 'GameLootChestReward' | 'CrazyWallsSkullReward' | 'SkyClashCardPackReward' | 'PitGold' | 'BedwarsExpReward'
+				type:
+					| 'MultipliedExperienceReward'
+					| 'MultipliedCoinReward'
+					| 'MegawallsMythicFavorReward'
+					| 'ArenaMagicKeyReward'
+					| 'CoinReward'
+					| 'WarlordsBrokenWeaponReward'
+					| 'WarlordsMagicDustReward'
+					| 'WarlordsVoidShardReward'
+					| 'SkyWarsSoulReward'
+					| 'SkyWarsTokenReward'
+					| 'GameLootChestReward'
+					| 'CrazyWallsSkullReward'
+					| 'SkyClashCardPackReward'
+					| 'PitGold'
+					| 'BedwarsExpReward'
 				amount: number
 			}[]
 			objectives: ({
 				id: string
-			} & ({
-				type: 'IntegerObjective'
-				integer: number
-			} | {
-				type: 'BooleanObjective'
-			}))[]
+			} & (
+				| {
+						type: 'IntegerObjective'
+						integer: number
+				  }
+				| {
+						type: 'BooleanObjective'
+				  }
+			))[]
 			requirements: {
 				type: 'DailyResetQuestRequirement' | 'WeeklyResetQuestRequirement'
 			}[]

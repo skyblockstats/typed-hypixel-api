@@ -40,14 +40,25 @@ export interface SkyBlockItemsResponse {
 		dungeon_item?: boolean
 		museum?: string
 		id: string
-	} & ({
-		generator: string
-		generator_tier: number
-	} | {}) & ({
-		material: 'SKULL_ITEM'
-		skin: string
-	} | {}) & ({
-		material: 'LEATHER_CHESTPLATE'
-		color: `${number},${number},${number}`
-	} | {}))[]
+	} & (
+		| {
+				generator: string
+				generator_tier: number
+		  }
+		| {}
+	) &
+		(
+			| {
+					material: 'SKULL_ITEM'
+					skin: string
+			  }
+			| {}
+		) &
+		(
+			| {
+					material: 'LEATHER_CHESTPLATE'
+					color: `${number},${number},${number}`
+			  }
+			| {}
+		))[]
 }

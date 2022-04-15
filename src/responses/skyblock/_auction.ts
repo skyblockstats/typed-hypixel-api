@@ -33,7 +33,7 @@ export interface Auction {
 	/**
 	 * The category of the item. These are the same categories that are
 	 * used to sort in the auction house GUI.
-	*/
+	 */
 	category: 'weapon' | 'accessories' | 'misc' | 'blocks' | 'consumables' | 'armor'
 	/** The rarity of the item. */
 	tier: ITEM_RARITY

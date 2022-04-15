@@ -1,8 +1,9 @@
 {
+	"parser": "typescript",
 	"printWidth": 100,
 	"useTabs": true,
 	"singleQuote": true,
-	"quoteProps": "consistent",
+	"quoteProps": "as-needed",
 	"trailingComma": "es5",
 	"semi": false,
 	"arrowParens": "avoid"
