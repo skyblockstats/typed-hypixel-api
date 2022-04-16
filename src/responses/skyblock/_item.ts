@@ -18,12 +18,3 @@ export interface Inventory {
 	 */
 	data: string
 }
-
-export interface DatabaseInventory {
-	/** This seems to always be 0. */
-	type: 0
-	/**
-	 * NBT bytes.
-	 */
-	data: number[]
-}

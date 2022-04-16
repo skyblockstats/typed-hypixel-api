@@ -34,6 +34,35 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
+
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'ed32a0660fc948378dcf8ed717d1188c',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'f7c77d999f154a66a87dc4a51ef30d19',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'c3b9402747b1433d8b20cd54c7da3f5d',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: 'b876ec32e396476ba1158438d83c67d4',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: '20934ef9488c465180a78f861586b4cf',
+		key: process.env.API_KEY
+	}, true))
+
+
+
+
 	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
 		key: process.env.API_KEY,
 		uuid: 'e471665f71014891bef337c8d22cf04b'
@@ -91,31 +120,6 @@ const startTime = Date.now();
 
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
-
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: 'ed32a0660fc948378dcf8ed717d1188c',
-		key: process.env.API_KEY
-	}, true))
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: 'f7c77d999f154a66a87dc4a51ef30d19',
-		key: process.env.API_KEY
-	}, true))
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: 'c3b9402747b1433d8b20cd54c7da3f5d',
-		key: process.env.API_KEY
-	}, true))
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: '16751f79c0b14e53a0b590d31fc1d80d',
-		key: process.env.API_KEY
-	}, true))
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: 'b876ec32e396476ba1158438d83c67d4',
-		key: process.env.API_KEY
-	}, true))
-	await testData('PlayerDataResponse', await request('player', {
-		uuid: '20934ef9488c465180a78f861586b4cf',
-		key: process.env.API_KEY
-	}, true))
 
 	await testData('GuildResponse', await request('guild', {
 		key: process.env.API_KEY,

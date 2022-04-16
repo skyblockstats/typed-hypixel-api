@@ -1,4 +1,5 @@
-import { DatabaseInventory, Inventory, ITEM_RARITY } from './_item'
+import { NBTInventory } from '../player/_inventory'
+import { Inventory, ITEM_RARITY } from './_item'
 import { SkyBlockBanking } from './_profile'
 
 export interface DungeonStats {
@@ -590,16 +591,16 @@ export type DatabaseSkyBlockProfileMember = Modify<
 		quiver_size?: number
 		talisman_bag_size?: number
 
-		inv_armor?: DatabaseInventory
-		talisman_bag?: DatabaseInventory
-		quiver?: DatabaseInventory
-		fishing_bag?: DatabaseInventory
-		ender_chest_contents?: DatabaseInventory
-		wardrobe_contents?: DatabaseInventory
-		potion_bag?: DatabaseInventory
-		personal_vault_contents?: DatabaseInventory
-		inv_contents?: DatabaseInventory
-		candy_inventory_contents?: DatabaseInventory
+		inv_armor?: NBTInventory
+		talisman_bag?: NBTInventory
+		quiver?: NBTInventory
+		fishing_bag?: NBTInventory
+		ender_chest_contents?: NBTInventory
+		wardrobe_contents?: NBTInventory
+		potion_bag?: NBTInventory
+		personal_vault_contents?: NBTInventory
+		inv_contents?: NBTInventory
+		candy_inventory_contents?: NBTInventory
 
 		slayer_quest?: SkyBlockProfileMember['slayer_quest'] & {
 			last_killed_mob_id: string
