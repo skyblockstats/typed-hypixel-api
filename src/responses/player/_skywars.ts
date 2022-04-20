@@ -73,6 +73,8 @@ export type SkyWarsRankedKit =
 	| 'pyromancer'
 	| 'scout'
 
+export type SkyWarsAnyKit = SkyWarsKit | SkyWarsMegaKit | SkyWarsRankedKit
+
 type PartialStat =
 	| 'killstreak'
 	| 'winstreak'

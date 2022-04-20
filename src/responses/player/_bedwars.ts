@@ -1,267 +1,132 @@
-export interface BedwarsStats {
-	Experience_new: number
-	first_join_7: boolean
-	bedwars_box_rares: number
-	bedwars_box_commons: number
-	bedwars_box: number
-	chest_history: string
+type BedwarsDeath = 'void' | 'entity_attack' | 'fall' | 'projectile' | 'expolosion' | 'magic'
+
+type BedwarsStat =
+	| 'winstreak'
+	| 'games_played_bedwars'
+	| 'resources_collected_bedwars'
+	| 'gold_resources_collected_bedwars'
+	| 'iron_resources_collected_bedwars'
+	| 'diamond_resources_collected_bedwars'
+	| 'emerald_resources_collected_bedwars'
+	| 'wins_bedwars'
+	| 'losses_bedwars'
+	| 'beds_lost_bedwars'
+	| 'beds_broken_bedwars'
+	// deaths
+	| 'deaths_bedwars'
+	| 'final_deaths_bedwars'
+	| `${BedwarsDeath}_deaths_bedwars`
+	| `${BedwarsDeath}_final_deaths_bedwars`
+	// kills
+	| 'kills_bedwars'
+	| 'final_kills_bedwars'
+	| `${BedwarsDeath}_kills_bedwars`
+	| `${BedwarsDeath}_final_kills_bedwars`
+	// these are two different stats for some reason
+	| 'items_purchased_bedwars'
+	| '_items_purchased_bedwars'
+	| 'permanent _items_purchased_bedwars'
+
+type BedwarsMode =
+	| 'castle'
+	| 'eight_one'
+	| 'eight_two'
+	| 'four_three'
+	| 'four_four'
+	| 'eight_two'
+	| 'eight_two_ultimate'
+	| 'eight_two_lucky'
+	| 'eight_two_voidless'
+
+export type BedwarsStats = { [key in BedwarsStat | `${BedwarsMode}_${BedwarsStat}`]?: number } & {
 	packages: string[]
+	coins: number
+
+	Experience: number
+	Experience_new: number
+
+	first_join_7: boolean
+
+	bedwars_box: number
 	bedwars_boxes: number
+	bedwars_box_commons: number
+	bedwars_box_rares: number
 	bedwars_box_epics: number
 	bedwars_box_legendaries: number
-	coins: number
-	Experience: number
+
+	Bedwars_openedChests?: number
+	Bedwars_openedCommons?: number
+	Bedwars_openedRares?: number
+	Bedwars_openedEpics?: number
+	Bedwars_openedLegendaries?: number
+
 	games_played_bedwars_1: number
-	activeNPCSkin: string
-	winstreak: number
-	gold_resources_collected_bedwars: number
-	eight_one_losses_bedwars: number
-	losses_bedwars: number
-	games_played_bedwars: number
-	eight_one_iron_resources_collected_bedwars: number
-	eight_one_games_played_bedwars: number
-	eight_one_resources_collected_bedwars: number
-	iron_resources_collected_bedwars: number
-	eight_one_gold_resources_collected_bedwars: number
-	resources_collected_bedwars: number
-	kills_bedwars: number
-	void_kills_bedwars: number
-	eight_one_void_kills_bedwars: number
-	eight_one_kills_bedwars: number
-	final_deaths_bedwars: number
-	eight_one_beds_lost_bedwars: number
-	beds_lost_bedwars: number
-	eight_one_final_deaths_bedwars: number
-	void_final_deaths_bedwars: number
-	eight_one_void_final_deaths_bedwars: number
-	wins_bedwars: number
-	eight_one_wins_bedwars: number
-	eight_one_beds_broken_bedwars: number
-	eight_one__items_purchased_bedwars: number
-	eight_one_items_purchased_bedwars: number
-	entity_attack_kills_bedwars: number
-	eight_one_entity_attack_kills_bedwars: number
-	items_purchased_bedwars: number
-	beds_broken_bedwars: number
-	_items_purchased_bedwars: number
-	spray_storage_new: string
-	four_four_losses_bedwars: number
-	void_deaths_bedwars: number
-	four_four__items_purchased_bedwars: number
-	four_four_games_played_bedwars: number
-	four_four_void_deaths_bedwars: number
-	four_four_items_purchased_bedwars: number
-	four_four_deaths_bedwars: number
-	deaths_bedwars: number
-	eight_one_deaths_bedwars: number
-	eight_one_entity_attack_deaths_bedwars: number
-	entity_attack_deaths_bedwars: number
-	eight_one_void_deaths_bedwars: number
-	eight_one_final_kills_bedwars: number
-	eight_one_void_final_kills_bedwars: number
-	final_kills_bedwars: number
-	void_final_kills_bedwars: number
-	four_four_iron_resources_collected_bedwars: number
-	four_four_resources_collected_bedwars: number
-	four_four_gold_resources_collected_bedwars: number
-	diamond_resources_collected_bedwars: number
-	eight_one_entity_attack_final_deaths_bedwars: number
-	entity_attack_final_deaths_bedwars: number
-	custom_final_deaths_bedwars: number
-	eight_one_custom_final_deaths_bedwars: number
-	eight_one_diamond_resources_collected_bedwars: number
-	activeIslandTopper: string
-	spray_glyph_field: string
-	four_three_wins_bedwars: number
-	shop_sort: string
-	activeKillEffect: string
-	activeDeathCry: string
-	activeProjectileTrail: string
-	shop_sort_enable_owned_first: boolean
-	activeVictoryDance: string
-	eight_two_resources_collected_bedwars: number
-	eight_two_gold_resources_collected_bedwars: number
-	eight_two_iron_resources_collected_bedwars: number
-	eight_two_games_played_bedwars: number
-	eight_two_losses_bedwars: number
-	favourites: string
-	favourites_1: string
-	eight_two_kills_bedwars: number
-	eight_two_entity_attack_kills_bedwars: number
-	eight_two_final_deaths_bedwars: number
-	eight_two_deaths_bedwars: number
-	eight_two__items_purchased_bedwars: number
-	eight_two_entity_attack_final_deaths_bedwars: number
-	eight_two_items_purchased_bedwars: number
-	eight_two_beds_lost_bedwars: number
-	eight_two_entity_attack_deaths_bedwars: number
-	bedwars_halloween_boxes: number
-	free_event_key_bedwars_halloween_boxes_2017: boolean
-	activeKillMessages: string
-	emerald_resources_collected_bedwars: number
-	'permanent _items_purchased_bedwars': number
-	eight_one_emerald_resources_collected_bedwars: number
-	'eight_one_permanent _items_purchased_bedwars': number
-	bedwars_christmas_boxes: number
-	free_event_key_bedwars_christmas_boxes_2017: boolean
-	Bedwars_openedChests: number
-	chest_history_new: string[]
-	Bedwars_openedCommons: number
-	Bedwars_openedRares: number
-	four_three_void_kills_bedwars: number
-	four_three_entity_attack_kills_bedwars: number
-	four_three_fall_kills_bedwars: number
-	four_three_iron_resources_collected_bedwars: number
-	four_three_games_played_bedwars: number
-	four_three__items_purchased_bedwars: number
-	fall_kills_bedwars: number
-	four_three_void_deaths_bedwars: number
-	four_three_entity_attack_deaths_bedwars: number
-	four_three_gold_resources_collected_bedwars: number
-	'four_three_permanent _items_purchased_bedwars': number
-	four_three_deaths_bedwars: number
-	four_three_wrapped_present_resources_collected_bedwars: number
-	four_three_diamond_resources_collected_bedwars: number
-	four_three_items_purchased_bedwars: number
-	four_three_kills_bedwars: number
-	wrapped_present_resources_collected_bedwars: number
-	four_three_resources_collected_bedwars: number
-	'four_four_permanent _items_purchased_bedwars': number
-	four_four_wrapped_present_resources_collected_bedwars: number
-	four_four_void_kills_bedwars: number
-	four_four_kills_bedwars: number
-	four_four_final_deaths_bedwars: number
-	entity_attack_final_kills_bedwars: number
-	four_four_entity_attack_deaths_bedwars: number
-	four_four_void_final_deaths_bedwars: number
-	four_four_beds_lost_bedwars: number
-	four_four_entity_attack_final_kills_bedwars: number
-	four_four_entity_attack_kills_bedwars: number
-	four_four_final_kills_bedwars: number
-	four_four_emerald_resources_collected_bedwars: number
-	four_three_beds_lost_bedwars: number
-	four_three_final_deaths_bedwars: number
-	four_three_entity_attack_final_deaths_bedwars: number
-	four_three_losses_bedwars: number
-	sw_duel_melee_swings_duels: number
-	sw_duel_duels_melee_swings: number
-	sw_duel_melee_swings: number
-	eight_two_void_deaths_bedwars: number
-	eight_two_beds_broken_bedwars: number
-	eight_two_emerald_resources_collected_bedwars: number
-	'eight_two_permanent _items_purchased_bedwars': number
-	eight_two_diamond_resources_collected_bedwars: number
-	eight_two_wins_bedwars: number
-	eight_two_entity_attack_final_kills_bedwars: number
-	eight_two_void_kills_bedwars: number
-	eight_two_void_final_kills_bedwars: number
-	eight_two_final_kills_bedwars: number
-	activeGlyph: string
-	eight_one_entity_attack_final_kills_bedwars: number
-	seen_beta_menu: number
-	favorite_slots: string
-	Bedwars_openedEpics: number
-	eight_one_projectile_kills_bedwars: number
-	projectile_kills_bedwars: number
-	bedwars_easter_boxes: number
-	Bedwars_openedLegendaries: number
-	activeBedDestroy: string
-	understands_resource_bank: boolean
-	understands_streaks: boolean
-	castle_beds_lost_bedwars: number
-	'castle_permanent _items_purchased_bedwars': number
-	castle_deaths_bedwars: number
-	castle__items_purchased_bedwars: number
-	castle_wins_bedwars: number
-	castle_entity_attack_kills_bedwars: number
-	castle_items_purchased_bedwars: number
-	castle_diamond_resources_collected_bedwars: number
-	castle_gold_resources_collected_bedwars: number
-	castle_resources_collected_bedwars: number
-	castle_entity_attack_deaths_bedwars: number
-	castle_emerald_resources_collected_bedwars: number
-	castle_void_deaths_bedwars: number
-	castle_iron_resources_collected_bedwars: number
-	castle_kills_bedwars: number
-	castle_winstreak: number
-	castle_games_played_bedwars: number
-	castle_fall_final_kills_bedwars: number
-	castle_void_final_kills_bedwars: number
-	castle_final_kills_bedwars: number
-	eight_one_winstreak: number
-	eight_one_fall_kills_bedwars: number
-	eight_two_lucky_winstreak: number
-	eight_two_lucky_gold_resources_collected_bedwars: number
-	eight_two_lucky_resources_collected_bedwars: number
-	eight_two_lucky_games_played_bedwars: number
-	eight_two_lucky_iron_resources_collected_bedwars: number
-	eight_two_lucky_wins_bedwars: number
-	four_three_void_final_kills_bedwars: number
-	four_three_emerald_resources_collected_bedwars: number
-	four_three_beds_broken_bedwars: number
-	four_three_final_kills_bedwars: number
-	four_three_winstreak: number
-	fall_deaths_bedwars: number
-	four_three_fall_deaths_bedwars: number
-	four_three_entity_attack_final_kills_bedwars: number
-	four_three_fall_final_kills_bedwars: number
-	fall_final_kills_bedwars: number
-	free_event_key_bedwars_halloween_boxes_2018: boolean
-	four_four_winstreak: number
-	four_four_beds_broken_bedwars: number
-	four_four_wins_bedwars: number
-	four_four_void_final_kills_bedwars: number
-	four_four_fall_kills_bedwars: number
-	four_four_diamond_resources_collected_bedwars: number
-	four_four_fall_deaths_bedwars: number
-	selected_ultimate: string
-	lastTourneyAd: number
-	lastHytaleAd: number
-	eight_two_fall_final_kills_bedwars: number
-	eight_two_void_final_deaths_bedwars: number
-	eight_two_winstreak: number
-	four_four_entity_attack_final_deaths_bedwars: number
-	four_three_void_final_deaths_bedwars: number
-	entity_explosion_deaths_bedwars: number
-	four_three_entity_explosion_deaths_bedwars: number
-	fall_final_deaths_bedwars: number
-	four_three_fall_final_deaths_bedwars: number
-	privategames: {
+
+	free_event_key_bedwars_halloween_boxes_2017?: true
+	free_event_key_bedwars_christmas_boxes_2017?: true
+	free_event_key_bedwars_halloween_boxes_2018?: true
+	free_event_key_bedwars_halloween_boxes_2021?: true
+
+	shop_sort_enable_owned_first?: boolean
+	understands_resource_bank?: true
+	understands_streaks?: true
+	privategames?: {
 		low_gravity: boolean
 		no_diamonds: boolean
 		bed_instabreak: boolean
 		respawn_time: string
 	}
-	entity_explosion_final_kills_bedwars: number
-	four_three_entity_explosion_final_kills_bedwars: number
-	four_three_permanent_items_purchased_bedwars: number
-	permanent_items_purchased_bedwars: number
-	four_three_magic_kills_bedwars: number
-	magic_kills_bedwars: number
-	four_three_magic_deaths_bedwars: number
-	magic_deaths_bedwars: number
-	four_four_magic_final_deaths_bedwars: number
-	four_four_permanent_items_purchased_bedwars: number
-	magic_final_deaths_bedwars: number
-	eight_two_ultimate_winstreak: number
-	eight_two_ultimate__items_purchased_bedwars: number
-	eight_two_ultimate_beds_lost_bedwars: number
-	eight_two_ultimate_entity_attack_final_deaths_bedwars: number
-	eight_two_ultimate_final_deaths_bedwars: number
-	eight_two_ultimate_games_played_bedwars: number
-	eight_two_ultimate_gold_resources_collected_bedwars: number
-	eight_two_ultimate_iron_resources_collected_bedwars: number
-	eight_two_ultimate_items_purchased_bedwars: number
-	eight_two_ultimate_losses_bedwars: number
-	eight_two_ultimate_resources_collected_bedwars: number
-	four_four_fall_final_kills_bedwars: number
-	practice: {
+
+	activeNPCSkin: string
+	activeIslandTopper?: string
+	activeKillEffect?: string
+	activeDeathCry?: string
+	activeProjectileTrail: string
+	activeVictoryDance?: string
+	activeKillMessages?: string
+	activeGlyph?: string
+	activeBedDestroy?: string
+
+	favourites?: string
+	favourites_1?: string
+
+	/**
+	 * A comma separated list of color code formatted item names, for example
+	 * `§5Animated Astronaut Shopkeeper,§aSlime Projectile Trail,§bCoins,§aBed Salesman Shopkeeper,§bBomb Island Topper`.
+	 * This field should be used together with `chest_history_new` to get the
+	 * correct chest history.
+	 */
+	chest_history: string
+	/**
+	 * An array of chest history IDs, for example
+	 * `["islandtopper_tree", "projectiletrail_black_smoke"]`.
+	 * This field should be used together with `chest_history` to get the
+	 * correct chest history.
+	 */
+	chest_history_new: string[]
+
+	sw_duel_melee_swings_duels?: number
+	sw_duel_duels_melee_swings?: number
+	sw_duel_melee_swings?: number
+
+	spooky_open_ach?: number
+	spray_storage_new?: string
+	spray_glyph_field?: string
+	shop_sort?: string
+	bedwars_halloween_boxes: number
+	bedwars_christmas_boxes: number
+	seen_beta_menu?: number
+	favorite_slots?: string
+	bedwars_easter_boxes: number
+	selected_ultimate?: string
+	lastTourneyAd: number
+	lastHytaleAd: number
+	practice?: {
 		selected: 'BRIDGING'
 		bridging: {
 			blocks_placed: number
 			failed_attempts: number
 		}
 	}
-	selected_challenge_type: string
-	eight_two_voidless_games_played_bedwars: number
+	selected_challenge_type?: string
 }

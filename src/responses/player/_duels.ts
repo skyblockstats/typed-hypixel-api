@@ -1,54 +1,111 @@
-export interface DuelsStats {
-	games_played_duels: number
-	duels_winstreak_best_uhc_duel: number
+import { MegaWallsClass } from './_mega_walls'
+import { SkyWarsAnyKit, SkyWarsKit } from './_skywars'
+import { SurvivalGamesKit } from './_survivalgames'
+
+type DuelsModeWithoutKit =
+	| 'uhc_duel'
+	| 'op_duel'
+	| 'mw_duel'
+	| 'combo_duel'
+	| 'potion_duel'
+	| 'op_doubles'
+	| 'classic_duel'
+	| 'sw_doubles'
+	| 'uhc_four'
+	| 'uhc_doubles'
+	| 'bowspleef_duel'
+	| 'blitz_duel'
+	| 'bow_duel'
+	| 'sumo_duel'
+	| 'uhc_meetup'
+	| 'null'
+	| 'bridge_1v1'
+	| 'bridge_duel'
+	| 'bridge_four'
+	| 'ranked_1'
+	| 'mw_doubles'
+type DuelsMode = DuelsModeWithoutKit | 'sw_duel'
+
+type a = Omit<DuelsMode, 'sw_duel'>
+
+export type DuelsStats = {
+	[key in `duels_winstreak_best_${DuelsMode}` | `duels_winstreak_${DuelsMode}`]?: number
+} & {
+	[key in
+		| `${DuelsModeWithoutKit}_layout_4`
+		| `${DuelsModeWithoutKit}_layout_5`
+		| `sw_duel_layout_${SkyWarsAnyKit}`
+		| `sw_duel_layout_${SkyWarsAnyKit}_4`
+		| `sw_duel_layout_${SkyWarsAnyKit}_5`
+		| `mw_duel_layout_${MegaWallsClass}`
+		| `mw_duel_layout_${MegaWallsClass}_4`
+		| `mw_duel_layout_${MegaWallsClass}_5`
+		| `blitz_duel_layout_${SurvivalGamesKit}`
+		| `blitz_duel_layout_${SurvivalGamesKit}_4`
+		| `blitz_duel_layout_${SurvivalGamesKit}_5`]?: DuelsInventoryLayout
+} & {
+	[key in
+		| `layout_${DuelsModeWithoutKit}_layout`
+		| `layout_sw_duel_layout_${SkyWarsAnyKit}`
+		| `layout_mw_duel_layout_${MegaWallsClass}`
+		| `layout_blitz_duel_${SurvivalGamesKit}`]?: DuelsInventoryAlternateLayout
+} & {
+	packages: string[]
+	coins: number
+
 	rematch_option_1: string
-	duels_recently_played: string
-	sw_duels_kit_1: string
-	kit_menu_option: string
-	duels_winstreak_best_sw_duel: number
 	sw_duels_kit: string
-	duels_winstreak_best_op_duel: number
+	sw_duels_kit_1: string
+
+	games_played_duels: number
+	duels_recently_played: string
+	duels_recently_played2: string
+	kit_menu_option: string
+
 	mw_duels_class: string
-	duels_winstreak_best_mw_duel: number
-	duels_winstreak_best_combo_duel: number
-	duels_winstreak_best_potion_duel: number
-	sw_duel_layout_blacksmith: DuelsInventoryLayout
-	show_lb_option: string
-	duels_winstreak_best_op_doubles: number
-	duels_winstreak_best_classic_duel: number
-	duels_winstreak_classic_duel: number
-	duels_winstreak_best_sw_doubles: number
-	duels_showqueuebook: boolean
 	mw_duels_class_1: string
-	mw_duel_layout_moleman_4: DuelsInventoryLayout
-	sw_duel_layout_scout_4: DuelsInventoryLayout
-	uhc_duel_layout_4: DuelsInventoryLayout
-	duels_winstreak_best_uhc_four: number
-	duels_winstreak_uhc_four: number
-	duels_winstreak_mw_duel: number
-	bow_duel_layout_5: DuelsInventoryLayout
-	potion_duel_layout_4: DuelsInventoryLayout
-	sw_duel_layout_athlete_4: DuelsInventoryLayout
-	sw_duel_layout_blacksmith_4: DuelsInventoryLayout
-	sw_duel_layout_pyromancer_4: DuelsInventoryLayout
-	mw_duel_layout_herobrine_5: DuelsInventoryLayout
-	mw_duel_layout_arcanist_5: DuelsInventoryLayout
-	duels_winstreak_best_uhc_doubles: number
-	duels_winstreak_uhc_doubles: number
-	sw_duel_layout_scout_5: DuelsInventoryLayout
-	duels_winstreak_uhc_duel: number
+
 	melee_swings_duels: number
 	sw_duel_melee_swings_duels: number
+	melee_swings: number
+	duels_melee_swings: number
+	sw_duel_duels_melee_swings: number
+	sw_duel_melee_swings: number
+	uhc_duel_melee_swings: number
+	uhc_tournament_melee_swings: number
+	op_duel_melee_swings: number
+	uhc_doubles_melee_swings: number
+	sw_doubles_melee_swings: number
+	op_doubles_melee_swings: number
+	sw_tournament_melee_swings: number
+	blitz_duel_melee_swings: number
+	combo_duel_melee_swings: number
+	uhc_four_melee_swings: number
+	classic_duel_melee_swings: number
+	sumo_duel_melee_swings: number
+	mw_duel_melee_swings: number
+	sumo_tournament_melee_swings: number
+	uhc_meetup_melee_swings: number
+	bridge_1v1_melee_swings: number
+	bridge_duel_melee_swings: number
+	bridge_2v2v2v2_melee_swings: number
+	bridge_doubles_melee_swings: number
+	bridge_four_melee_swings: number
+	bridge_tournament_melee_swings: number
+	bridge_3v3v3v3_melee_swings: number
+	ranked_1_melee_swings: number
+	potion_duel_melee_swings: number
+	duel_arena_melee_swings: number
+	capture_duel_melee_swings: number
+
+	show_lb_option: string
+	duels_showqueuebook: boolean
 	sw_duel_damage_dealt_duels: number
 	sw_duel_melee_hits_duels: number
 	melee_hits_duels: number
 	damage_dealt_duels: number
 	sw_duel_health_regenerated_duels: number
 	health_regenerated_duels: number
-	melee_swings: number
-	duels_melee_swings: number
-	sw_duel_duels_melee_swings: number
-	sw_duel_melee_swings: number
 	melee_hits: number
 	sw_duel_damage_dealt: number
 	damage_dealt: number
@@ -70,7 +127,6 @@ export interface DuelsStats {
 	deaths: number
 	sw_duel_deaths: number
 	uhc_duel_health_regenerated: number
-	uhc_duel_melee_swings: number
 	uhc_duel_kills: number
 	uhc_duel_rounds_played: number
 	uhc_duel_damage_dealt: number
@@ -80,7 +136,6 @@ export interface DuelsStats {
 	uhc_duel_bow_shots: number
 	uhc_duel_bow_hits: number
 	uhc_duel_deaths: number
-	sw_duel_layout_baseball_player_5: DuelsInventoryLayout
 	mw_doubles_health_regenerated: number
 	mw_doubles_rounds_played: number
 	mw_doubles_deaths: number
@@ -88,7 +143,6 @@ export interface DuelsStats {
 	op_doubles_wins: number
 	op_doubles_rounds_played: number
 	uhc_tournament_kills: number
-	uhc_tournament_melee_swings: number
 	uhc_tournament_rounds_played: number
 	uhc_tournament_melee_hits: number
 	uhc_tournament_damage_dealt: number
@@ -96,7 +150,6 @@ export interface DuelsStats {
 	uhc_tournament_losses: number
 	op_duel_damage_dealt: number
 	op_duel_kills: number
-	op_duel_melee_swings: number
 	op_duel_melee_hits: number
 	op_duel_bow_shots: number
 	op_duel_health_regenerated: number
@@ -121,12 +174,9 @@ export interface DuelsStats {
 	combo: boolean
 	uhc_tournament_bow_hits: number
 	uhc_tournament_bow_shots: number
-	coins: number
 	uhc_doubles_rounds_played: number
-	uhc_doubles_melee_swings: number
 	uhc_doubles_wins: number
 	sw_doubles_melee_hits: number
-	sw_doubles_melee_swings: number
 	sw_doubles_rounds_played: number
 	sw_doubles_health_regenerated: number
 	sw_doubles_damage_dealt: number
@@ -134,7 +184,6 @@ export interface DuelsStats {
 	op_doubles_melee_hits: number
 	op_doubles_damage_dealt: number
 	op_doubles_bow_shots: number
-	op_doubles_melee_swings: number
 	sw_doubles_wins: number
 	sw_doubles_kills: number
 	uhc_doubles_health_regenerated: number
@@ -148,7 +197,6 @@ export interface DuelsStats {
 	bow_spleef_duel_bow_shots: number
 	bow_spleef_duel_losses: number
 	bow_spleef_duel_rounds_played: number
-	duels_winstreak_best_bowspleef_duel: number
 	bowspleef_duel_rounds_played: number
 	bowspleef_duel_bow_shots: number
 	bowspleef_duel_deaths: number
@@ -168,15 +216,12 @@ export interface DuelsStats {
 	combo_duel: boolean
 	potion_duel: boolean
 	op_doubles: boolean
-	sw_duel_layout_armorsmith_5: DuelsInventoryLayout
 	sw_tournament_health_regenerated: number
 	sw_tournament_rounds_played: number
 	sw_tournament_melee_hits: number
-	sw_tournament_melee_swings: number
 	sw_tournament_damage_dealt: number
 	bowspleef_duel: boolean
 	blitz_duels_kit: string
-	blitz_duel_melee_swings: number
 	blitz_duel_damage_dealt: number
 	blitz_duel_melee_hits: number
 	blitz_duel_bow_shots: number
@@ -187,11 +232,8 @@ export interface DuelsStats {
 	blitz_duel_kills: number
 	blitz_duel_losses: number
 	blitz_duel_deaths: number
-	uhc_duel_layout_5: DuelsInventoryLayout
-	duels_winstreak_best_blitz_duel: number
 	combo_duel_melee_hits: number
 	combo_duel_wins: number
-	combo_duel_melee_swings: number
 	combo_duel_rounds_played: number
 	combo_duel_health_regenerated: number
 	combo_duel_deaths: number
@@ -201,7 +243,6 @@ export interface DuelsStats {
 	sw_tournament_kills: number
 	uhc_four_deaths: number
 	uhc_four_health_regenerated: number
-	uhc_four_melee_swings: number
 	uhc_four_bow_hits: number
 	uhc_four_melee_hits: number
 	uhc_four_rounds_played: number
@@ -217,7 +258,6 @@ export interface DuelsStats {
 	classic_duel_health_regenerated: number
 	classic_duel_damage_dealt: number
 	classic_duel_bow_shots: number
-	classic_duel_melee_swings: number
 	classic_duel_wins: number
 	classic_duel_bow_hits: number
 	sw_tournament_bow_hits: number
@@ -234,7 +274,6 @@ export interface DuelsStats {
 	sw_doubles_scout_kit_wins: number
 	chat_enabled: string
 	blitz_duel: boolean
-	blitz_duel_layout_pigman_5: DuelsInventoryLayout
 	bow_duel_bow_hits: number
 	bow_duel_deaths: number
 	bow_duel_losses: number
@@ -242,14 +281,11 @@ export interface DuelsStats {
 	bow_duel_health_regenerated: number
 	bow_duel_damage_dealt: number
 	bow_duel_rounds_played: number
-	duels_winstreak_best_bow_duel: number
 	bow_duel_wins: number
 	bow_duel_kills: number
 	sw_duel_pyromancer_kit_wins: number
 	pyromancer_kit_wins: number
 	activeVictoryDance: string
-	packages: string[]
-	sw_duel_layout_paladin_5: DuelsInventoryLayout
 	active_projectile_trail: string
 	shop_sort: string
 	duels_boxes: number
@@ -266,7 +302,6 @@ export interface DuelsStats {
 	op_doubles_deaths: number
 	op_doubles_losses: number
 	active_emblem: string
-	sumo_duel_melee_swings: number
 	sumo_duel_rounds_played: number
 	sumo_duel_melee_hits: number
 	sumo_duel_wins: number
@@ -280,21 +315,16 @@ export interface DuelsStats {
 	Duels_openedEpics: number
 	Duels_openedLegendaries: number
 	active_auras: string
-	mw_duel_melee_swings: number
 	mw_duel_melee_hits: number
 	mw_duel_damage_dealt: number
 	mw_duel_bow_hits: number
-	blitz_duel_layout_archer_5: DuelsInventoryLayout
-	duels_winstreak_best_sumo_duel: number
 	active_victory_dance: string
 	sw_duels_kit_new: string
 	active_killmessages: string
-	sw_duel_layout_knight_5: DuelsInventoryLayout
 	sw_tournament_losses: number
 	sw_doubles_pyromancer_kit_wins: number
 	sumo_duel_kills: number
 	sumo_tournament_melee_hits: number
-	sumo_tournament_melee_swings: number
 	sumo_tournament_losses: number
 	sumo_tournament_kills: number
 	sumo_tournament_deaths: number
@@ -302,12 +332,10 @@ export interface DuelsStats {
 	uhc_meetup_deaths: number
 	uhc_meetup_losses: number
 	uhc_meetup_rounds_played: number
-	duels_winstreak_best_uhc_meetup: number
 	uhc_meetup_wins: number
 	uhc_meetup_health_regenerated: number
 	uhc_meetup_melee_hits: number
 	uhc_meetup_damage_dealt: number
-	uhc_meetup_melee_swings: number
 	reaper_kit_wins: number
 	blitz_duel_kit_wins: number
 	blitz_duel_reaper_kit_wins: number
@@ -315,7 +343,6 @@ export interface DuelsStats {
 	selected_2_new: string
 	active_kill_effect: string
 	active_weaponpacks: string
-	duels_winstreak_best_null: number
 	progress_mode: string
 	no_debuff_godlike_title_prestige: number
 	mega_walls_legend_title_prestige: number
@@ -412,12 +439,10 @@ export interface DuelsStats {
 	blitz_duel_golem_kit_wins: number
 	knight_kit_wins: number
 	blitz_duel_knight_kit_wins: number
-	blitz_duel_layout_jockey_5: DuelsInventoryLayout
 	blitz_duel_jockey_kit_wins: number
 	jockey_kit_wins: number
 	sw_duel_blacksmith_kit_wins: number
 	blacksmith_kit_wins: number
-	sw_duel_layout_blacksmith_5: DuelsInventoryLayout
 	uhc_meetup_bow_shots: number
 	uhc_meetup_bow_hits: number
 	rambo_kit_wins: number
@@ -476,21 +501,15 @@ export interface DuelsStats {
 	bridge_rookie_title_prestige: number
 	bridge_2v2_wins: number
 	bridge_2v2_rounds_played: number
-	layout_mw_duel_layout_shaman: DuelsInventoryAlternateLayout
-	layout_blitz_duel_layout_shadow_knight: DuelsInventoryAlternateLayout
-	layout_sw_duel_layout_scout: DuelsInventoryAlternateLayout
-	layout_bow_duel_layout: DuelsInventoryAlternateLayout
 	bridge_1v1_losses: number
 	bridge_1v1_rounds_played: number
 	bridge_1v1_deaths: number
 	bridgeMapWins: string[]
 	bridge_1v1_wins: number
-	duels_winstreak_best_bridge_1v1: number
 	bridge_1v1_blocks_placed: number
 	bridge_1v1_bow_shots: number
 	bridge_1v1_melee_hits: number
 	bridge_1v1_damage_dealt: number
-	bridge_1v1_melee_swings: number
 	bridge_1v1_health_regenerated: number
 	bridge_godlike_title_prestige: number
 	leaderboardPage_goals: number
@@ -502,14 +521,11 @@ export interface DuelsStats {
 	bridge_1v1_goals: number
 	goals: number
 	leaderboardPage_wins: number
-	layout_sw_duel_pyromancer: DuelsInventoryAlternateLayout
 	bridge_duel_losses: number
 	bridge_duel_goals: number
 	bridge_duel_rounds_played: number
 	bridge_duel_wins: number
-	duels_winstreak_best_bridge_duel: number
 	bridge_duel_melee_hits: number
-	bridge_duel_melee_swings: number
 	bridge_duel_damage_dealt: number
 	bridge_duel_health_regenerated: number
 	bridge_duel_blocks_placed: number
@@ -521,7 +537,6 @@ export interface DuelsStats {
 	bridge_2v2v2v2_health_regenerated: number
 	bridge_2v2v2v2_blocks_placed: number
 	bridge_2v2v2v2_rounds_played: number
-	bridge_2v2v2v2_melee_swings: number
 	bridge_2v2v2v2_bow_hits: number
 	bridge_2v2v2v2_bow_shots: number
 	bridge_2v2v2v2_melee_hits: number
@@ -549,10 +564,8 @@ export interface DuelsStats {
 	bridge_doubles_goals: number
 	bridge_doubles_damage_dealt: number
 	bridge_doubles_blocks_placed: number
-	bridge_doubles_melee_swings: number
 	bridge_doubles_melee_hits: number
 	bridge_four_damage_dealt: number
-	bridge_four_melee_swings: number
 	bridge_four_melee_hits: number
 	active_goal: string
 	active_glyph: string
@@ -563,7 +576,6 @@ export interface DuelsStats {
 	bridge_tournament_damage_dealt: number
 	bridge_tournament_melee_hits: number
 	bridge_tournament_bow_hits: number
-	bridge_tournament_melee_swings: number
 	bridge_tournament_deaths: number
 	bridge_tournament_health_regenerated: number
 	bridge_tournament_blocks_placed: number
@@ -588,12 +600,10 @@ export interface DuelsStats {
 	uhc_doubles_golden_apples_eaten: number
 	best_winstreak_mode_bridge_four: number
 	current_winstreak_mode_bridge_four: number
-	duels_winstreak_best_bridge_four: number
 	current_tnt_games_winstreak: number
 	best_winstreak_mode_bowspleef_duel: number
 	best_tnt_games_winstreak: number
 	current_winstreak_mode_bowspleef_duel: number
-	layout_sw_duel_champion: DuelsInventoryAlternateLayout
 	bridge_duel_bridge_deaths: number
 	bridge_duel_bridge_kills: number
 	bridge_kills: number
@@ -624,7 +634,6 @@ export interface DuelsStats {
 	bridge_3v3v3v3_bow_hits: number
 	bridge_3v3v3v3_melee_hits: number
 	bridge_3v3v3v3_blocks_placed: number
-	bridge_3v3v3v3_melee_swings: number
 	bridge_3v3v3v3_bridge_deaths: number
 	bridge_3v3v3v3_bow_shots: number
 	bridge_3v3v3v3_rounds_played: number
@@ -638,8 +647,6 @@ export interface DuelsStats {
 	bridge_doubles_health_regenerated: number
 	bridge_doubles_bow_shots: number
 	bridge_doubles_bow_hits: number
-	layout_blitz_duel_slimeyslime: DuelsInventoryAlternateLayout
-	layout_combo_duel_layout: DuelsInventoryAlternateLayout
 	best_winstreak_mode_sumo_duel: number
 	current_winstreak_mode_sumo_duel: number
 	best_sumo_winstreak: number
@@ -656,7 +663,6 @@ export interface DuelsStats {
 	Duels_new_ranked__2_2019_uhc_duel_stars: number
 	ranked_streak_uhc_duel: number
 	Duels_new_ranked__2_2019_ranked_1_stars: number
-	ranked_1_melee_swings: number
 	ranked_1_melee_hits: number
 	ranked_1_damage_dealt: number
 	ranked_1_rounds_played: number
@@ -667,10 +673,8 @@ export interface DuelsStats {
 	Duels_new_ranked__2_2019_ranked_1_bestStars: number
 	ranked_1_wins: number
 	ranked_1_kills: number
-	duels_winstreak_best_ranked_1: number
 	sw_duel_armorer_kit_wins: number
 	armorer_kit_wins: number
-	duels_recently_played2: string
 	Duels_new_ranked__2_2019_overallBestStars: number
 	Duels_new_ranked__2_2019_ranked_1_bestElo: number
 	ranked_1_losses: number
@@ -689,7 +693,6 @@ export interface DuelsStats {
 	current_mega_walls_winstreak: number
 	best_mega_walls_winstreak: number
 	current_winstreak_mode_mw_doubles: number
-	duels_winstreak_best_mw_doubles: number
 	season_1_reward_fix: boolean
 	season_1_reward_fixes: boolean
 	collected_reward_season_1: boolean
@@ -721,9 +724,7 @@ export interface DuelsStats {
 	potion_duel_heal_pots_used: number
 	potion_duel_health_regenerated: number
 	potion_duel_melee_hits: number
-	potion_duel_melee_swings: number
 	potion_duel_rounds_played: number
-	layout_bridge_duel_layout: DuelsInventoryAlternateLayout
 	show_map_detail: string
 	old_winstreak: number
 	boxing_rookie_title_prestige: number
@@ -736,14 +737,12 @@ export interface DuelsStats {
 	duel_arena_health_regenerated: number
 	duel_arena_losses: number
 	duel_arena_melee_hits: number
-	duel_arena_melee_swings: number
 	duel_arena_rounds_played: number
 	duel_arena_kills: number
 	duel_arena_wins: number
 	moved_to_redis2: boolean
 	capture_duel_bridge_deaths: number
 	capture_duel_losses: number
-	capture_duel_melee_swings: number
 	capture_duel_rounds_played: number
 	active_cosmetictitle: string
 	parkour_eight_deaths: number

@@ -2,7 +2,7 @@ type UppercaseFirstLetter<S extends string> = S extends `${infer FirstLetter}${i
 	? `${Uppercase<FirstLetter>}${Remainder}`
 	: Uppercase<S>
 
-type MegaWallsClass =
+export type MegaWallsClass =
 	| 'golem'
 	| 'zombie'
 	| 'skeleton'
