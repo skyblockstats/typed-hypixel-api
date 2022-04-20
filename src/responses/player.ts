@@ -406,7 +406,8 @@ export interface PlayerDataResponse {
 			easter?: Record<
 				number,
 				{
-					duelsWinsAchievement: number
+					duelsWinsAchievement?: number
+					bedWarsDreamWinsAchievement?: number
 					mainlobby_egghunt_reward: boolean
 					[key: `mainlobby_egghunt_${number}_${number}_${number}`]: boolean
 				}

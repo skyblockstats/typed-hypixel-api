@@ -42,6 +42,9 @@ export let sendApiRequest = async<P extends keyof hypixel.Requests>(path: P, opt
 
 ## Contributing
 
+Do `yarn test` to run the tests. They'll take a few minutes.
+If you want to watch `test/_test_data.ts`, use `npx tsc test/_test_data.ts --noEmit --esModuleInterop --downlevelIteration --skipLibCheck --lib DOM.Iterable,ESNext,DOM -w`.
+
 ### Adding an endpoint
 
 Each endpoint is in a separate file in the `src/responses/` directory. You can look at other endpoints as a reference on how yours should look. If you add one, first export it from `src/responses/index.ts` and then in `src/index.ts` add it to the `Requests` interface. Also, this isn't necessary but it's recommended that you add JSDoc comments to explain what each field is for. Finally, add a test in `test/index.js` and do `yarn test`.

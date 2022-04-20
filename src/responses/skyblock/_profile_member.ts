@@ -74,7 +74,7 @@ export interface SkyBlockPotionEffect {
 }
 
 export type SkyBlockDungeonClasses = 'healer' | 'mage' | 'berserk' | 'archer' | 'tank'
-export type SkyBlockSlayerBosses = 'wolf' | 'zombie' | 'spider' | 'enderman'
+export type SkyBlockSlayerBosses = 'wolf' | 'zombie' | 'spider' | 'enderman' | 'blaze'
 
 export interface ExperimentationGame {
 	/** The timestamp at which the experiment was last attempted */
@@ -396,7 +396,6 @@ export interface SkyBlockProfileMember {
 			mining_madness?: number
 			goblin_killer?: number
 			lonesome_miner?: number
-			mining_speed_2?: number
 			professional?: number
 			fortunate?: number
 			mining_fortune_2?: number
@@ -406,16 +405,19 @@ export interface SkyBlockProfileMember {
 			forge_time?: number
 			pickaxe_toss?: number
 			experience_orbs?: number
+			maniac_miner?: number
 
 			great_explorer?: number
 			mole?: number
-			mining_speed?: number
 			efficient_miner?: number
+			mining_speed?: number
+			mining_speed_2?: number
 
 			toggle_great_explorer?: boolean
 			toggle_mole?: boolean
-			toggle_mining_speed?: boolean
 			toggle_efficient_miner?: boolean
+			toggle_mining_speed?: boolean
+			toggle_mining_speed_2?: boolean
 		}
 		received_free_tier?: true
 		tokens?: number
