@@ -1,3 +1,7 @@
+import { SkyBlockSlayerBosses } from '../../skyblock/_profile_member'
+
+type EssenceType = 'DIAMOND'
+
 export interface SkyBlockItemsResponse {
 	success: true
 	lastUpdated: number
@@ -15,9 +19,42 @@ export interface SkyBlockItemsResponse {
 			STRENGTH?: number
 			DEFENSE?: Number
 			HEALTH?: number
+			MINING_FORTUNE?: number
+			WALK_SPEED?: number
+			MAGIC_FIND?: number
 		}
+		/**
+		 * The number of coins that the player gets from selling the item to
+		 * an NPC.
+		 */
 		npc_sell_price?: number
-		essence: {
+		/**
+		 * If present, this item can be converted into a dungeon item by
+		 * using essence.
+		 */
+		dungeon_item_conversion_cost?: {
+			essence_type: EssenceType
+			amount: number
+		}
+		upgrade_costs?: [
+			{
+				essence_type: EssenceType
+				amount: number
+			}
+		][]
+		gemstone_slots?: {
+			slot_type: 'AMETHYST' | 'COMBAT'
+			costs?: (
+				| {
+						coins: number
+				  }
+				| {
+						item_id: `FINE_${string}_GEM`
+						amount: number
+				  }
+			)[]
+		}[]
+		essence?: {
 			essence_type: string
 			costs: number[]
 		}
@@ -32,13 +69,37 @@ export interface SkyBlockItemsResponse {
 			DEFENSE: number[]
 		}
 		requirements?: {
-			dungeon: {
-				type: string
+			/** If present, you need a specific level in a dungeon. */
+			dungeon?: {
+				type: 'CATACOMBS'
+				level: number
+			}
+			/**
+			 * If present, a reputation with one of the factions from
+			 * the nether is required.
+			 */
+			nether_reputation?: {
+				faction: 'BARBARIANS' | 'MAGES'
+				/** The number of reputation needed to meet this requirement. */
+				reputation: number
+				coop_total: true
+			}
+			/** If present, a specific slayer boss level is required. */
+			slayer?: {
+				slayer_boss_type: SkyBlockSlayerBosses
 				level: number
 			}
 		}
 		dungeon_item?: boolean
-		museum?: string
+		/**
+		 * If this is 'COOP', that means the item cannot be transferred to anyone outside the coop.
+		 */
+		soulbound?: 'COOP'
+		/**
+		 * Whether the item can be put on display in the museum.
+		 * https://hypixel-skyblock.fandom.com/wiki/Museum
+		 */
+		museum?: true
 		id: string
 	} & (
 		| {
