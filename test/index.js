@@ -34,6 +34,16 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
+
+	// we have to do this otherwise typescript gets mad :(
+	const itemsResponse = await request('resources/skyblock/items', {}, true)
+	const originalItems = itemsResponse.data.items
+	for (let i = 0; i < originalItems.length / 1000; i++) {
+		itemsResponse.data.items = originalItems.slice(i * 1000, (i + 1) * 1000)
+		await testData('SkyBlockItemsResponse', itemsResponse)
+	}
+
+
 	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {
 		key: process.env.API_KEY,
 		uuid: 'e471665f71014891bef337c8d22cf04b'
@@ -91,15 +101,6 @@ const startTime = Date.now();
 
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
-
-	// we have to do this otherwise typescript gets mad :(
-	const itemsResponse = await request('resources/skyblock/items', {}, true)
-	const originalItems = itemsResponse.data.items
-	for (let i = 0; i < originalItems.length / 1000; i++) {
-		itemsResponse.data.items = originalItems.slice(i * 1000, (i + 1) * 1000)
-		await testData('SkyBlockItemsResponse', itemsResponse)
-	}
-
 
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: 'ed32a0660fc948378dcf8ed717d1188c',

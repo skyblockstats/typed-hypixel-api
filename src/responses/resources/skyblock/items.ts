@@ -140,9 +140,10 @@ export interface SkyBlockItemsResponse {
 			essence_type: string
 			costs: number[]
 		}
+		/** I don't know why this is its own field, this can be used as a fallback if requirements.dungeon is missing. */
 		catacombs_requirements?: {
 			dungeon: {
-				type: string
+				type: 'CATACOMBS'
 				level: number
 			}
 		}
@@ -168,7 +169,10 @@ export interface SkyBlockItemsResponse {
 			ATTACK_SPEED?: number[]
 		}
 		requirements?: {
-			/** If present, you need a specific level in a dungeon. */
+			/**
+			 * If present, you need a specific level in a dungeon. Note that
+			 * sometimes `catacombs_requirements` is used instead of this field.
+			 */
 			dungeon?: {
 				type: 'CATACOMBS'
 				level: number
