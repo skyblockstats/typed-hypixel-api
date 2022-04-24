@@ -92,10 +92,14 @@ const startTime = Date.now();
 	await testData('SkyBlockNewsResponse', await request('skyblock/news', { key: process.env.API_KEY }, true))
 	await testData('SkyBlockBazaarResponse', await request('skyblock/bazaar', {}, true))
 
-	let itemsResponse = await request('resources/skyblock/items', {}, true)
 	// we have to do this otherwise typescript gets mad :(
-	itemsResponse.data.items = itemsResponse.data.items.slice(0, 1000)
-	await testData('SkyBlockItemsResponse', itemsResponse)
+	const itemsResponse = await request('resources/skyblock/items', {}, true)
+	const originalItems = itemsResponse.data.items
+	for (let i = 0; i < originalItems.length / 1000; i++) {
+		itemsResponse.data.items = originalItems.slice(i * 1000, (i + 1) * 1000)
+		await testData('SkyBlockItemsResponse', itemsResponse)
+	}
+
 
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: 'ed32a0660fc948378dcf8ed717d1188c',
