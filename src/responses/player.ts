@@ -407,8 +407,9 @@ export interface PlayerDataResponse {
 				number,
 				{
 					duelsWinsAchievement?: number
+					bedWarsWinsAchievement?: number
 					bedWarsDreamWinsAchievement?: number
-					mainlobby_egghunt_reward: boolean
+					mainlobby_egghunt_reward?: boolean
 					[key: `mainlobby_egghunt_${number}_${number}_${number}`]: boolean
 				}
 			>

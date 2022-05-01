@@ -90,6 +90,14 @@ export interface SkyBlockItemsResponse {
 		 */
 		npc_sell_price?: number
 		/**
+		 * The item that this item will give you if you right click it. Seems to be currently only used for eccentric paintings.
+		 */
+		item_specific?: {
+			bundled_item_id: 'ECCENTRIC_PAINTING'
+			/** The number of the `bundled_item_id`s that right clicking will give you */
+			bundled_amount: number
+		}
+		/**
 		 * If present, this item can be converted into a dungeon item by
 		 * using essence.
 		 */

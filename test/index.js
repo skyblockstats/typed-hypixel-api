@@ -129,13 +129,14 @@ const startTime = Date.now();
 
 	await testData('GuildResponse', await request('guild', {
 		key: process.env.API_KEY,
-		name: 'SkyComm'
+		id: '5d99932b77ce8491d195df49'
 	}, true))
 
-	await testData('RankedSkywarsResponse', await request('player/ranked/skywars', {
-		key: process.env.API_KEY,
-		uuid: 'a91bd7ca5d4b4846990bf4393727f279'
-	}, true))
+	// this is commented out because sometimes the skywars data for players just disappears
+	// await testData('RankedSkywarsResponse', await request('player/ranked/skywars', {
+	// 	key: process.env.API_KEY,
+	// 	uuid: 'a91bd7ca5d4b4846990bf4393727f279'
+	// }, true))
 
 	await testData('GamesInformationResponse', await request('resources/games', {}, true))
 	await testData('ChallengesResponse', await request('resources/challenges', {}, true))

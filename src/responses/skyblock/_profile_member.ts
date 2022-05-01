@@ -54,6 +54,8 @@ export interface Pet {
 	heldItem: string | null
 	candyUsed: number
 	skin?: string | null
+	/** This seems to be unused. */
+	extra?: Record<any, never>
 }
 
 export interface SkyBlockObjective {
