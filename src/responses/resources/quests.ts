@@ -27,6 +27,8 @@ export interface QuestsResponse {
 					| 'SkyClashCardPackReward'
 					| 'PitGold'
 					| 'BedwarsExpReward'
+					| 'WoolWarsWoolReward'
+					| 'WoolWarsExpReward'
 				amount: number
 			}[]
 			objectives: ({

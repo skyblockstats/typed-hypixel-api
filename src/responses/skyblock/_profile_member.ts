@@ -471,6 +471,35 @@ export interface SkyBlockProfileMember {
 			forge_1?: Record<number, ForgeProcess>
 		}
 	}
+	/** Extra information about the user's accessory bag upgrades and powers. */
+	accessory_bag_storage?: {
+		/** The member's tuning templates. https://wiki.hypixel.net/Powers#Tuning_Templates */
+		tuning: {
+			/**
+			 * A tuning template. This is formatted as a record of stat ids to
+			 * their upgraded value, for example { strength: 104 }.
+			 * You can find more info at https://wiki.hypixel.net/Powers#Tuning_Templates
+			 */
+			[key: `slot_${number}`]: Record<string, number>
+			/**
+			 * The number of extra tuning templates unlocked. For
+			 * example, if this is 2, `slot_0`, `slot_1`, and `slot_2` will be
+			 * in `tuning`. If this is missing, you can assume it's 0.
+			 */
+			highest_unlocked_slot?: number
+		}
+		/**
+		 * The number of times the player has bought extra slots for their
+		 * accessory bag. The unofficial wiki contains a table of the extra
+		 * slots you gain per purchase.
+		 * https://hypixel-skyblock.fandom.com/wiki/Accessory_Bag
+		 */
+		bag_upgrades_purchased?: number
+		/** The prefix of the active power stone. Power stones give you extra stats. */
+		selected_power?: string
+		/** The prefixes of the power stones that the member has unlocked. */
+		unlocked_powers?: string[]
+	}
 	unlocked_coll_tiers?: string[]
 	sacks_counts?: Record<string, number>
 

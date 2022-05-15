@@ -186,7 +186,7 @@ export interface SkyBlockItemsResponse {
 				level: number
 			}
 			dungeon_completion?: {
-				type: 'CATACOMBS'
+				type: 'CATACOMBS' | 'MASTER_CATACOMBS'
 				tier: number
 			}
 			/**
