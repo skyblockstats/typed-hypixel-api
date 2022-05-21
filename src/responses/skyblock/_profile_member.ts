@@ -79,20 +79,24 @@ export type SkyBlockDungeonClasses = 'healer' | 'mage' | 'berserk' | 'archer' | 
 export type SkyBlockSlayerBosses = 'wolf' | 'zombie' | 'spider' | 'enderman' | 'blaze'
 
 export interface ExperimentationGame {
-	/** The timestamp at which the experiment was last attempted */
+	/** The timestamp of the start of the last attempt. */
 	last_attempt?: number
+	/** The timestamp of when the last game was won. */
 	last_claimed?: number
 	bonus_clicks?: number
 
+	/** The number of times the player has attempted the first type of this game. */
 	attempts_0?: number
+	/** The number of times the player has finished this game type. */
 	claims_0?: number
+	/** The best score the player has gotten on this game type. */
 	best_score_0?: number
 
 	attempts_1?: number
 	claims_1?: number
 	best_score_1?: number
-	attempts_2?: number
 
+	attempts_2?: number
 	claims_2?: number
 	best_score_2?: number
 
@@ -344,10 +348,28 @@ export interface SkyBlockProfileMember {
 		 */
 		unique_golds2?: string[]
 	}
+	/**
+	 * The experimentation table is an item that has a few minigames that can
+	 * be played once per day. When playing an experimentation game, you can
+	 * choose a difficulty or "type", ranging from beginner to metaphysical.
+	 * Not all experimentation games start at the same type though.
+	 */
 	experimentation?: {
+		/**
+		 * Superpairs. This is the main experimentation game, with types
+		 * ranging from beginner to metaphysical.
+		 **/
 		pairings: ExperimentationGame
+		/**
+		 * Chronomatron. The types are ranging from high to metaphysical.
+		 */
 		simon: ExperimentationGame
+		/** Ultrasequencer. The types range from supreme to metaphysical. */
 		numbers?: ExperimentationGame
+		/**
+		 * The number of extra daily games the player bought last time they
+		 * bought extra games. This only goes up to 3.
+		 */
 		claims_resets?: number
 		claims_resets_timestamp?: number
 	}
