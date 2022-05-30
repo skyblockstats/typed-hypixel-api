@@ -1,6 +1,6 @@
 {
   "name": "typed-hypixel-api",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "build/index.js",
   "types": "build/index.d.js",
   "repository": "https://github.com/skyblockstats/typed-hypixel-api.git",
@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "typescript": "^4.6.3",
-    "undici": "^4.16.0"
+    "undici": "^5.3.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
