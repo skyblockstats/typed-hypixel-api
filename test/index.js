@@ -84,6 +84,11 @@ const startTime = Date.now();
 		uuid: '20934ef9488c465180a78f861586b4cf',
 		key: process.env.API_KEY
 	}, true))
+	await testData('SkyBlockProfilesResponse', await request('skyblock/profiles', {
+		uuid: '78800595c0e9445595ac4a93fa2a3a4c',
+		key: process.env.API_KEY
+	}, true))
+
 
 	await testData('SkyBlockProfileResponse', await request('skyblock/profile', {
 		profile: '64722047f9b34e69b67b76a62351eb05',
@@ -124,6 +129,10 @@ const startTime = Date.now();
 	}, true))
 	await testData('PlayerDataResponse', await request('player', {
 		uuid: '20934ef9488c465180a78f861586b4cf',
+		key: process.env.API_KEY
+	}, true))
+	await testData('PlayerDataResponse', await request('player', {
+		uuid: '78800595c0e9445595ac4a93fa2a3a4c',
 		key: process.env.API_KEY
 	}, true))
 

@@ -434,6 +434,15 @@ export interface PlayerDataResponse {
 		 * field.
 		 */
 		[key: `claimed_century_cake${number}00`]: number
+		skyblock_extra?: {
+			/**
+			 * The number of coins this player has given to the Ozanne NPC.
+			 * https://hypixel-skyblock.fandom.com/wiki/Ozanne
+			 * Note that this field isn't reliable and doesn't appear most of
+			 * the time when a player has interacted with the NPC.
+			 */
+			ozanne_coins: number
+		}
 		[key: `adventRewards${number}` | `adventRewards_v2_${number}`]: Record<`day${number}`, number>
 		claimed_year143_cake?: number
 		mostRecentGameType?: string

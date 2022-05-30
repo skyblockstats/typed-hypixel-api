@@ -54,8 +54,10 @@ export interface Pet {
 	heldItem: string | null
 	candyUsed: number
 	skin?: string | null
-	/** This seems to be unused. */
-	extra?: Record<any, never>
+	extra?: {
+		/** This field seems to only appear for wisp pets. */
+		blaze_kills?: number
+	}
 }
 
 export type SkyBlockObjective = {
@@ -397,7 +399,7 @@ export interface SkyBlockProfileMember {
 		/**
 		 * Chronomatron. The types are ranging from high to metaphysical.
 		 */
-		simon: ExperimentationGame
+		simon?: ExperimentationGame
 		/** Ultrasequencer. The types range from supreme to metaphysical. */
 		numbers?: ExperimentationGame
 		/**
