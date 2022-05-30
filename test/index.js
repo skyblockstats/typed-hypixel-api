@@ -34,7 +34,6 @@ console.log('\x1b[1m%s\x1b[0m', 'Running tests. This will take a few minutes, be
 const startTime = Date.now();
 
 (async () => {
-
 	// we have to do this otherwise typescript gets mad :(
 	const itemsResponse = await request('resources/skyblock/items', {}, true)
 	const originalItems = itemsResponse.data.items
@@ -42,6 +41,7 @@ const startTime = Date.now();
 		itemsResponse.data.items = originalItems.slice(i * 1000, (i + 1) * 1000)
 		await testData('SkyBlockItemsResponse', itemsResponse)
 	}
+
 
 
 	await testData('SkyBlockPlayerBingoResponse', await request('skyblock/bingo', {

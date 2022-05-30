@@ -58,11 +58,48 @@ export interface Pet {
 	extra?: Record<any, never>
 }
 
-export interface SkyBlockObjective {
-	status: 'ACTIVE' | 'COMPLETE'
+export type SkyBlockObjective = {
+	/**
+	 * If an objective is active, that means the quest isn't complete. You can
+	 * check if the progress field is above 0 to know whether the player has
+	 * done any progress on the quest.
+	 *
+	 * If the objective is complete, that means the player has finished it and
+	 * can't get any more progress.
+	 *
+	 * If the objective is inactive, that means the objective hasn't started.
+	 * This is the same as active. At the time of writing (29th of May, 2022),
+	 * the only objective with this seems to be select_mage_faction.
+	 */
+	status: 'ACTIVE' | 'COMPLETE' | 'INACTIVE'
 	progress: number
 	completed_at: number
-}
+	/**
+	 * Some quests have a "completion" field. At the time of writing (29th of
+	 * May, 2022) the only objectives with this field are defeat_the_monster
+	 * and defeat_the_monster_2. I don't know what the quest for these
+	 * objectives is. Completions can also be -1 sometimes, for some reason.
+	 */
+	completions?: number
+} & (
+	| {
+			/**
+			 * Some objectives contain extra flags for item ids (always in
+			 * all-caps), for example collect_ingots has IRON_INGOT and
+			 * GOLD_INGOT. If it's a boolean, that means the item(s) have
+			 * successfully been given. If it's a number, that signifies the
+			 * amount of the item that has been given. Whether a boolean or
+			 * number is used depends on each quest, and it seems to be
+			 * arbitrary.
+			 *
+			 * Sometimes, objectives have completely irrelevant fields such as
+			 * "mages_talked_to", "An", "faction". Sometimes these are numbers,
+			 * sometimes they're strings.
+			 */
+			[key: string]: boolean | number | string
+	  }
+	| {}
+)
 
 export interface SkyBlockPotionEffect {
 	effect: string
@@ -192,14 +229,11 @@ export interface SkyBlockProfileMember {
 	 * The objectives that the user has. Each objective can be either ACTIVE or
 	 * COMPLETE, and has a `progress` value in between 0 and 1. Some objectives
 	 * like `collect_ingots` have extra data attached that are relevant to the
-	 * objective.
+	 * objective. Each objective also has an attached quest, but finding it is
+	 * left as an exercise for the reader because the API has no info about
+	 * this.
 	 */
-	objectives: Record<string, SkyBlockObjective> & {
-		collect_ingots?: SkyBlockObjective & {
-			IRON_INGOT: boolean
-			GOLD_INGOT: boolean
-		}
-	}
+	objectives: Record<string, SkyBlockObjective>
 	tutorial?: string[]
 	quests: Record<
 		string,
@@ -424,7 +458,6 @@ export interface SkyBlockProfileMember {
 			fortunate?: number
 			mining_fortune_2?: number
 			powder_buff?: number
-			daily_powder?: number
 			mining_experience?: number
 			forge_time?: number
 			pickaxe_toss?: number
@@ -436,12 +469,14 @@ export interface SkyBlockProfileMember {
 			efficient_miner?: number
 			mining_speed?: number
 			mining_speed_2?: number
+			daily_powder?: number
 
 			toggle_great_explorer?: boolean
 			toggle_mole?: boolean
 			toggle_efficient_miner?: boolean
 			toggle_mining_speed?: boolean
 			toggle_mining_speed_2?: boolean
+			toggle_daily_powder?: boolean
 		}
 		received_free_tier?: true
 		tokens?: number
