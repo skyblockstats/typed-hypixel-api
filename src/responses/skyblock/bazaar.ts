@@ -40,7 +40,7 @@ export interface SkyBlockBazaarResponse {
 				sellPrice: number
 				/** The sum of all item amounts in all sell orders. */
 				sellVolume: number
-				/** The total number of items that have been sold in the past week. */
+				/** The total number of items that have been instasold in the past week. */
 				sellMovingWeek: number
 				/** The number of active sell orders. */
 				sellOrders: number
@@ -48,7 +48,7 @@ export interface SkyBlockBazaarResponse {
 				buyPrice: number
 				/** The sum of all item amounts in all buy orders. */
 				buyVolume: number
-				/** The total number of items that have been bought in the past week. */
+				/** The total number of items that have been instabought in the past week. */
 				buyMovingWeek: number
 				/** The number of active buy orders. */
 				buyOrders: number
