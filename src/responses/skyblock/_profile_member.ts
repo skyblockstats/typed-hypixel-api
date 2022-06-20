@@ -191,6 +191,127 @@ export interface ForgeProcess {
 	notified: boolean
 }
 
+export type SkyBlockTrophyFishId =
+	| 'obfuscated_fish_1'
+	| 'moldfin'
+	| 'lava_horse'
+	| 'golden_fish'
+	| 'blobfish'
+	| 'steaming_hot_flounder'
+	| 'volcanic_stonefish'
+	| 'soul_fish'
+	| 'mana_ray'
+	| 'obfuscated_fish_2'
+	| 'obfuscated_fish_3'
+	| 'skeleton_fish'
+	| 'flyfish'
+	| 'slugfish'
+	| 'vanille'
+	| 'karate_fish'
+	| 'gusher'
+	| 'sulphur_skitter'
+
+export type SkyBlockTrophyFishStats = {
+	[key in `${SkyBlockTrophyFishId}`]?: number
+} & {
+	[key in `${SkyBlockTrophyFishId}_bronze`]?: number
+} & {
+	[key in `${SkyBlockTrophyFishId}_silver`]?: number
+} & {
+	[key in `${SkyBlockTrophyFishId}_gold`]?: number
+} & {
+	[key in `${SkyBlockTrophyFishId}_diamond`]?: number
+} & {
+	rewards: number[]
+	total_caught?: number
+}
+
+export type SkyBlockAutopetRuleDatas = {
+	EQUIP_WARDROBE_SLOT: { slot: `${number}` }
+	START_SLAYER_QUEST: Record<any, never>
+	BOSS_SPAWN: {
+		boss: SkyBlockSlayerBosses
+		category: 'slayer'
+	}
+}
+export type SkyBlockAutopetExceptionDatas = {
+	HAS_EQUIPPED_PET: { pet: string }
+	THURSDAY: Record<any, never>
+}
+
+export interface SkyBlockAutopetRule<Id extends keyof SkyBlockAutopetRuleDatas = any> {
+	/** The id of the rule, like `EQUIP_WARDROBE_SLOT`. */
+	id: Id
+	/** The id of the pet, like `GOLDEN_DRAGON`. */
+	pet: string
+	exceptions: SkyBlockAutopetException[]
+	disabled: boolean
+	data: SkyBlockAutopetRuleDatas[Id]
+}
+
+export interface SkyBlockAutopetException<Id extends keyof SkyBlockAutopetExceptionDatas = any> {
+	/** The id of the rule, like `HAS_EQUIPPED_PET`. */
+	id: Id
+	data: SkyBlockAutopetExceptionDatas[Id]
+}
+
+export type SkyBlockNetherIslandMinibosses =
+	| 'ASHFANG'
+	| 'MAGMA_BOSS'
+	| 'BLADESOUL'
+	| 'BARBARIAN_DUKE_X'
+	| 'MAGE_OUTLAW'
+
+export type SkyBlockDojoStats = {
+	[key in `dojo_${'points' | 'time'}_${
+		| 'mob_kb'
+		| 'wall_jump'
+		| 'archer'
+		| 'sword_swap'
+		| 'snake'
+		| 'fireball'}`]?: number
+}
+
+export interface SkyBlockAbiphoneStats {
+	contact_data: {
+		[key in SkyBlockAbiphoneContactName]?: SkyBlockAbiphoneContact
+	}
+	games: {
+		/**
+		 * The number of times the player has reached a draw in tic-tac-toe. Winning is impossible.
+		 */
+		tic_tac_toe_draws?: number
+		/**
+		 * The best score the player has reached in the snake game.
+		 */
+		snake_best_score?: number
+	}
+	active_contacts?: SkyBlockAbiphoneContactName[]
+}
+
+/** The ids of the NPCs that the player can contact through the Abiphone. */
+export type SkyBlockAbiphoneContactName =
+	| 'dusk'
+	| 'dean'
+	| 'elle'
+	| 'captain_ahone'
+	| 'ophelia'
+	| 'blacksmith'
+	| 'oringo'
+	| 'slayer'
+	| 'igrupan'
+	| 'builder'
+	| 'pablo'
+
+export interface SkyBlockAbiphoneContact {
+	/** Milliseconds since epoch. */
+	last_call?: number
+	talked_to?: true
+	completed_quest?: true
+}
+
+export type SkyBlockNetherIslandFactionName = 'mages' | 'barbarians'
+
 export interface SkyBlockProfileMember {
 	last_save?: number
 	/**
@@ -312,6 +433,12 @@ export interface SkyBlockProfileMember {
 	>
 	/** The pets that the member has */
 	pets?: Pet[]
+	autopet?:
+		| Record<any, never>
+		| {
+				rules_limit: number
+				rules: SkyBlockAutopetRule[]
+		  }
 	dungeons?: {
 		dungeon_types: {
 			catacombs?: DungeonStats
@@ -465,6 +592,7 @@ export interface SkyBlockProfileMember {
 			pickaxe_toss?: number
 			experience_orbs?: number
 			maniac_miner?: number
+			vein_seeker?: number
 
 			great_explorer?: number
 			mole?: number
@@ -530,6 +658,177 @@ export interface SkyBlockProfileMember {
 			forge_1?: Record<number, ForgeProcess>
 		}
 	}
+	bestiary?: {
+		migrated_stats?: true
+		[key: `kills_${string}`]: number
+		[key: `deaths_${string}`]: number
+	}
+	trophy_fish?: SkyBlockTrophyFishStats
+	nether_island_player_data?: {
+		quests: {
+			quest_data: {
+				fishing?: SkyBlockObjective
+				wanted_mini_boss?: SkyBlockObjective
+				fetch?: SkyBlockObjective
+				dojo?: SkyBlockObjective
+				boss?: SkyBlockObjective
+				quest_list?: string[]
+			}
+			miniboss_daily: { [miniboss in SkyBlockNetherIslandMinibosses]?: boolean }
+			kuuda_boss_daily: {
+				NONE?: true
+				HOT?: true
+			}
+			/**
+			 * Each entry is either:
+			 * { Quest id : Item id } ("crimson_isle_moldfin_C": "LUMP_OF_MAGMA")
+			 * or
+			 * { Item id: amount } ("LUMP_OF_MAGMA": 4)
+			 *
+			 * Why Hypixel decided to make it this way is beyond me.
+			 */
+			quest_rewards: Record<string, number | string>
+			alchemist_quest:
+				| Record<any, never>
+				| {
+						alchemist_quest_start?: true
+						alchemist_quest_progress?: number
+				  }
+			rulenor:
+				| Record<any, never>
+				| {
+						talked_to: boolean
+						/** Milliseconds since epoch. */
+						last_payment?: number
+				  }
+			chicken_quest:
+				| Record<any, never>
+				| {
+						chicken_quest_start: boolean
+						chicken_quest_progress: number
+						/**
+						 * The names of chickens, like ['Cluckles', 'Chickovsky', 'Hennifer', 'Chikira', 'Henrietta'].
+						 */
+						chicken_quest_collected: string[]
+				  }
+			pomtair_quest:
+				| Record<any, never>
+				| {
+						talked_to_npc: boolean
+				  }
+			suus_quest:
+				| Record<any, never>
+				| {
+						talked_to_npc: boolean
+						mob_id?: string
+						/** Milliseconds since epoch. */
+						last_toy_drop?: number
+						/** Milliseconds since epoch. */
+						last_completion?: number
+				  }
+			pablo_quest:
+				| Record<any, never>
+				| {
+						/** A SkyBlock item id. */
+						pablo_item: string
+						pablo_active: boolean
+						/** Milliseconds since epoch. */
+						pablo_last_give: number
+				  }
+			duel_training_quest:
+				| Record<any, never>
+				| {
+						duel_training_phase_mages?: number
+						/** Milliseconds since epoch. */
+						duel_training_last_complete_mages?: number
+
+						duel_training_phase_barbarians?: number
+						/** Milliseconds since epoch. */
+						duel_training_last_complete_barbarians?: number
+				  }
+			sirih_quest: Record<any, never>
+			edelis_quest:
+				| Record<any, never>
+				| {
+						heard_story_statue: true
+				  }
+			mollim_quest:
+				| Record<any, never>
+				| {
+						talked_to_npc: boolean
+						completed_quest?: true
+				  }
+			aranya_quest:
+				| Record<any, never>
+				| {
+						talked_to_npc: boolean
+						/** Milliseconds since epoch. */
+						last_completion?: number
+				  }
+			last_reset?: number
+			/** Milliseconds since epoch. */
+			chicken_quest_handed_in?: number
+			paid_bruuh?: boolean
+			miniboss_data?: {
+				[miniboss in SkyBlockNetherIslandMinibosses]?: boolean
+			}
+
+			/** Milliseconds since epoch. */
+			last_kuudra_relic?: number
+			found_kuudra_book?: true
+			found_kuudra_leggings?: true
+			kuudra_loremaster?: true
+		}
+		kuudra_completed_tiers: {
+			none?: number
+			hot?: number
+		}
+		dojo: SkyBlockDojoStats
+		abiphone: SkyBlockAbiphoneStats
+		matriarch:
+			| Record<any, never>
+			| {
+					pearls_collected: number
+					/** Milliseconds since epoch. */
+					last_attempt: number
+			  }
+		/** The faction that the player is in. If the player isn't in any faction, this field is not present. */
+		selected_faction?: SkyBlockNetherIslandFactionName
+		/**
+		 * Every time a miniboss gets killed by the player, its id gets appended to this list, probably in order. This means that the items aren't unique.
+		 */
+		last_minibosses_killed?: SkyBlockNetherIslandMinibosses[]
+	} & {
+		/** The reputation value the player has for each faction. */
+		[key in `${SkyBlockNetherIslandFactionName}_reputation`]?: number
+	}
+	trapper_quest?:
+		| Record<any, never>
+		| {
+				pelt_count: number
+				/** Milliseconds since epoch. */
+				last_task_time: number
+		  }
+	personal_bank_upgrade?: number
+	soulflow?: number
+	/**
+	 * I don't know where this is used in-game, but here's the list of arrows:
+	 * https://hypixel-skyblock.fandom.com/wiki/Arrows
+	 */
+	favorite_arrow?:
+		| 'ARROW'
+		| 'FLINT_ARROW'
+		| 'REINFORCED_IRON_ARROW'
+		| 'GOLD_TIPPED_ARROW'
+		| 'REDSTONE_TIPPED_ARROW'
+		| 'EMERALD_TIPPED_ARROW'
+		| 'BOUNCY_ARROW'
+		| 'ICY_ARROW'
+		| 'ARMORSHRED_ARROW'
+		| 'EXPLOSIVE_ARROW'
+		| 'GLUE_ARROW'
+		| 'NANSORB_ARROW'
+		| 'MAGMA_ARROW'
 	/** Extra information about the user's accessory bag upgrades and powers. */
 	accessory_bag_storage?: {
 		/** The member's tuning templates. https://wiki.hypixel.net/Powers#Tuning_Templates */
@@ -569,6 +868,7 @@ export interface SkyBlockProfileMember {
 	essence_spider?: number
 	essence_undead?: number
 	essence_ice?: number
+	essence_crimson?: number
 
 	wardrobe_equipped_slot?: number
 	collection?: Record<string, number>
@@ -586,6 +886,7 @@ export interface SkyBlockProfileMember {
 	personal_vault_contents?: Inventory
 	inv_contents?: Inventory
 	candy_inventory_contents?: Inventory
+	equippment_contents?: Inventory
 
 	experience_skill_alchemy?: number
 	experience_skill_carpentry?: number
@@ -596,7 +897,13 @@ export interface SkyBlockProfileMember {
 	experience_skill_foraging?: number
 	experience_skill_mining?: number
 	experience_skill_runecrafting?: number
+	/**
+	 * This is no longer used and has always been unstable, use
+	 * `experience_skill_social2` instead.
+	 */
 	experience_skill_social?: number
+	/** Replacement for `experience_skill_social`. */
+	experience_skill_social2?: number
 	experience_skill_taming?: number
 }
 
