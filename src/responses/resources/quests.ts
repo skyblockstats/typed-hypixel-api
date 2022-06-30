@@ -29,6 +29,7 @@ export interface QuestsResponse {
 					| 'BedwarsExpReward'
 					| 'WoolWarsWoolReward'
 					| 'WoolWarsExpReward'
+					| 'FestivalExperienceReward'
 				amount: number
 			}[]
 			objectives: ({

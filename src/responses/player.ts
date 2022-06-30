@@ -333,7 +333,7 @@ export interface PlayerDataResponse {
 		challenges: Record<string, Record<string, number>>
 		spec_always_flying?: boolean
 		userLanguage?: string
-		monthlyRankColor?: 'AQUA'
+		monthlyRankColor?: 'AQUA' | 'GOLD'
 		achievementSync: Record<string, number>
 		tiered_achievement_menu_sort?: string
 		parkourCheckpointBests?: Record<string, Record<number, number>>
@@ -420,6 +420,13 @@ export interface PlayerDataResponse {
 					anniversaryNPCProgress: number
 				}
 			>
+			summer?: Record<
+				number,
+				{
+					levelling: { experience: number }
+				}
+			>
+			silver?: number
 		}
 		[key: `completed_christmas_quests_${number}`]: number
 		currentGadget?: string

@@ -577,7 +577,6 @@ export interface SkyBlockProfileMember {
 			special_0?: number
 			daily_effect?: number
 			mining_fortune?: number
-			titanium_insanium?: number
 			mining_speed_boost?: number
 			random_event?: number
 			mining_madness?: number
@@ -600,6 +599,7 @@ export interface SkyBlockProfileMember {
 			mining_speed?: number
 			mining_speed_2?: number
 			daily_powder?: number
+			titanium_insanium?: number
 
 			toggle_great_explorer?: boolean
 			toggle_mole?: boolean
@@ -607,6 +607,7 @@ export interface SkyBlockProfileMember {
 			toggle_mining_speed?: boolean
 			toggle_mining_speed_2?: boolean
 			toggle_daily_powder?: boolean
+			toggle_titanium_insanium?: boolean
 		}
 		received_free_tier?: true
 		tokens?: number
@@ -628,7 +629,7 @@ export interface SkyBlockProfileMember {
 				statues_placed?: undefined[]
 			}
 			precursor?: {
-				parts_delivered: []
+				parts_delivered?: []
 				talked_to_professor?: true
 			}
 			goblin?: {
@@ -665,7 +666,7 @@ export interface SkyBlockProfileMember {
 	}
 	trophy_fish?: SkyBlockTrophyFishStats
 	nether_island_player_data?: {
-		quests: {
+		quests?: {
 			quest_data: {
 				fishing?: SkyBlockObjective
 				wanted_mini_boss?: SkyBlockObjective
