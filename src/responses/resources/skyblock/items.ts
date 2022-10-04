@@ -19,6 +19,27 @@ type GemstoneType =
 	| 'TOPAZ'
 	| 'OPAL'
 
+type TieredStats =
+	| 'DAMAGE'
+	| 'STRENGTH'
+	| 'DEFENSE'
+	| 'HEALTH'
+	| 'MINING_FORTUNE'
+	| 'WALK_SPEED'
+	| 'MAGIC_FIND'
+	| 'INTELLIGENCE'
+	| 'WEAPON_ABILITY_DAMAGE'
+	| 'CRITICAL_DAMAGE'
+	| 'CRITICAL_CHANCE'
+	| 'SEA_CREATURE_CHANCE'
+	| 'FEROCITY'
+	| 'BREAKING_POWER'
+	| 'MINING_SPEED'
+	| 'PET_LUCK'
+	| 'ABILITY_DAMAGE_PERCENT'
+	| 'TRUE_DEFENSE'
+	| 'ATTACK_SPEED'
+
 export interface SkyBlockItemsResponse {
 	success: true
 	lastUpdated: number
@@ -31,7 +52,6 @@ export interface SkyBlockItemsResponse {
 		name: string
 		glowing?: boolean
 		furniture?: string
-		category?: string
 		/** If the item is a floating crystal, this will be present. */
 		crystal?:
 			| 'FISHING'
@@ -54,34 +74,68 @@ export interface SkyBlockItemsResponse {
 		salvageable_from_recipe?: true
 		salvages?: (
 			| {
+					type: 'ESSENCE'
 					essence_type: EssenceType
 					amount: number
 			  }
 			| {
+					type: 'ITEM'
 					item_id: string
 					amount: number
 			  }
 		)[]
+		/**
+		 * Make sure to normalize the case for these, since older items have
+		 * them uppercase and newer items have them lowercase.
+		 */
 		stats?: {
 			DAMAGE?: number
+			damage?: number
 			STRENGTH?: number
+			strength?: number
 			DEFENSE?: number
 			HEALTH?: number
+			health?: number
 			MINING_FORTUNE?: number
+			mining_fortune?: number
 			WALK_SPEED?: number
+			walk_speed?: number
 			MAGIC_FIND?: number
+			magic_find?: number
 			INTELLIGENCE?: number
+			intelligence?: number
 			WEAPON_ABILITY_DAMAGE?: number
+			weapon_ability_damage?: number
 			CRITICAL_DAMAGE?: number
+			critical_damage?: number
 			CRITICAL_CHANCE?: number
+			critical_chance?: number
 			SEA_CREATURE_CHANCE?: number
+			sea_creature_chance?: number
 			FEROCITY?: number
+			ferocity?: number
 			BREAKING_POWER?: number
+			breaking_power?: number
 			MINING_SPEED?: number
+			mining_speed?: number
 			PET_LUCK?: number
+			pet_luck?: number
 			ABILITY_DAMAGE_PERCENT?: number
+			ability_damage_percent?: number
 			TRUE_DEFENSE?: number
+			true_defense?: number
 			ATTACK_SPEED?: number
+			attack_speed?: number
+			RIFT_DAMAGE?: number
+			RIFT_INTELLIGENCE?: number
+			RIFT_TIME?: number
+			mending?: number
+			vitality?: number
+			fishing_speed?: number
+			health_regeneration?: number
+			fishing_wisdom?: number
+			combat_wisdom?: number
+			foraging_wisdom?: number
 		}
 		ability_damage_scaling?: number
 		/**
@@ -89,14 +143,31 @@ export interface SkyBlockItemsResponse {
 		 * an NPC.
 		 */
 		npc_sell_price?: number
+		motes_sell_price?: number
 		/**
 		 * The item that this item will give you if you right click it. Seems to be currently only used for eccentric paintings.
 		 */
-		item_specific?: {
-			bundled_item_id: 'ECCENTRIC_PAINTING'
-			/** The number of the `bundled_item_id`s that right clicking will give you */
-			bundled_amount: number
-		}
+		item_specific?:
+			| {
+					bundled_item_id: 'ECCENTRIC_PAINTING'
+					/** The number of the `bundled_item_id`s that right clicking will give you */
+					bundled_amount: number
+			  }
+			| {
+					mana_refund: number
+			  }
+			| {
+					rift_time: number
+					intelligence: number
+			  }
+			| {
+					tiers: Record<
+						number,
+						{
+							stats: Partial<Record<TieredStats, number>>
+						}
+					>
+			  }
 		/**
 		 * If present, this item can be converted into a dungeon item by
 		 * using essence.
@@ -107,10 +178,12 @@ export interface SkyBlockItemsResponse {
 		}
 		upgrade_costs?: (
 			| {
+					type: 'ESSENCE'
 					essence_type: EssenceType
 					amount: number
 			  }
 			| {
+					type: 'ITEM'
 					item_id: string
 					amount: number
 			  }
@@ -120,10 +193,12 @@ export interface SkyBlockItemsResponse {
 			item_id: string
 			costs: (
 				| {
+						type: 'ESSENCE'
 						essence_type: EssenceType
 						amount: number
 				  }
 				| {
+						type: 'ITEM'
 						item_id: string
 						amount: number
 				  }
@@ -133,9 +208,11 @@ export interface SkyBlockItemsResponse {
 			slot_type: GemstoneType | 'UNIVERSAL' | 'MINING' | 'COMBAT' | 'DEFENSIVE' | 'OFFENSIVE'
 			costs?: (
 				| {
+						type: 'COINS'
 						coins: number
 				  }
 				| {
+						type: 'ITEM'
 						item_id:
 							| `FINE_${GemstoneType}_GEM`
 							| `FLAWLESS_${GemstoneType}_GEM`
@@ -150,80 +227,70 @@ export interface SkyBlockItemsResponse {
 		}
 		/** I don't know why this is its own field, this can be used as a fallback if requirements.dungeon is missing. */
 		catacombs_requirements?: {
-			dungeon: {
-				type: 'CATACOMBS'
-				level: number
-			}
-		}
-		tiered_stats?: {
-			DAMAGE?: number[]
-			STRENGTH?: number[]
-			DEFENSE?: number[]
-			HEALTH?: number[]
-			MINING_FORTUNE?: number[]
-			WALK_SPEED?: number[]
-			MAGIC_FIND?: number[]
-			INTELLIGENCE?: number[]
-			WEAPON_ABILITY_DAMAGE?: number[]
-			CRITICAL_DAMAGE?: number[]
-			CRITICAL_CHANCE?: number[]
-			SEA_CREATURE_CHANCE?: number[]
-			FEROCITY?: number[]
-			BREAKING_POWER?: number[]
-			MINING_SPEED?: number[]
-			PET_LUCK?: number[]
-			ABILITY_DAMAGE_PERCENT?: number[]
-			TRUE_DEFENSE?: number[]
-			ATTACK_SPEED?: number[]
-		}
-		requirements?: {
-			/**
-			 * If present, you need a specific level in a dungeon. Note that
-			 * sometimes `catacombs_requirements` is used instead of this field.
-			 */
-			dungeon?: {
-				type: 'CATACOMBS'
-				level: number
-			}
-			dungeon_completion?: {
-				type: 'CATACOMBS' | 'MASTER_CATACOMBS'
-				tier: number
-			}
+			type: 'DUNGEON_SKILL'
+			dungeon_type: 'CATACOMBS'
+			level: number
+		}[]
+		tiered_stats?: Partial<Record<TieredStats, number[]>>
+		requirements?: /**
+		 * If present, you need a specific level in a dungeon. Note that
+		 * sometimes `catacombs_requirements` is used instead of this field.
+		 */
+		(
+			| {
+					type: 'DUNGEON_SKILL'
+					dungeon_type: 'CATACOMBS'
+					level: number
+			  }
+			| {
+					type: 'DUNGEON_TIER'
+					dungeon_type: 'CATACOMBS' | 'MASTER_CATACOMBS'
+					tier: number
+			  }
 			/**
 			 * If present, a reputation with one of the factions from
 			 * the nether is required.
 			 */
-			nether_reputation?: {
-				faction: 'BARBARIANS' | 'MAGES'
-				/** The number of reputation needed to meet this requirement. */
-				reputation: number
-				coop_total: true
-			}
+			| {
+					type: 'CRIMSON_ISLE_REPUTATION'
+					faction: 'BARBARIANS' | 'MAGES'
+					/** The number of reputation needed to meet this requirement. */
+					reputation: number
+			  }
 			/** If present, a specific slayer boss level is required. */
-			slayer?: {
-				slayer_boss_type: SkyBlockSlayerBosses
-				level: number
-			}
-			skill?: {
-				/** A skill id in all caps, like "FISHING". */
-				type: string
-				level: number
-			}
-			trophy_fishing_reward?: {
-				reward: 'BRONZE' | 'SILVER' | 'GOLD' | 'DIAMOND'
-			}
-			heart_of_the_mountain?: {
-				tier: number
-			}
-			collection?: {
-				/** A collection id, in all caps. */
-				collection_id: string
-				required_tier: number
-			}
-			target_practice?: {
-				mode: 'I' | 'II' | 'III'
-			}
-		}
+			| {
+					type: 'SLAYER'
+					slayer_boss_type: SkyBlockSlayerBosses
+					level: number
+			  }
+			| {
+					type: 'SKILL'
+					/** A skill id in all caps, like "FISHING". */
+					skill: string
+					level: number
+			  }
+			| {
+					type: 'TROPHY_FISHING'
+					reward: 'BRONZE' | 'SILVER' | 'GOLD' | 'DIAMOND'
+			  }
+			| {
+					type: 'HEART_OF_THE_MOUNTAIN'
+					tier: number
+			  }
+			| {
+					type: 'COLLECTION'
+					/** A collection id, in all caps. */
+					collection: string
+					tier: number
+			  }
+			| {
+					type: 'TARGET_PRACTICE'
+					mode: 'I' | 'II' | 'III'
+			  }
+			| {
+					type: 'MELODY_HAIR'
+			  }
+		)[]
 		dungeon_item?: boolean
 		/**
 		 * If this is 'COOP', that means the item cannot be transferred to
@@ -240,6 +307,8 @@ export interface SkyBlockItemsResponse {
 		 * https://hypixel-skyblock.fandom.com/wiki/Museum
 		 */
 		museum?: true
+		rift_transferrable?: true
+		cannot_reforge?: true
 		gear_score?: number
 		/**
 		 * If this is present that means the item is an island spawner, its
@@ -249,13 +318,14 @@ export interface SkyBlockItemsResponse {
 		 * */
 		private_island?: string
 		id: string
-	} & (
-		| {
-				generator: string
-				generator_tier: number
-		  }
-		| {}
-	) &
+	} & ({ category?: 'SWORD'; sword_type: string } | { category?: string }) &
+		(
+			| {
+					generator: string
+					generator_tier: number
+			  }
+			| {}
+		) &
 		(
 			| {
 					material: 'SKULL_ITEM'

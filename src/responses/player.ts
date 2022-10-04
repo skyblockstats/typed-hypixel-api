@@ -43,7 +43,7 @@ export interface PlayerDataResponse {
 		 */
 		_id: string
 		/** An array of ids of one-time achievements that the player has unlocked. */
-		achievementsOneTime: string[]
+		achievementsOneTime?: string[]
 		clock?: boolean
 		/**
 		 * The username of the player that Hypixel has cached. Identical to
@@ -64,16 +64,6 @@ export interface PlayerDataResponse {
 		firstLogin: number
 		friendRequests?: string[]
 		/**
-		 * The previous usernames of the player including their current one,
-		 * without duplicates, sorted by oldest first.
-		 */
-		knownAliases: string[]
-		/**
-		 * The lowercased previous usernames of the player including their
-		 * current one, without duplicates, sorted by oldest first.
-		 */
-		knownAliasesLower: string[]
-		/**
 		 * A number that is supposed to represent the Minecraft version the
 		 * player last logged on with. This seems to be deprecated as it only
 		 * appears on some old profiles, use `mcVersionRp` instead.
@@ -90,7 +80,7 @@ export interface PlayerDataResponse {
 
 		/** The UNIX timestamp of when the player last logged in. */
 		lastLogin?: number
-		networkExp: number
+		networkExp?: number
 		notifications?: boolean
 
 		/**
@@ -102,7 +92,7 @@ export interface PlayerDataResponse {
 		seeRequests?: boolean
 		spec_first_person?: boolean
 		spectators_invisible?: boolean
-		stats: Record<string, any> & {
+		stats?: Record<string, any> & {
 			SkyBlock?: {
 				profiles: SimpleSkyBlockProfilesRecord
 			}
@@ -195,10 +185,10 @@ export interface PlayerDataResponse {
 
 		vanityFavorites?: string
 		currentEmote?: string
-		achievements: Record<string, number>
+		achievements?: Record<string, number>
 		transformation?: string
-		housingMeta: Record<string, any>
-		voting: Record<string, number>
+		housingMeta?: Record<string, any>
+		voting?: Record<string, number>
 		/**
 		 * The version string of the Minecraft version the player last logged
 		 * onto Hypixel with, for example 1.16.3. Note that this is not
@@ -211,23 +201,23 @@ export interface PlayerDataResponse {
 		vanityFirstConvertedBox?: number
 		[key: `${string}Cooldowns`]: Record<string, boolean>
 		cooldowns?: Record<string, Record<string, number>>
-		karma: number
-		petConsumables: Record<string, number>
+		karma?: number
+		petConsumables?: Record<string, number>
 		[key: `levelingReward_${number}`]: boolean
-		vanityMeta: {
+		vanityMeta?: {
 			packages: string[]
 		}
-		parkourCompletions: Record<
+		parkourCompletions?: Record<
 			string,
 			{
 				timeStart: number
 				timeTook: number
 			}[]
 		>
-		lastAdsenseGenerateTime: number
+		lastAdsenseGenerateTime?: number
 		lastClaimedReward?: number
 		lastLogout?: number
-		friendRequestsUuid: any[]
+		friendRequestsUuid?: any[]
 		gadget?: string
 		/** An old field, doesn't seem to be used anymore. */
 		hypixel_tutorial_tutorial?: true
@@ -262,7 +252,7 @@ export interface PlayerDataResponse {
 		petStats?: Record<string, any>
 		achievementRewardsNew?: Record<`for_points_${number}00`, number>
 		onetime_achievement_menu_sort?: string
-		achievementTracking: any[]
+		achievementTracking?: any[]
 		adsense_tokens?: number
 		language?: string
 
@@ -330,14 +320,14 @@ export interface PlayerDataResponse {
 		}
 		disableTipMessages?: boolean
 		guildNotifications?: boolean
-		challenges: Record<string, Record<string, number>>
+		challenges?: Record<string, Record<string, number>>
 		spec_always_flying?: boolean
 		userLanguage?: string
 		monthlyRankColor?: 'AQUA' | 'GOLD'
-		achievementSync: Record<string, number>
+		achievementSync?: Record<string, number>
 		tiered_achievement_menu_sort?: string
 		parkourCheckpointBests?: Record<string, Record<number, number>>
-		achievementPoints: number
+		achievementPoints?: number
 		battlePassGlowStatus?: boolean
 		lastMapVote?: number
 
@@ -357,6 +347,9 @@ export interface PlayerDataResponse {
 		/** This doesn't seem to be used for anything anymore. */
 		currentCloak?: 'PING'
 		particlePack?: 'SPHERE'
+		leveling?: {
+			claimedRewards: number[]
+		}
 
 		gifts_grinch?: number
 

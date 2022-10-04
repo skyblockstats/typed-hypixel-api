@@ -269,7 +269,8 @@ export type SkyBlockDojoStats = {
 		| 'archer'
 		| 'sword_swap'
 		| 'snake'
-		| 'fireball'}`]?: number
+		| 'fireball'
+		| 'lock_head'}`]?: number
 }
 
 export interface SkyBlockAbiphoneStats {
@@ -311,6 +312,35 @@ export interface SkyBlockAbiphoneContact {
 }
 
 export type SkyBlockNetherIslandFactionName = 'mages' | 'barbarians'
+
+export interface SkyBlockTreasureRun {
+	run_id: string
+	/** Milliseconds since epoch */
+	completion_ts: number
+	dungeon_type: SkyBlockDungeonType
+	dungeon_tier: number
+	participants: {
+		player_uuid: string
+		display_name: string
+		class_milestone: number
+	}[]
+}
+
+export interface SkyBlockTreasureChest {
+	run_id: string
+	chest_id: string
+	treasure_type: string
+	rewards: {
+		rewards: string[]
+		rolled_rng_meter_randomly: boolean
+	}
+	quality: number
+	shiny_eligible: boolean
+	paid: boolean
+	rerolls: number
+}
+
+export type SkyBlockDungeonType = 'catacombs' | 'master_catacombs'
 
 export interface SkyBlockProfileMember {
 	last_save?: number
@@ -386,6 +416,8 @@ export interface SkyBlockProfileMember {
 		tier: number
 		start_timestamp: number
 		completion_state: number
+		used_armor?: false
+		solo?: true
 		combat_xp?: number
 		recent_mob_kills?: {
 			xp: number
@@ -437,13 +469,10 @@ export interface SkyBlockProfileMember {
 		| Record<any, never>
 		| {
 				rules_limit: number
-				rules: SkyBlockAutopetRule[]
+				rules?: SkyBlockAutopetRule[]
 		  }
 	dungeons?: {
-		dungeon_types: {
-			catacombs?: DungeonStats
-			master_catacombs?: DungeonStats
-		}
+		dungeon_types: Partial<Record<SkyBlockDungeonType, DungeonStats>>
 		player_classes: Record<SkyBlockDungeonClasses, { experience?: number }> | {}
 		dungeon_journal: {
 			journal_entries?: SkyBlockJournalEntries
@@ -457,6 +486,10 @@ export interface SkyBlockProfileMember {
 		daily_runs?: {
 			current_day_stamp: number
 			completed_runs_count: number
+		}
+		treasures?: {
+			runs?: SkyBlockTreasureRun[]
+			chests?: SkyBlockTreasureChest[]
 		}
 	}
 	griffin?: {
@@ -581,7 +614,6 @@ export interface SkyBlockProfileMember {
 			random_event?: number
 			mining_madness?: number
 			goblin_killer?: number
-			lonesome_miner?: number
 			professional?: number
 			fortunate?: number
 			mining_fortune_2?: number
@@ -592,6 +624,7 @@ export interface SkyBlockProfileMember {
 			experience_orbs?: number
 			maniac_miner?: number
 			vein_seeker?: number
+			front_loaded?: number
 
 			great_explorer?: number
 			mole?: number
@@ -600,6 +633,7 @@ export interface SkyBlockProfileMember {
 			mining_speed_2?: number
 			daily_powder?: number
 			titanium_insanium?: number
+			lonesome_miner?: number
 
 			toggle_great_explorer?: boolean
 			toggle_mole?: boolean
@@ -608,6 +642,7 @@ export interface SkyBlockProfileMember {
 			toggle_mining_speed_2?: boolean
 			toggle_daily_powder?: boolean
 			toggle_titanium_insanium?: boolean
+			toggle_lonesome_miner?: boolean
 		}
 		received_free_tier?: true
 		tokens?: number
