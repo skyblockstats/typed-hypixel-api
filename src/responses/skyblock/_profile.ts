@@ -46,13 +46,11 @@ export interface SkyBlockProfile {
 	last_save?: string | number
 	banking?: SkyBlockBanking | {}
 	/**
-	 * The "cute name" of the profile. This field is only present if the user
-	 * has used this profile recently.
+	 * The "cute name" of the profile.
 	 */
 	cute_name?: string
 	/**
-	 * Whether this is the active profile for the user. This is only present
-	 * if the user has used this profile recently.
+	 * Whether this is the active profile for the user.
 	 */
 	selected?: boolean
 	game_mode?: 'bingo' | 'island' | 'ironman'
