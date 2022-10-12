@@ -416,8 +416,8 @@ export interface SkyBlockProfileMember {
 		tier: number
 		start_timestamp: number
 		completion_state: number
-		used_armor?: false
-		solo?: true
+		used_armor?: boolean
+		solo?: boolean
 		combat_xp?: number
 		recent_mob_kills?: {
 			xp: number
@@ -664,7 +664,10 @@ export interface SkyBlockProfileMember {
 				statues_placed?: undefined[]
 			}
 			precursor?: {
-				parts_delivered?: []
+				/**
+				 * Example: ["SUPERLITE_MOTOR", "FTX_3070"]
+				 */
+				parts_delivered?: string[]
 				talked_to_professor?: true
 			}
 			goblin?: {

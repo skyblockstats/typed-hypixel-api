@@ -143,6 +143,7 @@ export interface SkyBlockItemsResponse {
 		 * an NPC.
 		 */
 		npc_sell_price?: number
+		hide_from_viewrecipe_command?: true
 		motes_sell_price?: number
 		/**
 		 * The item that this item will give you if you right click it. Seems to be currently only used for eccentric paintings.

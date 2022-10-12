@@ -10,28 +10,34 @@ export interface QuestsResponse {
 			/** The ID of the quest. */
 			id: string
 			name: string
-			rewards: {
-				type:
-					| 'MultipliedExperienceReward'
-					| 'MultipliedCoinReward'
-					| 'MegawallsMythicFavorReward'
-					| 'ArenaMagicKeyReward'
-					| 'CoinReward'
-					| 'WarlordsBrokenWeaponReward'
-					| 'WarlordsMagicDustReward'
-					| 'WarlordsVoidShardReward'
-					| 'SkyWarsSoulReward'
-					| 'SkyWarsTokenReward'
-					| 'GameLootChestReward'
-					| 'CrazyWallsSkullReward'
-					| 'SkyClashCardPackReward'
-					| 'PitGold'
-					| 'BedwarsExpReward'
-					| 'WoolWarsWoolReward'
-					| 'WoolWarsExpReward'
-					| 'FestivalExperienceReward'
-				amount: number
-			}[]
+			rewards: (
+				| {
+						type:
+							| 'MultipliedExperienceReward'
+							| 'MultipliedCoinReward'
+							| 'MegawallsMythicFavorReward'
+							| 'ArenaMagicKeyReward'
+							| 'CoinReward'
+							| 'WarlordsBrokenWeaponReward'
+							| 'WarlordsMagicDustReward'
+							| 'WarlordsVoidShardReward'
+							| 'SkyWarsSoulReward'
+							| 'SkyWarsTokenReward'
+							| 'GameLootChestReward'
+							| 'CrazyWallsSkullReward'
+							| 'SkyClashCardPackReward'
+							| 'PitGold'
+							| 'BedwarsExpReward'
+							| 'WoolWarsWoolReward'
+							| 'WoolWarsExpReward'
+							| 'FestivalExperienceReward'
+						amount: number
+				  }
+				| {
+						type: 'PackageReward'
+						package: string
+				  }
+			)[]
 			objectives: ({
 				id: string
 			} & (
@@ -44,7 +50,10 @@ export interface QuestsResponse {
 				  }
 			))[]
 			requirements: {
-				type: 'DailyResetQuestRequirement' | 'WeeklyResetQuestRequirement'
+				type:
+					| 'DailyResetQuestRequirement'
+					| 'WeeklyResetQuestRequirement'
+					| 'OneTimeQuestRequirement'
 			}[]
 			/** A description of the quest. */
 			description: string

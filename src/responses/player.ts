@@ -420,6 +420,13 @@ export interface PlayerDataResponse {
 				}
 			>
 			silver?: number
+			halloween?: Record<
+				number,
+				{
+					levelling: { experience: number }
+					skyBlockAlchemistIntro?: true
+				}
+			>
 		}
 		[key: `completed_christmas_quests_${number}`]: number
 		currentGadget?: string
