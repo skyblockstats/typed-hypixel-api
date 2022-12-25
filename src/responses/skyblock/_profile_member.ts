@@ -282,12 +282,17 @@ export interface SkyBlockAbiphoneStats {
 		 * The number of times the player has reached a draw in tic-tac-toe. Winning is impossible.
 		 */
 		tic_tac_toe_draws?: number
+		tic_tac_toe_losses?: number
 		/**
 		 * The best score the player has reached in the snake game.
 		 */
 		snake_best_score?: number
 	}
 	active_contacts?: SkyBlockAbiphoneContactName[]
+	operator_chip?: {
+		repaired_index?: number
+	}
+	trio_contact_addons?: number
 }
 
 /** The ids of the NPCs that the player can contact through the Abiphone. */
@@ -303,12 +308,43 @@ export type SkyBlockAbiphoneContactName =
 	| 'igrupan'
 	| 'builder'
 	| 'pablo'
+	| 'arrow_forger'
+	| 'plumber'
+	| 'tomioka'
+	| 'gatekeeper'
+	| 'jacob'
+	| 'anita'
+	| 'community_shop'
+	| 'thaumaturgist'
+	| 'spooky'
+	| 'zog'
+	| 'pet_collector'
+	| 'fairy'
+	| 'queen_mismyla'
+	| 'duncan'
+	| 'st_jerry'
+	| 'pet_sitter'
+	| 'walter'
+	| 'kaus'
+	| 'suus'
+	| 'telekinesis_applier'
+	| 'aranya'
+	| 'forge_foreman'
+	| 'gemstone'
+	| 'drill_fuel_mechanic'
+	| 'rollim'
+	| 'shady_bartender'
+	| 'sirih'
+	| 'trevor_the_trapper'
+	| 'queen'
 
 export interface SkyBlockAbiphoneContact {
 	/** Milliseconds since epoch. */
 	last_call?: number
 	talked_to?: true
 	completed_quest?: true
+	/** Depends on the contact. */
+	specific?: unknown
 }
 
 export type SkyBlockNetherIslandFactionName = 'mages' | 'barbarians'
@@ -533,6 +569,7 @@ export interface SkyBlockProfileMember {
 				 * The number of people who participated in this contest
 				 */
 				claimed_participants?: number
+				claimed_medal?: 'bronze' | 'silver' | 'gold'
 			}
 		>
 		/** Whether the player has talked to the Jacob NPC */
@@ -569,24 +606,7 @@ export interface SkyBlockProfileMember {
 		claims_resets?: number
 		claims_resets_timestamp?: number
 	}
-	perks?: {
-		permanent_strength?: number
-		permanent_intelligence?: number
-		permanent_speed?: number
-		permanent_defense?: number
-		permanent_health?: number
-
-		catacombs_strength?: number
-		catacombs_boss_luck?: number
-		catacombs_looting?: number
-		catacombs_crit_damage?: number
-		catacombs_health?: number
-		catacombs_defense?: number
-		catacombs_intelligence?: number
-
-		forbidden_blessing?: number
-		revive_stone?: number
-	}
+	perks?: Record<string, number>
 	harp_quest?: {
 		selected_song?: string
 		selected_song_epoch?: number
@@ -625,6 +645,9 @@ export interface SkyBlockProfileMember {
 			maniac_miner?: number
 			vein_seeker?: number
 			front_loaded?: number
+			star_powder?: number
+			precision_mining?: number
+			fallen_star_bonus?: number
 
 			great_explorer?: number
 			mole?: number
@@ -821,6 +844,13 @@ export interface SkyBlockProfileMember {
 		kuudra_completed_tiers: {
 			none?: number
 			hot?: number
+			burning?: number
+			fiery?: number
+
+			highest_wave_none?: number
+			highest_wave_hot?: number
+			highest_wave_burning?: number
+			highest_wave_fiery?: number
 		}
 		dojo: SkyBlockDojoStats
 		abiphone: SkyBlockAbiphoneStats
@@ -830,6 +860,7 @@ export interface SkyBlockProfileMember {
 					pearls_collected: number
 					/** Milliseconds since epoch. */
 					last_attempt: number
+					recent_refreshes?: number[]
 			  }
 		/** The faction that the player is in. If the player isn't in any faction, this field is not present. */
 		selected_faction?: SkyBlockNetherIslandFactionName
@@ -837,6 +868,14 @@ export interface SkyBlockProfileMember {
 		 * Every time a miniboss gets killed by the player, its id gets appended to this list, probably in order. This means that the items aren't unique.
 		 */
 		last_minibosses_killed?: SkyBlockNetherIslandMinibosses[]
+		kuudra_party_finder?: {
+			search_settings?: Record<any, never>
+			group_builder?: {
+				tier: 'NONE'
+				note: ''
+				combat_level_required: 0
+			}
+		}
 	} & {
 		/** The reputation value the player has for each faction. */
 		[key in `${SkyBlockNetherIslandFactionName}_reputation`]?: number

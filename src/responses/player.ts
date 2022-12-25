@@ -394,6 +394,7 @@ export interface PlayerDataResponse {
 				{
 					adventRewards?: Record<`day${number}`, number>
 					presents?: Record<string, true>
+					levelling?: { experience: number }
 				}
 			>
 			easter?: Record<

@@ -63,6 +63,7 @@ export interface SkyBlockItemsResponse {
 			| 'DESERT_ISLAND'
 			| 'MITHRIL'
 			| 'NETHER_WART_ISLAND'
+			| 'WINTER_ISLAND'
 		tier?: string
 		/**
 		 * Almost no items have this. Formatting codes here look like
@@ -94,6 +95,7 @@ export interface SkyBlockItemsResponse {
 			STRENGTH?: number
 			strength?: number
 			DEFENSE?: number
+			defense?: number
 			HEALTH?: number
 			health?: number
 			MINING_FORTUNE?: number
@@ -136,6 +138,7 @@ export interface SkyBlockItemsResponse {
 			fishing_wisdom?: number
 			combat_wisdom?: number
 			foraging_wisdom?: number
+			farming_wisdom?: number
 		}
 		ability_damage_scaling?: number
 		/**
@@ -168,6 +171,24 @@ export interface SkyBlockItemsResponse {
 							stats: Partial<Record<TieredStats, number>>
 						}
 					>
+			  }
+			| {
+					portal: {
+						holo_name: string
+						description_name?: string
+						destination_mode: string
+						location_tag?: string
+						schematic_file: string
+						offset?: string
+						skill_requirement: {
+							skill: 'MINING' | 'COMBAT' | 'FORAGING' | 'FARMING'
+							level: number
+						}
+					}
+			  }
+			| {
+					speed_on_farming_island: number
+					extra_pelts: number
 			  }
 		/**
 		 * If present, this item can be converted into a dungeon item by
