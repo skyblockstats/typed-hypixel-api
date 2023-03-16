@@ -139,6 +139,8 @@ export interface SkyBlockItemsResponse {
 			combat_wisdom?: number
 			foraging_wisdom?: number
 			farming_wisdom?: number
+			FARMING_FORTUNE?: number
+			farming_fortune?: number
 		}
 		ability_damage_scaling?: number
 		/**
@@ -259,6 +261,10 @@ export interface SkyBlockItemsResponse {
 		 * sometimes `catacombs_requirements` is used instead of this field.
 		 */
 		(
+			| {
+					type: 'GARDEN_LEVEL'
+					level: number
+			  }
 			| {
 					type: 'DUNGEON_SKILL'
 					dungeon_type: 'CATACOMBS'
