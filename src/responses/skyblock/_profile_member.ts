@@ -440,8 +440,8 @@ export interface SkyBlockProfileMember {
 	visited_zones?: string[]
 	fairy_souls_collected?: number
 	fairy_souls?: number
-	fairy_exchanges?: number
-	fishing_treasure_caught?: number
+	fairy_exchanges?: number //  Up to date as of 3/16/23 (16/3/23)
+	fishing_treasure_caught?: number // Up to date as of 3/16/23 (16/3/23)
 	death_count?: number
 	/**
 	 * The names of the islands this user has created, in all caps
@@ -464,7 +464,7 @@ export interface SkyBlockProfileMember {
 		spawn_timestamp?: number
 		kill_timestamp?: number
 	}
-	slayer_bosses?: Partial<
+	slayer_bosses?: Partial< 
 		Record<
 			SkyBlockSlayerBosses,
 			{
@@ -498,9 +498,9 @@ export interface SkyBlockProfileMember {
 				xp?: number
 			} & Record<`boss_kills_tier_${number}`, number>
 		>
-	>
+	> // Up to date as of 3/16/23 (16/3/23)
 	/** The pets that the member has */
-	pets?: Pet[]
+	pets?: Pet[] // Up to date as of 3/16/23 (16/3/23)
 	autopet?:
 		| Record<any, never>
 		| {
@@ -527,7 +527,7 @@ export interface SkyBlockProfileMember {
 			runs?: SkyBlockTreasureRun[]
 			chests?: SkyBlockTreasureChest[]
 		}
-	}
+	} // Up to date as of 3/16/23 (16/3/23)
 	griffin?: {
 		burrows?: {
 			ts: number
@@ -619,7 +619,7 @@ export interface SkyBlockProfileMember {
 	paused_effects?: SkyBlockPotionEffect[]
 	disabled_potion_effects?: string[]
 	visited_modes?: string[]
-	temp_stat_buffs?: {
+	temp_stat_buffs?: { // Up to date as of 3/16/23 (16/3/23)
 		stat: number
 		key: string
 		amount: number
@@ -846,11 +846,12 @@ export interface SkyBlockProfileMember {
 			hot?: number
 			burning?: number
 			fiery?: number
-
+			infernal?: number
 			highest_wave_none?: number
 			highest_wave_hot?: number
 			highest_wave_burning?: number
 			highest_wave_fiery?: number
+			highest_wave_infernal?: number;
 		}
 		dojo: SkyBlockDojoStats
 		abiphone: SkyBlockAbiphoneStats
