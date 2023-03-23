@@ -940,7 +940,9 @@ export interface SkyBlockProfileMember {
 		unlocked_powers?: string[]
 	}
 	leveling?: {
-		experience: number
+		experience?: number
+		completions?: {}
+		completed_tasks?: string[]
 	}
 	unlocked_coll_tiers?: string[]
 	sacks_counts?: Record<string, number>
