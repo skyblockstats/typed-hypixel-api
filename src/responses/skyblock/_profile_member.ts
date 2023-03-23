@@ -316,6 +316,7 @@ export type SkyBlockAbiphoneContactName =
 	| 'anita'
 	| 'community_shop'
 	| 'thaumaturgist'
+	| 'trinity'
 	| 'spooky'
 	| 'zog'
 	| 'pet_collector'
@@ -846,7 +847,9 @@ export interface SkyBlockProfileMember {
 			hot?: number
 			burning?: number
 			fiery?: number
+			infernal?: number
 
+			highest_wave_infernal?: number
 			highest_wave_none?: number
 			highest_wave_hot?: number
 			highest_wave_burning?: number
@@ -935,6 +938,9 @@ export interface SkyBlockProfileMember {
 		selected_power?: string
 		/** The prefixes of the power stones that the member has unlocked. */
 		unlocked_powers?: string[]
+	}
+	leveling?: {
+		experience: number
 	}
 	unlocked_coll_tiers?: string[]
 	sacks_counts?: Record<string, number>
