@@ -247,6 +247,7 @@ export interface SkyBlockAutopetRule<Id extends keyof SkyBlockAutopetRuleDatas =
 	exceptions: SkyBlockAutopetException[]
 	disabled: boolean
 	data: SkyBlockAutopetRuleDatas[Id]
+	uuid?: string
 }
 
 export interface SkyBlockAutopetException<Id extends keyof SkyBlockAutopetExceptionDatas = any> {
@@ -316,6 +317,7 @@ export type SkyBlockAbiphoneContactName =
 	| 'anita'
 	| 'community_shop'
 	| 'thaumaturgist'
+	| 'trinity'
 	| 'spooky'
 	| 'zog'
 	| 'pet_collector'
@@ -435,7 +437,7 @@ export interface SkyBlockProfileMember {
 		}
 	>
 	coin_purse?: number
-	last_death: number
+	last_death?: number
 	crafted_generators?: string[]
 	visited_zones?: string[]
 	fairy_souls_collected?: number
@@ -501,16 +503,18 @@ export interface SkyBlockProfileMember {
 	>
 	/** The pets that the member has */
 	pets?: Pet[]
-	autopet?:
-		| Record<any, never>
-		| {
-				rules_limit: number
-				rules?: SkyBlockAutopetRule[]
-		  }
+	autopet?: {
+		rules_limit?: number
+		rules?: SkyBlockAutopetRule[]
+		migrated?: true
+		migrated_2?: true
+	}
+
 	dungeons?: {
 		dungeon_types: Partial<Record<SkyBlockDungeonType, DungeonStats>>
 		player_classes: Record<SkyBlockDungeonClasses, { experience?: number }> | {}
 		dungeon_journal: {
+			unlocked_journals?: string[]
 			journal_entries?: SkyBlockJournalEntries
 		}
 		/**
@@ -666,6 +670,7 @@ export interface SkyBlockProfileMember {
 			toggle_daily_powder?: boolean
 			toggle_titanium_insanium?: boolean
 			toggle_lonesome_miner?: boolean
+			toggle_professional?: boolean
 		}
 		received_free_tier?: true
 		tokens?: number
@@ -726,6 +731,7 @@ export interface SkyBlockProfileMember {
 		[key: `deaths_${string}`]: number
 	}
 	trophy_fish?: SkyBlockTrophyFishStats
+	reaper_peppers_eaten?: number
 	nether_island_player_data?: {
 		quests?: {
 			quest_data: {
@@ -846,7 +852,9 @@ export interface SkyBlockProfileMember {
 			hot?: number
 			burning?: number
 			fiery?: number
+			infernal?: number
 
+			highest_wave_infernal?: number
 			highest_wave_none?: number
 			highest_wave_hot?: number
 			highest_wave_burning?: number
@@ -869,11 +877,11 @@ export interface SkyBlockProfileMember {
 		 */
 		last_minibosses_killed?: SkyBlockNetherIslandMinibosses[]
 		kuudra_party_finder?: {
-			search_settings?: Record<any, never>
+			search_settings?: Record<string, string>
 			group_builder?: {
-				tier: 'NONE'
-				note: ''
-				combat_level_required: 0
+				tier: 'NONE' | 'HOT' | 'BURNING' | 'FIERY' | 'INFERNAL'
+				note: string
+				combat_level_required: number
 			}
 		}
 	} & {
@@ -883,9 +891,9 @@ export interface SkyBlockProfileMember {
 	trapper_quest?:
 		| Record<any, never>
 		| {
-				pelt_count: number
+				pelt_count?: number
 				/** Milliseconds since epoch. */
-				last_task_time: number
+				last_task_time?: number
 		  }
 	personal_bank_upgrade?: number
 	soulflow?: number
@@ -918,6 +926,12 @@ export interface SkyBlockProfileMember {
 			 */
 			[key: `slot_${number}`]: Record<string, number>
 			/**
+			 * Number of extra accessory slots that have been purchased.
+			 */
+			bag_upgrades_purchased?: number
+			selected_power?: string
+			unlocked_powers?: string[]
+			/**
 			 * The number of extra tuning templates unlocked. For
 			 * example, if this is 2, `slot_0`, `slot_1`, and `slot_2` will be
 			 * in `tuning`. If this is missing, you can assume it's 0.
@@ -935,6 +949,22 @@ export interface SkyBlockProfileMember {
 		selected_power?: string
 		/** The prefixes of the power stones that the member has unlocked. */
 		unlocked_powers?: string[]
+		highest_magical_power?: number
+	}
+	teleporter_pill_consumed?: boolean
+	leveling?: {
+		experience?: number
+		completions?: Record<string, number>
+		completed?: string[]
+		completed_tasks?: string[]
+		category_expanded?: boolean
+		last_viewed_tasks?: string[]
+		highest_pet_score?: number
+		mining_fiesta_ores_mined?: number
+		fishing_festival_sharks_killed?: number
+		migrated?: boolean
+		migrated_completions?: boolean
+		migrated_completions_2?: boolean
 	}
 	unlocked_coll_tiers?: string[]
 	sacks_counts?: Record<string, number>
