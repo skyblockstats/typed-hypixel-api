@@ -131,6 +131,8 @@ export interface SkyBlockItemsResponse {
 			RIFT_DAMAGE?: number
 			RIFT_INTELLIGENCE?: number
 			RIFT_TIME?: number
+			FARMING_FORTUNE?: number
+			farming_fortune?: number
 			mending?: number
 			vitality?: number
 			fishing_speed?: number
