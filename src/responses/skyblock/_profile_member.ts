@@ -943,6 +943,13 @@ export interface SkyBlockProfileMember {
 		experience?: number
 		completions?: {}
 		completed_tasks?: string[]
+		category_expanded: boolean
+		last_viewd_tasks: string[]
+		highest_pet_score: number
+		mining_fiesta_ores_mined: number
+		fishing_festival_sharks_killed: number
+		migrated: boolean
+		migrated_completions_2: boolean
 	}
 	unlocked_coll_tiers?: string[]
 	sacks_counts?: Record<string, number>
