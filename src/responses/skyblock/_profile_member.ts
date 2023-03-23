@@ -944,7 +944,7 @@ export interface SkyBlockProfileMember {
 		completions?: {}
 		completed_tasks?: string[]
 		category_expanded: boolean
-		last_viewd_tasks: string[]
+		last_viewed_tasks: string[]
 		highest_pet_score: number
 		mining_fiesta_ores_mined: number
 		fishing_festival_sharks_killed: number
