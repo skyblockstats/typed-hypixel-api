@@ -314,6 +314,10 @@ export interface SkyBlockItemsResponse {
 			| {
 					type: 'MELODY_HAIR'
 			  }
+			| {
+					type: 'GARDEN_LEVEL'
+					level: number
+			  }
 		)[]
 		dungeon_item?: boolean
 		/**
