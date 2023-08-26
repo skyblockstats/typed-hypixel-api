@@ -115,7 +115,7 @@ export interface SkyBlockPotionEffect {
 }
 
 export type SkyBlockDungeonClasses = 'healer' | 'mage' | 'berserk' | 'archer' | 'tank'
-export type SkyBlockSlayerBosses = 'wolf' | 'zombie' | 'spider' | 'enderman' | 'blaze'
+export type SkyBlockSlayerBosses = 'wolf' | 'zombie' | 'spider' | 'enderman' | 'blaze' | 'vampire'
 
 export interface ExperimentationGame {
 	/** The timestamp of the start of the last attempt. */
@@ -409,6 +409,21 @@ export interface SkyBlockProfileMember {
 	}
 	first_join?: number
 	first_join_hub?: number
+	rift: {
+		wither_cage: Record<string, any>
+		black_lagoon: Record<string, any>
+		dead_cats: Record<string, any>
+		wizard_tower: Record<string, any>
+		west_village: {
+			crazy_kloon: {
+				selected_colors: Record<string, any>
+			}
+			mirrorverse: Record<string, any>
+			kat_house: Record<string, any>
+		}
+		enigma: Record<string, any>
+		wyld_woods: Record<string, any>
+	}
 	/**
 	 * A record of the stat id to a number for each stat that the user has. For
 	 * example, { deaths_void: 500 } would mean that the user died to the void
@@ -516,6 +531,9 @@ export interface SkyBlockProfileMember {
 		dungeon_journal: {
 			unlocked_journals?: string[]
 			journal_entries?: SkyBlockJournalEntries
+		}
+		deletion_notice?: {
+			timestamp: number
 		}
 		/**
 		 * This lists the dungeon people who the player has talked to

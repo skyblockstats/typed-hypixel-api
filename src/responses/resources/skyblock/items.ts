@@ -1,5 +1,190 @@
 import { SkyBlockSlayerBosses } from '../../skyblock/_profile_member'
 
+interface MainItemStats {
+	DAMAGE?: number
+	damage?: number
+
+	STRENGTH?: number
+	strength?: number
+
+	DEFENSE?: number
+	defense?: number
+
+	HEALTH?: number
+	health?: number
+
+	MINING_FORTUNE?: number
+	mining_fortune?: number
+
+	WALK_SPEED?: number
+	walk_speed?: number
+
+	MAGIC_FIND?: number
+	magic_find?: number
+
+	INTELLIGENCE?: number
+	intelligence?: number
+
+	WEAPON_ABILITY_DAMAGE?: number
+	weapon_ability_damage?: number
+
+	CRITICAL_DAMAGE?: number
+	critical_damage?: number
+
+	CRITICAL_CHANCE?: number
+	critical_chance?: number
+
+	SEA_CREATURE_CHANCE?: number
+	sea_creature_chance?: number
+
+	FEROCITY?: number
+	ferocity?: number
+
+	BREAKING_POWER?: number
+	breaking_power?: number
+
+	MINING_SPEED?: number
+	mining_speed?: number
+
+	PET_LUCK?: number
+	pet_luck?: number
+
+	ABILITY_DAMAGE_PERCENT?: number
+	ability_damage_percent?: number
+
+	TRUE_DEFENSE?: number
+	true_defense?: number
+
+	ATTACK_SPEED?: number
+	attack_speed?: number
+
+	FARMING_FORTUNE?: number
+	farming_fortune?: number
+
+	MENDING?: number
+	mending?: number
+
+	VITALITY?: number
+	vitality?: number
+
+	FISHING_SPEED?: number
+	fishing_speed?: number
+
+	HEALTH_REGENERATION?: number
+	health_regeneration?: number
+
+	FISHING_WISDOM?: number
+	fishing_wisdom?: number
+
+	COMBAT_WISDOM?: number
+	combat_wisdom?: number
+
+	FORAGING_WISDOM?: number
+	foraging_wisdom?: number
+
+	FARMING_WISDOM?: number
+	farming_wisdom?: number
+
+	MANA_REGEN?: number
+	mana_regen?: number
+}
+
+interface RiftItemStats {
+	RIFT_DAMAGE?: number
+	rift_damage?: number
+
+	RIFT_STRENGTH?: number
+	rift_strength?: number
+
+	RIFT_DEFENCE?: number
+	rift_defense?: number
+
+	RIFT_HEALTH?: number
+	rift_health?: number
+
+	RIFT_MINING_FORTUNE?: number
+	rift_mining_fortune?: number
+
+	RIFT_WALK_SPEED?: number
+	rift_walk_speed?: number
+
+	RIFT_MAGIC_FIND?: number
+	rift_magic_find?: number
+
+	RIFT_INTELLIGENCE?: number
+	rift_intelligence?: number
+
+	RIFT_WEAPON_ABILITY_DAMAGE?: number
+	rift_weapon_ability_damage?: number
+
+	RIFT_CRITICAL_DAMAGE?: number
+	rift_critical_damage?: number
+
+	RIFT_CRITICAL_CHANCE?: number
+	rift_critical_chance?: number
+
+	RIFT_SEA_CREATURE_CHANCE?: number
+	rift_sea_creature_chance?: number
+
+	RIFT_FEROCITY?: number
+	rift_ferocity?: number
+
+	RIFT_BREAKING_POWER?: number
+	rift_breaking_power?: number
+
+	RIFT_MINGING_SPEED?: number
+	rift_mining_speed?: number
+
+	RIFT_PET_LUCK?: number
+	rift_pet_luck?: number
+
+	RIFT_ABILITY_DAMAGE_PERCENT?: number
+	rift_ability_damage_percent?: number
+
+	RIFT_TRUE_DEFENSE?: number
+	rift_true_defense?: number
+
+	RIFT_ATTACK_SPEED?: number
+	rift_attack_speed?: number
+
+	RIFT_TIME?: number
+	rift_time?: number
+	// Hypixel spelling error
+	rift_Time?: number
+
+	RIFT_FARMING_FORTUNE?: number
+	rift_farming_fortune?: number
+
+	RIFT_MENDING?: number
+	rift_mending?: number
+
+	RIFT_VITALITY?: number
+	rift_vitality?: number
+
+	RIFT_FISHING_SPEED?: number
+	rift_fishing_speed?: number
+
+	RIFT_HEALTH_REGENERATION?: number
+	rift_health_regeneration?: number
+
+	RIFT_FISHING_WISDOM?: number
+	rift_fishing_wisdom?: number
+
+	RIFT_COMBAT_WISDOM?: number
+	rift_combat_wisdom?: number
+
+	RIFT_FORAGING_WISDOM?: number
+	rift_foraging_wisdom?: number
+
+	RIFT_FARMING_WISDOM?: number
+	rift_farming_wisdom?: number
+
+	RIFT_MANA_REGEN?: number
+	rift_mana_regen?: number
+}
+
+type ItemStats = MainItemStats & RiftItemStats
+
 type EssenceType =
 	| 'DIAMOND'
 	| 'WITHER'
@@ -45,6 +230,11 @@ export interface SkyBlockItemsResponse {
 	lastUpdated: number
 	items: ({
 		material: string
+		/** Base64 encoded skin data. */
+		skin?: string
+		/** Format: "R,G,B" */
+		color?: string
+		lose_motes_value_on_transfer?: boolean
 		/** A record of enchantment ids like `counter_strike` to their default level. */
 		enchantments?: Record<string, number>
 		durability?: number
@@ -89,59 +279,8 @@ export interface SkyBlockItemsResponse {
 		 * Make sure to normalize the case for these, since older items have
 		 * them uppercase and newer items have them lowercase.
 		 */
-		stats?: {
-			DAMAGE?: number
-			damage?: number
-			STRENGTH?: number
-			strength?: number
-			DEFENSE?: number
-			defense?: number
-			HEALTH?: number
-			health?: number
-			MINING_FORTUNE?: number
-			mining_fortune?: number
-			WALK_SPEED?: number
-			walk_speed?: number
-			MAGIC_FIND?: number
-			magic_find?: number
-			INTELLIGENCE?: number
-			intelligence?: number
-			WEAPON_ABILITY_DAMAGE?: number
-			weapon_ability_damage?: number
-			CRITICAL_DAMAGE?: number
-			critical_damage?: number
-			CRITICAL_CHANCE?: number
-			critical_chance?: number
-			SEA_CREATURE_CHANCE?: number
-			sea_creature_chance?: number
-			FEROCITY?: number
-			ferocity?: number
-			BREAKING_POWER?: number
-			breaking_power?: number
-			MINING_SPEED?: number
-			mining_speed?: number
-			PET_LUCK?: number
-			pet_luck?: number
-			ABILITY_DAMAGE_PERCENT?: number
-			ability_damage_percent?: number
-			TRUE_DEFENSE?: number
-			true_defense?: number
-			ATTACK_SPEED?: number
-			attack_speed?: number
-			RIFT_DAMAGE?: number
-			RIFT_INTELLIGENCE?: number
-			RIFT_TIME?: number
-			FARMING_FORTUNE?: number
-			farming_fortune?: number
-			mending?: number
-			vitality?: number
-			fishing_speed?: number
-			health_regeneration?: number
-			fishing_wisdom?: number
-			combat_wisdom?: number
-			foraging_wisdom?: number
-			farming_wisdom?: number
-		}
+		stats?: ItemStats
+		origin?: string
 		ability_damage_scaling?: number
 		/**
 		 * The number of coins that the player gets from selling the item to
@@ -153,45 +292,8 @@ export interface SkyBlockItemsResponse {
 		/**
 		 * The item that this item will give you if you right click it. Seems to be currently only used for eccentric paintings.
 		 */
-		item_specific?:
-			| {
-					bundled_item_id: 'ECCENTRIC_PAINTING'
-					/** The number of the `bundled_item_id`s that right clicking will give you */
-					bundled_amount: number
-			  }
-			| {
-					mana_refund: number
-			  }
-			| {
-					rift_time: number
-					intelligence: number
-			  }
-			| {
-					tiers: Record<
-						number,
-						{
-							stats: Partial<Record<TieredStats, number>>
-						}
-					>
-			  }
-			| {
-					portal: {
-						holo_name: string
-						description_name?: string
-						destination_mode: string
-						location_tag?: string
-						schematic_file: string
-						offset?: string
-						skill_requirement: {
-							skill: 'MINING' | 'COMBAT' | 'FORAGING' | 'FARMING'
-							level: number
-						}
-					}
-			  }
-			| {
-					speed_on_farming_island: number
-					extra_pelts: number
-			  }
+		item_specific?: Record<string, any> // Too complicated to keep track of every single item that requires 'item_specific' stats.
+
 		/**
 		 * If present, this item can be converted into a dungeon item by
 		 * using essence.
@@ -317,6 +419,11 @@ export interface SkyBlockItemsResponse {
 			| {
 					type: 'GARDEN_LEVEL'
 					level: number
+			  }
+			| {
+					type: 'PROFILE_AGE'
+					minimum_age_unit: string
+					minimum_age: number
 			  }
 		)[]
 		dungeon_item?: boolean

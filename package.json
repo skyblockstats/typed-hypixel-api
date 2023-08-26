@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "typescript": "^4.6.3",
-    "undici": "^5.19.1"
+    "undici": "^5.23.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
